@@ -1,0 +1,60 @@
+﻿@model SistemaIEBCE.Models.Seccion
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var message = TempData["error"] ?? string.Empty;
+}
+
+<div class="container-fluid bg-white p-4 mt-4">
+    <h1 class="mt-4">Crear Nueva Seccion</h1>
+
+    <form method="post" asp-action="Create">
+        <div class="row px-2 mx-2 border">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-12 mt-4">
+                <div class="form-group row mt-3">
+                    <label asp-for="NomSeccion" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <input asp-for="NomSeccion" class="form-control" />
+                        <span asp-validation-for="NomSeccion" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <input asp-for="Estado" value="1" hidden />
+
+                <div class="form-group row mt-3 row d-flex justify-content-center">
+                    <partial name="_VistaCrearVolver" />
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+                var message = '@message';
+                if (message) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'bottom-end',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Formulario Invalido: ' + message
+                    })
+                }
+            });
+    </script>
+}

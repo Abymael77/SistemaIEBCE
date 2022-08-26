@@ -1,0 +1,95 @@
+﻿@model SistemaIEBCE.Models.Catedratico
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var message = TempData["error"] ?? string.Empty;
+}
+
+<div class="container-fluid bg-white p-4 mt-4">
+    <h1 class="mt-4">Crear Nuevo Catedratico</h1>
+
+    <form method="post" asp-action="Create">
+        <div class="row px-2 mx-2 border">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-12 mt-4">
+                <div class="form-group row mt-3">
+                    <label asp-for="NomCatedratico" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <input asp-for="NomCatedratico" class="form-control" />
+                        <span asp-validation-for="NomCatedratico" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label asp-for="ApellCatedratico" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <input asp-for="ApellCatedratico" class="form-control" />
+                        <span asp-validation-for="ApellCatedratico" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label asp-for="Sexo" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <select asp-for="Sexo" class="form-control">
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                        </select>
+                        <span asp-validation-for="Sexo" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label asp-for="Tel" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <input asp-for="Tel" class="form-control" min="10000000"/>
+                        <span asp-validation-for="Tel" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label asp-for="Profesion" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <input asp-for="Profesion" class="form-control" />
+                        <span asp-validation-for="Profesion" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <input asp-for="Estado" value="1" hidden />
+
+                <div class="form-group row mt-3 row d-flex justify-content-center">
+                    <partial name="_VistaCrearVolver" />
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+                var message = '@message';
+                if (message) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'bottom-end',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Formulario Invalido: ' + message
+                    })
+                }
+            });
+    </script>
+}

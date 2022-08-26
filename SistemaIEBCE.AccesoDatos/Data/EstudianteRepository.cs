@@ -1,0 +1,50 @@
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using SistemaIEBCE.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SistemaIEBCE.AccesoDatos.Data.Repository
+{
+    public class EstudianteRepository : Repository<Estudiante>, IEstudianteRepository
+    {
+        private readonly ApplicationDbContext _db;
+
+        public EstudianteRepository(ApplicationDbContext db) : base(db)
+        {
+            _db = db;
+        }
+
+        public IEnumerable<SelectListItem> GetListaEstudiante()
+        {
+            return _db.Estudiante.Select(i => new SelectListItem()
+            {
+                Text = i.NomEstudiante,
+                Value = i.Id.ToString()
+            }); ;
+        }
+
+        public void Update(Estudiante seccion)
+        {
+            var objDesdeDB = _db.Estudiante.FirstOrDefault(s => s.Id == seccion.Id);
+            objDesdeDB.NomEstudiante = seccion.NomEstudiante;
+            objDesdeDB.ApellEstudiante = seccion.ApellEstudiante;
+            objDesdeDB.Sexo = seccion.Sexo;
+            objDesdeDB.Carnet = seccion.Carnet;
+            objDesdeDB.TelEstudiante = seccion.TelEstudiante;
+            objDesdeDB.Encargado = seccion.Encargado;
+            objDesdeDB.TelEncargado = seccion.TelEncargado;
+            objDesdeDB.Direccion = seccion.Direccion;
+            objDesdeDB.Estado = seccion.Estado;
+
+            _db.SaveChanges();
+        }
+
+        IEnumerable<SelectListItem> IEstudianteRepository.GetListaEstudiante()
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

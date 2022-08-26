@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<ul class="navbar-nav mr-4">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown dropleft">
+                        <a href="#" class="nav-link dropdown-toggle text-white h4" id="NavbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </a>
+                        <div class="dropdown-menu text-center" aria-labelledby="NavbarDropDown">
+                            <a class="nav-link text-primary" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Cuenta</a>
+                            <form class="form-inline justify-content-center" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" class="nav-link btn btn-link text-danger"> <i class="fa-solid fa-power-off"></i> Salir </button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Register">Registrar</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login">Acceder</a>
+        </li>
+    }
+</ul>

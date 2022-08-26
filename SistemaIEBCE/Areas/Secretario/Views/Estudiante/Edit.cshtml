@@ -1,0 +1,136 @@
+﻿@model SistemaIEBCE.Models.Estudiante
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var message = TempData["error"] ?? string.Empty;
+}
+
+<div class="container-fluid bg-white p-4 mt-4">
+    <h3 class="mt-4 text-center">Editar Estudiante</h3>
+    <form method="post" asp-action="Edit">
+        <div class="row px-2 mx-2 border">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="col-12 mt-4">
+                <div class="form-group row mt-3">
+                    <label asp-for="NomEstudiante" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <input asp-for="NomEstudiante" class="form-control" />
+                        <span asp-validation-for="NomEstudiante" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label asp-for="ApellEstudiante" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <input asp-for="ApellEstudiante" class="form-control" />
+                        <span asp-validation-for="ApellEstudiante" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label asp-for="Sexo" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <select asp-for="Sexo" class="form-control">
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                        </select>
+                        <span asp-validation-for="Sexo" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label asp-for="Carnet" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <input asp-for="Carnet" class="form-control" min="10000000" />
+                        <span asp-validation-for="Carnet" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label asp-for="TelEstudiante" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <input asp-for="TelEstudiante" class="form-control" min="10000000" />
+                        <span asp-validation-for="TelEstudiante" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label asp-for="Encargado" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <input asp-for="Encargado" class="form-control" />
+                        <span asp-validation-for="Encargado" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label asp-for="TelEncargado" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <input asp-for="TelEncargado" class="form-control" min="10000000" />
+                        <span asp-validation-for="TelEncargado" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label asp-for="Direccion" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <input asp-for="Direccion" class="form-control" min="10000000" />
+                        <span asp-validation-for="Direccion" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label asp-for="Estado" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <select asp-for="Estado" class="form-control">
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                        <span asp-validation-for="Estado" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="form-group row mt-3 row d-flex justify-content-center">
+                    <div class="row">
+                        <div class="mx-2">
+                            <button type="submit" class="btn text-light bg-primary px-5 form-control" asp-route-idEstudiante="@Model.Id">Actualizar</button>
+                        </div>
+                        <div class="mx-2">
+                            <a asp-action="Index" class="btn btn-secondary px-5 form-control">Volver</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+                var message = '@message';
+                if (message) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'bottom-end',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Formulario Invalido: ' + message
+                    })
+                }
+            });
+    </script>
+}

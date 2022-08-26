@@ -1,0 +1,104 @@
+﻿@using SistemaIEBCE.Utilidades
+
+<!DOCTYPE html>
+<html lang="es-es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SistemaIEBCE</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <!-- Plugins -->
+    <link href="~/lib/DataTables/datatables.min.css" rel="stylesheet" />
+    <link href="~/lib/fontawesome/css/fontawesome.css" rel="stylesheet" />
+    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" />
+    <link href="~/lib/toastr/toastr.min.css" rel="stylesheet" />
+    <link href="~/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <link href="~/lib/toastr/toastr.min.css" rel="stylesheet" />
+
+</head>
+<body style="background: #F0F0F7">
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand pl-lg-4" asp-area="Invitado" asp-controller="Home" asp-action="Index">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-4 "><img style="width: 30px" src="~/img/logoIEBCE.png" /></div>
+                        <div class="col-8 text-left">IEBCE</div>
+                    </div>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto">
+                        @if (User.IsInRole(CNT.Director))
+                        {
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle text-white" id="NavbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Director
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="NavbarDropDown">
+                                    <a class="dropdown-item" asp-area="Director" asp-controller="Menu" asp-action="Index">Menu</a>
+                                    <a class="dropdown-item" asp-area="Director" asp-controller="Usuario" asp-action="Index">Usuario</a>
+                                </div>
+                            </li>
+                        }
+
+                        @if (User.IsInRole(CNT.Secretario))
+                        {
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle text-white" id="NavbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Secretaría
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="NavbarDropDown">
+                                    <a class="dropdown-item" asp-area="Secretario" asp-controller="Menu" asp-action="Index">Menu</a>
+                                </div>
+                            </li>
+                        }
+
+                        @if (User.IsInRole(CNT.Tesorero))
+                        {
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle text-white" id="NavbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Tesorería
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="NavbarDropDown">
+                                    <a class="dropdown-item" asp-area="Tesorero" asp-controller="Menu" asp-action="Index">Menu</a>
+                                </div>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+                <partial name="_LoginPartial" />
+            </div>
+        </nav>
+
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted shadow-lg">
+        <div class="container">
+            &copy; 2022 - SistemaIEBCE - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugins  -->
+    <script src="~/lib/DataTables/datatables.js"></script>
+    <script src="~/lib/fontawesome/js/fontawesome.js"></script>
+    <script src="~/lib/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="~/lib/toastr/toastr.min.js"></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

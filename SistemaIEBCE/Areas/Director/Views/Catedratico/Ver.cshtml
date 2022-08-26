@@ -1,0 +1,113 @@
+﻿@model SistemaIEBCE.Models.Catedratico
+
+@{
+    ViewData["Title"] = "Ver";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/ProfileCardHover.css" rel="stylesheet" />
+
+
+
+<div class="container-fluid  p-2 mt-2">
+    <div class="container-fluid text-right p">
+        <a asp-area="Director" asp-controller="Catedratico" asp-action="Index" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+    </div>
+    <div class="card border-0 bg-light text-primary">
+
+        <div class="slide slide1">
+
+            <div class="content">
+
+                <div class="icon">
+
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="slide slide2 bg-white font-weight-bold">
+
+            <div class="content container-fluid">
+
+                <h3>Catedrático</h3>
+                <div class="form-row d-flex justify-content-around">
+                    <div class="col-5">
+                        <div class="form-group row mt-3">
+                            <label class="col-sm-4 col-form-label col-form-label-lg text-center">Nombres</label>
+                            <div class="col-8">
+                                <input asp-for="NomCatedratico" class="border-top-0 border-primary form-control-plaintext form-control-lg text-center" disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group row mt-3">
+                            <label class="col-sm-4 col-form-label col-form-label-lg text-center">Apellidos</label>
+                            <div class="col-8">
+                                <input asp-for="ApellCatedratico" class="border-top-0 border-primary form-control-plaintext form-control-lg text-center" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row d-flex justify-content-around">
+                    <div class="col-5">
+                        <div class="form-group row mt-3">
+                            <label asp-for="Sexo" class="col-sm-4 col-form-label col-form-label-lg text-center"></label>
+                            <div class="col-8">
+                                <input asp-for="Sexo" class="border-top-0 border-primary form-control-plaintext form-control-lg text-center" disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group row mt-3">
+                            <label class="col-sm-4 col-form-label col-form-label-lg text-center">Teléfono</label>
+                            <div class="col-8">
+                                <input asp-for="Tel" class="border-top-0 border-primary form-control-plaintext form-control-lg text-center" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row d-flex justify-content-around">
+                    <div class="col-sm-5">
+                        <div class="form-group row mt-3">
+                            <label class="col-sm-4 col-form-label col-form-label-lg text-center">Profesion</label>
+                            <div class="col-8">
+                                <input asp-for="Profesion" class="border-top-0 border-primary form-control-plaintext form-control-lg text-center" disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="form-group row mt-3">
+                            <label asp-for="Estado" class="col-sm-4 col-form-label col-form-label-lg text-center"></label>
+                            <div class="col-8">
+                                <input id="est" asp-for="Estado" hidden />
+                                <p id="eee" class="border-top-0 border-primary form-control-plaintext form-control-lg text-center font-weight-normal"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    let inputValue = document.getElementById("est").value;
+
+    if (inputValue == 1) {
+        document.getElementById("eee").innerHTML = "Activo";
+    }
+    else {
+        document.getElementById("eee").innerHTML = "Inactivo";
+    }
+
+</script> 
