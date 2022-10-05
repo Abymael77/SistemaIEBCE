@@ -12,6 +12,8 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
     {
         IEnumerable<SelectListItem> GetListaBloque();
 
+        IEnumerable<BloqueAsigCurso> GetListaBloqueEstado(int est);
+
         void Update(Bloque bloque);
     }
 }

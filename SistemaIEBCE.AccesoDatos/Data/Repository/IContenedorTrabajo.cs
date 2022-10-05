@@ -15,6 +15,22 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
         ICatedraticoRepository Catedratico { get; }
         IEstudianteRepository Estudiante { get; }
 
+        //Asignaciones
+        ICicloEscolarRepository CicloEscolar { get; }
+        IAsigCursoRepository AsigCurso { get; }
+        IAsigEstudianteRepository AsigEstudiante { get; }
+        IBloqueAsigCursoRepository BloqueAsigCurso { get; }
+        INotaRepository Nota { get; }
+        IAsistenciaRepository Asistencia { get; }
+
+        //Tesoreria
+        ICuotaRepository Cuota { get; }
+        IGastoRepository Gasto { get; }
+        IDetalleGastoRepository DetalleGasto { get; }
+        ICajaRepository Caja { get; }
+        IFacturaRepository Factura { get; }
+        IDetalleFacturaRepository DetalleFactura { get; }
+
 
         IUsuarioRepository Usuario { get; }
 

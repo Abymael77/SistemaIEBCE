@@ -1,0 +1,75 @@
+﻿@model SistemaIEBCE.Models.NotaFull
+
+@{
+    ViewData["Title"] = "Boleta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Boleta</h1>
+
+<div class="bg-white text-center p-5" id="boleta">
+    <h4>EVALUACIÓN DE LAS ASIGNATURAS</h4>
+    <div class="row">
+        <div class="col-10">
+            <table id="Notas" class="table table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Asignatura</th>
+                        <th>Nota</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-2 d-flex align-items-start flex-column">
+            <h6 class="font-weight-bolder">Firma de Aprobación</h6>
+            <div class="row pt-4 pl-2 ml-1 border-bottom" style="width:100%">
+                <p>f)</p>
+            </div>
+            <div class="text-center " style="width:100%"> <h6>Bloque I</h6> </div>
+            <div class="row mt-5 border p-2 mt-auto mb-3 bd-highlight">
+                <p class="text-justify" style="font-size: 10px;">
+                    Cada unidad tiene un valor de 100 puntos. <br /><br />
+                    Al estudiante se le concidera que ha ganado la unidad, si ha obtenido como minimo 60 puntos. <br /><br />
+                    Se realizra examen de recuperación a final del ciclo escolar en una sola oportunidad cuando es reprobado
+                    cuatro áreas o sub áreas. (Acuerdo Ministerial 1171-2010). <br /><br />
+                    Por cada unidad se suplica firmar de enterado.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="btn bg-primary text-white" type="button" onclick="printDiv('boleta')" value="imprimir div">
+    Imprimir
+</button>
+
+@section Scripts{
+
+    <script src="~/js/ImpresionNota.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            CargarBoleta(@ViewData["idAsigEstudinate"], @ViewData["idBloque"]);
+
+        });
+    </script>
+
+    <script>
+        function printDiv(nombreDiv) {
+            var contenido = document.getElementById(nombreDiv).innerHTML;
+            var contenidoOriginal = document.body.innerHTML;
+
+            document.body.innerHTML = contenido;
+
+            window.print();
+
+            document.body.innerHTML = contenidoOriginal;
+        }
+    </script>
+}

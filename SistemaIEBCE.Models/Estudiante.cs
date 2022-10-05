@@ -27,11 +27,14 @@ namespace SistemaIEBCE.Models
         [Display(Name = "Sexo")]
         public string Sexo { get; set; }
 
-        [Required(ErrorMessage = "El Número de Carnet del Estudiante es obligatorio")]
-        [Display(Name = "Número de Carnet")]
-        public int Carnet { get; set; }
 
-        [Required(ErrorMessage = "El Número de Telefono del Estudiante es obligatorio")]
+        [RegularExpression(@"([0-9]{13})?", ErrorMessage = "El Número de Carnet del Estudiante debe ser de 13 dígitos numericos")]
+        [StringLength(13, ErrorMessage = "Los {0} debe ser al menos {2} y maximo {1} caracteres", MinimumLength = 13)]
+        [Display(Name = "Número de Carnet")]
+        public string Carnet { get; set; }
+
+
+        [RegularExpression(@"[0-9]{8}", ErrorMessage = "El Número de Telefono del Estudiante debe ser de 8 dígitos numericos")]
         [Display(Name = "Tel. Estudiante")]
         public int TelEstudiante { get; set; }
 
@@ -41,6 +44,7 @@ namespace SistemaIEBCE.Models
         public string Encargado { get; set; }
 
         [Required(ErrorMessage = "El Número de Telefono del Encargado es obligatorio")]
+        [RegularExpression(@"[0-9]{8}", ErrorMessage = "El Número de Telefono del Encargado debe ser de 8 dígitos numericos")]
         [Display(Name = "Tel. Encargado")]
         public int TelEncargado { get; set; }
 

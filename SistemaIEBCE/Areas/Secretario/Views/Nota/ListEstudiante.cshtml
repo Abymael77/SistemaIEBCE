@@ -1,0 +1,60 @@
+﻿@model SistemaIEBCE.Models.ViewModels.AsigEstudianteVM
+
+@{
+    ViewData["Title"] = "ListEstudiante";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ListEstudiante</h1>
+<h2>Ciclo => @ViewBag.IdBlkAsCu</h2>
+
+<div class="bg-white p-4">
+    <button class="guardar" onclick="RegistrarNota(@ViewBag.IdBlkAsCu)" type="submit">Submit form</button>
+    <table id="listEstu" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>IdAsEs</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Nota</th>
+            </tr>
+        </thead>
+        <tbody>
+            @*<tr>
+                    <td>Tiger Nixon</td>
+                    <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                </tr>*@
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Id</th>
+                <th>IdAsEs</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Nota</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+@section Scripts{
+
+    <script src="~/js/ListEstudiante.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            cargarDatatableLsEst(@ViewData["idBlkAsCu"], @ViewData["IdCicloEscolar"], @ViewData["IdAsigCurso"]);
+
+            $('button.guardar').click(function () {
+                var data = table.$('input, select').serialize();
+                alert('The following data would have been submitted to the server: \n\n' + data.substr(0, 120) + '...');
+                //return false;
+            });
+
+
+        });
+    </script>
+
+}

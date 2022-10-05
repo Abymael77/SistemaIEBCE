@@ -20,11 +20,16 @@ namespace SistemaIEBCE.AccesoDatos.Data
 
         public IEnumerable<SelectListItem> GetListaCurso()
         {
-            return _db.Curso.Select(i => new SelectListItem()
-            {
-                Text = i.NomCurso,
-                Value = i.Id.ToString()
-            }); ;
+            List<SelectListItem> list = null;
+            int est = 1;
+
+            // consulta Validada por estado 
+            var query = (from ca in _db.Curso
+                         where ca.Estado == est
+                         select new SelectListItem { Text = ca.NomCurso, Value = ca.Id.ToString() }).Distinct();
+            list = query.ToList();
+
+            return list;
         }
 
         public void Update(Curso curso)

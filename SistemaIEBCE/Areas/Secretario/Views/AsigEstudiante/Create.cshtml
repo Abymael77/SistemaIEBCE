@@ -1,0 +1,101 @@
+﻿@model SistemaIEBCE.Models.ViewModels.AsigEstudianteVM
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var message = TempData["error"] ?? string.Empty;
+}
+
+<link href="~/css/chosen.css" rel="stylesheet" />
+<link href="~/css/CreateForm.css" rel="stylesheet" />
+
+@*create carpeta*@
+
+<div class='box mt-5 container-sm justify-content-center'>
+    <div class='box-form container-fluid mx-2'>
+        <div class='box-login-tab'></div>
+        <div class='box-login-title p-2 font-weight-bold text-primary'>
+            <h2> <i class="fa-solid fa-swatchbook"></i> &nbsp;&nbsp;&nbsp; Crear</h2>
+        </div>
+        <div class='box-login container-fluid'>
+            <div class='fieldset-body container-fluid' id='login_form'>
+
+                <form class="my-4 container-fluid" method="post" asp-action="Create">
+                    <div class="row border">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="col-12 mt-4">
+
+                            <div class="form-group row mt-3">
+                                <label asp-for="AsigEstudiante.IdEstudiante" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                                <div class="col-10">
+                                    @Html.DropDownListFor(m => m.AsigEstudiante.IdEstudiante, Model.ListaEstudiante,
+                                   "-Porfavor seleccione una opción-", new { @class = "form-control", @id = "estudiantes" })
+                                </div>
+                                <span asp-validation-for="AsigEstudiante.IdEstudiante" class="text-danger offset-2 col-10"></span>
+                            </div>
+
+                            <div class="form-group row mt-3">
+                                <label asp-for="AsigEstudiante.IdCicloEscolar" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                                <div class="col-10">
+                                    @Html.DropDownListFor(m => m.AsigEstudiante.IdCicloEscolar, Model.ListaCicloEscolar,
+                                   "-Porfavor seleccione una opción-", new { @class = "form-control" , @id = "cicloescolar" })
+                                </div>
+                                <span asp-validation-for="AsigEstudiante.IdCicloEscolar" class="text-danger offset-2 col-10"></span>
+                            </div>
+
+                            <input asp-for="AsigEstudiante.Estado" value="1" hidden />
+
+                            <div class="form-group row mt-3">
+                                <div class="col-4 offset-4">
+                                    <partial name="_VistaCrearVolver" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <input type='submit' id='do_login' value='' />
+    </div>
+</div>
+
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+        $(function () {
+            $("#estudiantes").chosen({ width: "90%" });
+            $("#catedraticos").chosen({ width: "90%" });
+            $("#cicloescolar").chosen({ width: "90%" });
+        });
+    </script>
+    <script src="~/js/chosen.jquery.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+                var message = '@message';
+                if (message) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'bottom-end',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Formulario Invalido: ' + message
+                    })
+                }
+            });
+    </script>
+}

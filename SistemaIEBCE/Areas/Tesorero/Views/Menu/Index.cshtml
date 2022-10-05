@@ -1,0 +1,203 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="p-2 my-3 text-center">Tesorería IEBCE</h1>
+
+<div class="container-fluid">
+    <section>
+
+        <div class="row">
+            <div class="col-xl-4 col-sm-6 col-12 mb-4">
+                <div class="card shadow">
+                    <a class="btn" asp-area="Tesorero" asp-controller="Inventario" asp-action="Index">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div class="align-self-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 83.813 74.5">
+                                        <path id="Trazado_416" data-name="Trazado 416" d="M23.281,6.984A6.985,6.985,0,0,1,30.266,0H37.25V11.641a2.331,2.331,0,0,0,2.328,2.328h4.656a2.331,2.331,0,0,0,2.328-2.328V0h6.984a6.985,6.985,0,0,1,6.984,6.984V25.609a6.986,6.986,0,0,1-6.984,6.984H30.266a6.986,6.986,0,0,1-6.984-6.984ZM13.969,41.906V53.547A2.335,2.335,0,0,0,16.3,55.875h4.656a2.335,2.335,0,0,0,2.328-2.328V41.906h6.984a6.986,6.986,0,0,1,6.984,6.984V67.516A6.986,6.986,0,0,1,30.266,74.5H6.984A6.985,6.985,0,0,1,0,67.516V48.891a6.985,6.985,0,0,1,6.984-6.984Zm46.563,0V53.547a2.335,2.335,0,0,0,2.328,2.328h4.656a2.335,2.335,0,0,0,2.328-2.328V41.906h6.984a6.986,6.986,0,0,1,6.984,6.984V67.516A6.986,6.986,0,0,1,76.828,74.5H53.547a6.986,6.986,0,0,1-6.984-6.984V48.891a6.986,6.986,0,0,1,6.984-6.984Z" fill="#161e35" />
+                                    </svg>
+                                </div>
+                                <div class="col-9 text-right">
+                                    <h3 class="text-nowrap text-primary">Inventario</h3>
+                                    <p class="mb-0 text-secondary">Productos del Centro Educativo </p>
+                                </div>
+                            </div>
+                            <div class="px-md-1">
+                                <div class="progress mt-3 mb-1 rounded" style="height: 7px;">
+                                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%;" aria-valuenow="60"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xl-4 col-sm-6 col-12 mb-4">
+                <div class="card shadow">
+                    <a class="btn" asp-area="Tesorero" asp-controller="Caja" asp-action="Index">
+
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div class="align-self-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 70 70">
+                                        <path id="Trazado_415" data-name="Trazado 415" d="M70,10.937c0,2.462-1.955,4.73-5.25,6.562-3.979,2.2-9.9,3.76-16.721,4.225-.492-.232-1.012-.465-1.531-.684C41.1,18.785,33.934,17.5,26.25,17.5c-1.135,0-2.242.027-3.35.082l-.15-.082c-3.295-1.832-5.25-4.1-5.25-6.562C17.5,4.9,29.135,0,43.75,0,58.242,0,70,4.9,70,10.937ZM21.971,22.025c1.395-.1,2.816-.15,4.279-.15,8.5,0,16.051,1.682,20.85,4.293,3.391,1.846,5.4,4.143,5.4,6.645a5.148,5.148,0,0,1-.287,1.6c-.629,1.8-2.434,3.459-4.785,4.867h0a.1.1,0,0,0-.055.027h0c-.041.027-.082.041-.123.068-4.785,2.652-12.414,4.375-21,4.375-8.148,0-15.441-1.545-20.256-3.979-.256-.137-.5-.383-.745-.4C1.952,37.543,0,35.273,0,32.813,0,28.055,7.3,23.994,17.5,22.5c1.436-.219,2.926-.383,4.471-.479ZM53.58,25.512A46.013,46.013,0,0,0,64,22.709a23.916,23.916,0,0,0,6-3.486v4.84c0,2.639-2.256,5.072-5.988,6.959a33.4,33.4,0,0,1-7.164,2.516c.014-.232.027-.479.027-.725a10.323,10.323,0,0,0-3.295-7.3ZM52.5,45.938c0,2.461-1.955,4.73-5.25,6.563-.246.014-.492.26-.738.4C41.686,55.33,34.4,56.875,26.25,56.875c-8.586,0-16.212-1.723-21-4.375C1.952,50.668,0,48.4,0,45.938V41.1a23.8,23.8,0,0,0,6.006,3.486c5.4,2.256,12.56,3.541,20.244,3.541S41.1,46.84,46.5,44.584a27.6,27.6,0,0,0,3.062-1.49,21.721,21.721,0,0,0,2.352-1.531c.205-.15.4-.314.588-.465Zm4.375-7.916A62.456,62.456,0,0,0,64,35.834a23.916,23.916,0,0,0,6-3.486v4.84a6.042,6.042,0,0,1-2.037,4.225c-2.229,2.229-6.152,4.061-11.115,5.25.014-.232.027-.479.027-.725ZM26.25,61.25c7.684,0,14.848-1.285,20.248-3.541a23.916,23.916,0,0,0,6-3.486v4.84C52.5,65.105,40.742,70,26.25,70S0,65.105,0,59.062v-4.84a23.8,23.8,0,0,0,6.006,3.486C11.408,59.965,18.566,61.25,26.25,61.25Z" fill="#161e35" />
+                                    </svg>
+                                </div>
+                                <div class="col-9 text-right">
+                                    <h3 class="text-primary">Caja</h3>
+                                    <p class="mb-0 text-secondary">Control de ingresos y egresos</p>
+                                </div>
+                            </div>
+                            <div class="px-md-1">
+                                <div class="progress mt-3 mb-1 rounded" style="height: 7px;">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 100%;" aria-valuenow="60"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xl-4 col-sm-6 col-12 mb-4">
+                <div class="card shadow">
+                    <a class="btn" asp-area="Tesorero" asp-controller="Factura" asp-action="Index">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div class="align-self-center">
+                                    <svg id="icon_Invoices" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 60 80">
+                                        <path id="Trazado_102" data-name="Trazado 102" d="M56.714,0H5.286C2.714,0,1,2,1,5V80L13.857,70l8.571,10L31,70l8.571,10,8.571-10L61,80V5C61,2,59.286,0,56.714,0ZM48.143,50H13.857V40H48.143Zm0-20H13.857V20H48.143Z" transform="translate(-1)" fill="#161e35" />
+                                    </svg>
+                                </div>
+                                <div class="col-9 text-right">
+                                    <h3 class="text-primary">Facturas</h3>
+                                    <p class="mb-0 text-secondary">Comprobanates de pagos</p>
+                                </div>
+                            </div>
+                            <div class="px-md-1">
+                                <div class="progress mt-3 mb-1 rounded" style="height: 7px;">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 100%;" aria-valuenow="60"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-4 col-sm-6 col-12 mb-4">
+                <div class="card shadow">
+                    <a class="btn" asp-area="Tesorero" asp-controller="Cuotas" asp-action="Index">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div class="align-self-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 69 69">
+                                        <path id="Trazado_430" data-name="Trazado 430" d="M43.125,12.937H25.875L19.487,3.353A2.155,2.155,0,0,1,21.279,0H47.721a2.155,2.155,0,0,1,1.792,3.353ZM25.875,17.25h17.25c.512.337,1.092.714,1.631,1.132C52.518,23.274,69,33.813,69,56.062A12.941,12.941,0,0,1,56.062,69H12.937A12.939,12.939,0,0,1,0,56.062c0-22.25,16.482-32.788,24.123-37.68.66-.418,1.24-.8,1.752-1.132ZM37.209,30.188a2.738,2.738,0,0,0-2.83-2.709,2.686,2.686,0,0,0-2.588,2.709V31a8.894,8.894,0,0,0-2.143.687,6.975,6.975,0,0,0-4.191,5.081,6.421,6.421,0,0,0,.458,3.908A6.67,6.67,0,0,0,28.247,43.3a19.2,19.2,0,0,0,5.2,2.156l.3.081a14.491,14.491,0,0,1,3.949,1.577,1.248,1.248,0,0,1,.5.553,1.415,1.415,0,0,1,.04.889,1.517,1.517,0,0,1-1.078,1.186A7.368,7.368,0,0,1,33.274,50a29.915,29.915,0,0,1-3.531-1.051c-.3-.108-.593-.2-.862-.3a2.7,2.7,0,0,0-3.41,1.712,2.521,2.521,0,0,0,1.712,3.288,1.343,1.343,0,0,0,.593.323A36.018,36.018,0,0,0,31.791,55.2v.862a2.686,2.686,0,0,0,2.588,2.709,2.738,2.738,0,0,0,2.83-2.709v-.741c.714-.135,1.415-.458,2.062-.62a7.035,7.035,0,0,0,3.868-9.191,6.631,6.631,0,0,0-2.278-2.749,18.3,18.3,0,0,0-5.445-2.345l-.229-.027a16.692,16.692,0,0,1-3.908-1.55,1.319,1.319,0,0,1-.485-.472,1.016,1.016,0,0,1-.027-.674c.054-.27.256-.714,1.105-1.092a7.905,7.905,0,0,1,3.854-.472c.593.216,2.412.566,2.938.7a2.69,2.69,0,1,0,1.375-5.2c-.593-.162-1.941-.431-2.83-.593Z" fill="#161e35" />
+                                    </svg>
+                                </div>
+                                <div class="col-9 text-right">
+                                    <h3 class="text-nowrap text-primary">Cobros</h3>
+                                    <p class="mb-0 text-secondary">Pagos de estudiantes</p>
+                                </div>
+                            </div>
+                            <div class="px-md-1">
+                                <div class="progress mt-3 mb-1 rounded" style="height: 7px;">
+                                    <div class="progress-bar bg-dark" role="progressbar" style="width: 100%;" aria-valuenow="60"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xl-4 col-sm-6 col-12 mb-4">
+                <div class="card shadow">
+                    <a class="btn" asp-area="Tesorero" asp-controller="Gastos" asp-action="Index">
+
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div class="align-self-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 69 69">
+                                        <path id="Trazado_429" data-name="Trazado 429" d="M19.487,3.353A2.155,2.155,0,0,1,21.279,0H47.721a2.155,2.155,0,0,1,1.792,3.353l-6.388,9.585H25.875ZM44.756,18.382C52.518,23.274,69,33.813,69,56.063A12.941,12.941,0,0,1,56.063,69H12.938A12.939,12.939,0,0,1,0,56.063c0-22.25,16.482-32.788,24.123-37.68.66-.418,1.24-.8,1.752-1.132h17.25c.512.337,1.092.714,1.631,1.132Zm.539,20.444a2.927,2.927,0,0,0,0-4.461,3.115,3.115,0,0,0-4.461,0L34.5,40.713l-6.455-6.347a3.154,3.154,0,0,0-4.461,4.461l6.347,6.455-6.347,6.334a3.115,3.115,0,0,0,0,4.461,2.927,2.927,0,0,0,4.461,0L34.5,49.85l6.334,6.226a3.154,3.154,0,0,0,4.461-4.461l-6.226-6.334Z" fill="#161e35" />
+                                    </svg>
+                                </div>
+                                <div class="col-9 text-right">
+                                    <h3 class="text-primary">Gastos</h3>
+                                    <p class="mb-0 text-secondary">Registro de egresos</p>
+                                </div>
+                            </div>
+                            <div class="px-md-1">
+                                <div class="progress mt-3 mb-1 rounded" style="height: 7px;">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="60"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xl-4 col-sm-6 col-12 mb-4">
+                <div class="card shadow">
+                    <a class="btn" asp-area="Tesorero" asp-controller="AdminTes" asp-action="Index">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div class="align-self-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 70 80">
+                                        <path id="Trazado_457" data-name="Trazado 457" d="M84.5,26.031a3.732,3.732,0,0,1-.914,3.844l-6.281,6.156a32.061,32.061,0,0,1,0,7.938l6.281,6.156a3.732,3.732,0,0,1,.914,3.844,41.2,41.2,0,0,1-2.277,5.359l-.682,1.266a41.32,41.32,0,0,1-3.206,4.891,3.169,3.169,0,0,1-3.554,1.063L66.7,63.766a31.267,31.267,0,0,1-6.382,3.984l-1.813,8.922a3.615,3.615,0,0,1-2.64,2.781,35.252,35.252,0,0,1-6.3.547,34.506,34.506,0,0,1-6.034-.547,3.615,3.615,0,0,1-2.64-2.781L39.085,67.75A28.092,28.092,0,0,1,32.7,63.766l-8.074,2.781a3.163,3.163,0,0,1-3.555-1.062,41.151,41.151,0,0,1-3.207-4.891l-.679-1.266A40.462,40.462,0,0,1,14.9,53.969a3.735,3.735,0,0,1,.921-3.844l6.275-6.156a32.632,32.632,0,0,1,0-7.937L15.82,29.875a3.727,3.727,0,0,1-.921-3.844,40.655,40.655,0,0,1,2.289-5.359l.677-1.266a40.616,40.616,0,0,1,3.209-4.883,3.147,3.147,0,0,1,3.555-1.064L32.7,16.234a27.485,27.485,0,0,1,6.382-3.98L40.9,3.333A3.419,3.419,0,0,1,43.538.548a34.922,34.922,0,0,1,12.33,0,3.419,3.419,0,0,1,2.64,2.784l1.813,8.922a30.513,30.513,0,0,1,6.382,3.98l8.079-2.775a3.153,3.153,0,0,1,3.554,1.064,40.6,40.6,0,0,1,3.206,4.883l.682,1.266A41.2,41.2,0,0,1,84.5,26.031ZM49.7,52.5c6.411,0,11.6-5.594,11.6-12.641,0-6.766-5.193-12.5-11.6-12.5s-11.6,5.734-11.6,12.5C38.1,46.906,43.292,52.5,49.7,52.5Z" transform="translate(-14.702)" fill="#161e35" />
+                                    </svg>
+                                </div>
+                                <div class="col-10 text-right">
+                                    <h4 class="text-primary">Administración</h4>
+                                    <p class="mb-0 text-secondary">Gestón de cuotas y gastos</p>
+                                </div>
+                            </div>
+                            <div class="px-md-1">
+                                <div class="progress mt-3 mb-1 rounded" style="height: 7px;">
+                                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%;" aria-valuenow="60"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-4 col-sm-6 col-12 mb-4">
+                <div class="card shadow">
+                    <a class="btn" asp-area="Tesorero" asp-controller="Reportes" asp-action="Index">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div class="align-self-center">
+                                    <svg id="icon_dashboard" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 70 80">
+                                        <path id="Unión_8" data-name="Unión 8" d="M56.876,80C54.25,80,52.5,78,52.5,75V30c0-3,1.752-5,4.378-5h8.749C68.248,25,70,27,70,30V75c0,3-1.752,5-4.375,5ZM30.626,80c-2.626,0-4.375-2-4.375-5V5c0-3,1.748-5,4.375-5h8.749C42,0,43.749,2,43.749,5V75c0,3-1.748,5-4.374,5ZM4.375,80C1.752,80,0,78,0,75V55c0-3,1.752-5,4.375-5h8.749c2.626,0,4.379,2,4.379,5V75c0,3-1.752,5-4.379,5Z" fill="#161e35" />
+                                    </svg>
+                                </div>
+                                <div class="col-9 text-right">
+                                    <h3 class="text-nowrap text-primary">Reportes</h3>
+                                    <p class="mb-0 text-secondary">Detalles sobre los ingresos y egresos</p>
+                                </div>
+                            </div>
+                            <div class="px-md-1">
+                                <div class="progress mt-3 mb-1 rounded" style="height: 7px;">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;" aria-valuenow="60"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </section>
+</div>
+

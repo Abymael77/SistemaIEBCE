@@ -13,7 +13,7 @@
             <div class="col-4"> <h2>Usuarios</h2> </div>
             <div class="col-8 d-flex justify-content-end flex-nowrap">
                 <a asp-area="Director" asp-controller="Menu" asp-action="Index" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
-                <a asp-action="Create" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-plus"></i> Crear Nuevo Usuario</a>
+                <a class="btn text-white bg-primary m-1" asp-area="Identity" asp-page="/Account/Register"><i class="fa-solid fa-plus"></i> Crear Nuevo Usuario</a>
             </div>
         </div>
 

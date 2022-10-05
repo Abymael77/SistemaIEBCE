@@ -20,11 +20,16 @@ namespace SistemaIEBCE.AccesoDatos.Data
 
         public IEnumerable<SelectListItem> GetListaCatedratico()
         {
-            return _db.Catedratico.Select(i => new SelectListItem()
-            {
-                Text = i.NomCatedratico,
-                Value = i.Id.ToString()
-            }); ;
+            List<SelectListItem> list = null;
+            int est = 1;
+                        
+            // consulta Validada por estado 
+            var query = (from ca in _db.Catedratico
+                         where ca.Estado == est
+                         select new SelectListItem { Text = ca.NomCatedratico, Value = ca.Id.ToString() }).Distinct();
+            list = query.ToList();
+
+            return list;
         }
 
         public void Update(Catedratico seccion)

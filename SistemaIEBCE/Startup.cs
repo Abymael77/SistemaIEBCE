@@ -38,7 +38,8 @@ namespace SistemaIEBCE
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoleManager<RoleManager<IdentityRole>>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders()
+                .AddErrorDescriber<MyErrorDescriber>();
 
             services.AddSingleton<IEmailSender, EmailSender>();
 
@@ -46,7 +47,12 @@ namespace SistemaIEBCE
 
             services.AddScoped<IContenedorTrabajo, ContenedorTrabajo>();
 
-            services.AddRazorPages();
+            services.AddRazorPages().AddMvcOptions(options =>
+            {
+                //options.MaxModelValidationErrors = 50;
+                options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
+                    _ => "Valor Requerido");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,4 +89,82 @@ namespace SistemaIEBCE
             });
         }
     }
+
+    //traduccion de mensajes de error identity
+    public class MyErrorDescriber: IdentityErrorDescriber
+    {
+        public override IdentityError InvalidEmail(string email)
+        {
+            return new IdentityError()
+            {
+                Code = nameof(InvalidEmail),
+                Description = "Correo Electronico Invalido."
+            };
+        }
+
+        public override IdentityError PasswordMismatch()
+        {
+            return new IdentityError()
+            {
+                Code = nameof(PasswordMismatch),
+                Description = "Error de coincidencia de contraseña."
+            };
+        }
+
+        public override IdentityError PasswordRequiresDigit()
+        {
+            return new IdentityError()
+            {
+                Code = nameof(PasswordRequiresDigit),
+                Description = "La contraseña especificada no contiene un carácter numérico."
+            };
+        }
+
+        public override IdentityError PasswordRequiresLower()
+        {
+            return new IdentityError()
+            {
+                Code = nameof(PasswordRequiresLower),
+                Description = "La contraseña especificada no contiene una letra minúscula."
+            };
+        }
+
+        public override IdentityError PasswordRequiresNonAlphanumeric()
+        {
+            return new IdentityError()
+            {
+                Code = nameof(PasswordRequiresNonAlphanumeric),
+                Description = "La contraseña especificada no contiene un carácter no alfanumérico."
+            };
+        }
+
+        public override IdentityError PasswordRequiresUniqueChars(int uniqueChars)
+        {
+            return new IdentityError()
+            {
+                Code = nameof(PasswordRequiresUniqueChars),
+                Description = "La contraseña no cumple el número mínimo de caracteres únicos."
+            };
+        }
+
+        public override IdentityError PasswordRequiresUpper()
+        {
+            return new IdentityError()
+            {
+                Code = nameof(PasswordRequiresUpper),
+                Description = "La contraseña especificada no contiene una letra mayúscula."
+            };
+        }
+
+        public override IdentityError PasswordTooShort(int length)
+        {
+            return new IdentityError()
+            {
+                Code = nameof(PasswordTooShort),
+                Description = "La contraseña no cumple los requisitos de longitud mínima."
+            };
+        }
+
+    }
+
 }

@@ -20,10 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Tesorero\Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SistemaIEBCE.AccesoDatos\SistemaIEBCE.AccesoDatos.csproj" />
   </ItemGroup>
 

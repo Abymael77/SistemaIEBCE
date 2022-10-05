@@ -215,6 +215,94 @@ namespace SistemaIEBCE.AccesoDatos.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("SistemaIEBCE.Models.AsigCurso", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Estado")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdCatedratico")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdCicloEscolar")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdCurso")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdCatedratico");
+
+                    b.HasIndex("IdCicloEscolar");
+
+                    b.HasIndex("IdCurso");
+
+                    b.ToTable("AsigCurso");
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.AsigEstudiante", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Estado")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdCicloEscolar")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdEstudiante")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdCicloEscolar");
+
+                    b.HasIndex("IdEstudiante");
+
+                    b.ToTable("AsigEstudiante");
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.Asistencia", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comentario")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("Date")
+                        .HasColumnName("Fecha");
+
+                    b.Property<int>("IdAsigEstudinate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdBloqueAsigCurso")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdAsigEstudinate");
+
+                    b.HasIndex("IdBloqueAsigCurso");
+
+                    b.ToTable("Asistencia");
+                });
+
             modelBuilder.Entity("SistemaIEBCE.Models.Bloque", b =>
                 {
                     b.Property<int>("Id")
@@ -233,6 +321,57 @@ namespace SistemaIEBCE.AccesoDatos.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Bloque");
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.BloqueAsigCurso", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Estado")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdAsigCurso")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdBloque")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdAsigCurso");
+
+                    b.HasIndex("IdBloque");
+
+                    b.ToTable("BloqueAsigCurso");
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.Caja", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Estado")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FechaFin")
+                        .HasColumnType("Date")
+                        .HasColumnName("Fin");
+
+                    b.Property<DateTime>("FechaInicio")
+                        .HasColumnType("Date")
+                        .HasColumnName("Inicio");
+
+                    b.Property<float>("MontoInicial")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Caja");
                 });
 
             modelBuilder.Entity("SistemaIEBCE.Models.Catedratico", b =>
@@ -273,6 +412,63 @@ namespace SistemaIEBCE.AccesoDatos.Migrations
                     b.ToTable("Catedratico");
                 });
 
+            modelBuilder.Entity("SistemaIEBCE.Models.CicloEscolar", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Anio")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Estado")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdGrado")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdSeccion")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdGrado");
+
+                    b.HasIndex("IdSeccion");
+
+                    b.ToTable("CicloEscolar");
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.Cuota", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DescpCuota")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Estado")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Monto")
+                        .HasColumnType("real");
+
+                    b.Property<string>("NomCuota")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cuota");
+                });
+
             modelBuilder.Entity("SistemaIEBCE.Models.Curso", b =>
                 {
                     b.Property<int>("Id")
@@ -297,6 +493,66 @@ namespace SistemaIEBCE.AccesoDatos.Migrations
                     b.ToTable("Curso");
                 });
 
+            modelBuilder.Entity("SistemaIEBCE.Models.DetalleFactura", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdCuota")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdFactura")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Monto")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdCuota");
+
+                    b.HasIndex("IdFactura");
+
+                    b.ToTable("DetalleFactura");
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.DetalleGasto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("Date")
+                        .HasColumnName("Fecha");
+
+                    b.Property<int>("IdCaja")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdGasto")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Monto")
+                        .HasColumnType("real");
+
+                    b.Property<int>("NoFactura")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdCaja");
+
+                    b.HasIndex("IdGasto");
+
+                    b.ToTable("DetalleGasto");
+                });
+
             modelBuilder.Entity("SistemaIEBCE.Models.Estudiante", b =>
                 {
                     b.Property<int>("Id")
@@ -309,8 +565,9 @@ namespace SistemaIEBCE.AccesoDatos.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("Carnet")
-                        .HasColumnType("int");
+                    b.Property<string>("Carnet")
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<string>("Direccion")
                         .IsRequired()
@@ -346,6 +603,58 @@ namespace SistemaIEBCE.AccesoDatos.Migrations
                     b.ToTable("Estudiante");
                 });
 
+            modelBuilder.Entity("SistemaIEBCE.Models.Factura", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("Date")
+                        .HasColumnName("Fecha");
+
+                    b.Property<int>("IdAsigEstudiante")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdCaja")
+                        .HasColumnType("int");
+
+                    b.Property<float>("NoFactura")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdAsigEstudiante");
+
+                    b.HasIndex("IdCaja");
+
+                    b.ToTable("Factura");
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.Gasto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DescGasto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Estado")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NomGasto")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Gasto");
+                });
+
             modelBuilder.Entity("SistemaIEBCE.Models.Grado", b =>
                 {
                     b.Property<int>("Id")
@@ -364,6 +673,31 @@ namespace SistemaIEBCE.AccesoDatos.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Grado");
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.Nota", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdAsigEstudinate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdBloqueAsigCurso")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Punteo")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdAsigEstudinate");
+
+                    b.HasIndex("IdBloqueAsigCurso");
+
+                    b.ToTable("Nota");
                 });
 
             modelBuilder.Entity("SistemaIEBCE.Models.Seccion", b =>
@@ -435,6 +769,185 @@ namespace SistemaIEBCE.AccesoDatos.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.AsigCurso", b =>
+                {
+                    b.HasOne("SistemaIEBCE.Models.Catedratico", "Catedratico")
+                        .WithMany()
+                        .HasForeignKey("IdCatedratico")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SistemaIEBCE.Models.CicloEscolar", "CicloEscolar")
+                        .WithMany()
+                        .HasForeignKey("IdCicloEscolar")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SistemaIEBCE.Models.Curso", "Curso")
+                        .WithMany()
+                        .HasForeignKey("IdCurso")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Catedratico");
+
+                    b.Navigation("CicloEscolar");
+
+                    b.Navigation("Curso");
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.AsigEstudiante", b =>
+                {
+                    b.HasOne("SistemaIEBCE.Models.CicloEscolar", "CicloEscolar")
+                        .WithMany()
+                        .HasForeignKey("IdCicloEscolar")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SistemaIEBCE.Models.Estudiante", "Estudiante")
+                        .WithMany()
+                        .HasForeignKey("IdEstudiante")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CicloEscolar");
+
+                    b.Navigation("Estudiante");
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.Asistencia", b =>
+                {
+                    b.HasOne("SistemaIEBCE.Models.AsigEstudiante", "asigEstudiante")
+                        .WithMany()
+                        .HasForeignKey("IdAsigEstudinate")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SistemaIEBCE.Models.BloqueAsigCurso", "BloqueAsigCurso")
+                        .WithMany()
+                        .HasForeignKey("IdBloqueAsigCurso")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("asigEstudiante");
+
+                    b.Navigation("BloqueAsigCurso");
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.BloqueAsigCurso", b =>
+                {
+                    b.HasOne("SistemaIEBCE.Models.AsigCurso", "AsigCurso")
+                        .WithMany()
+                        .HasForeignKey("IdAsigCurso")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SistemaIEBCE.Models.Bloque", "Bloque")
+                        .WithMany()
+                        .HasForeignKey("IdBloque")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AsigCurso");
+
+                    b.Navigation("Bloque");
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.CicloEscolar", b =>
+                {
+                    b.HasOne("SistemaIEBCE.Models.Grado", "Grado")
+                        .WithMany()
+                        .HasForeignKey("IdGrado")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SistemaIEBCE.Models.Seccion", "Seccion")
+                        .WithMany()
+                        .HasForeignKey("IdSeccion")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Grado");
+
+                    b.Navigation("Seccion");
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.DetalleFactura", b =>
+                {
+                    b.HasOne("SistemaIEBCE.Models.Cuota", "Cuota")
+                        .WithMany()
+                        .HasForeignKey("IdCuota")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SistemaIEBCE.Models.Factura", "Factura")
+                        .WithMany()
+                        .HasForeignKey("IdFactura")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cuota");
+
+                    b.Navigation("Factura");
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.DetalleGasto", b =>
+                {
+                    b.HasOne("SistemaIEBCE.Models.Caja", "Caja")
+                        .WithMany()
+                        .HasForeignKey("IdCaja")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SistemaIEBCE.Models.Gasto", "Gasto")
+                        .WithMany()
+                        .HasForeignKey("IdGasto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Caja");
+
+                    b.Navigation("Gasto");
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.Factura", b =>
+                {
+                    b.HasOne("SistemaIEBCE.Models.AsigEstudiante", "AsigEstudiante")
+                        .WithMany()
+                        .HasForeignKey("IdAsigEstudiante")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SistemaIEBCE.Models.Caja", "Caja")
+                        .WithMany()
+                        .HasForeignKey("IdCaja")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AsigEstudiante");
+
+                    b.Navigation("Caja");
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.Nota", b =>
+                {
+                    b.HasOne("SistemaIEBCE.Models.AsigEstudiante", "asigEstudiante")
+                        .WithMany()
+                        .HasForeignKey("IdAsigEstudinate")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SistemaIEBCE.Models.BloqueAsigCurso", "BloqueAsigCurso")
+                        .WithMany()
+                        .HasForeignKey("IdBloqueAsigCurso")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("asigEstudiante");
+
+                    b.Navigation("BloqueAsigCurso");
                 });
 #pragma warning restore 612, 618
         }

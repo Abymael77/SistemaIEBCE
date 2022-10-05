@@ -1,0 +1,119 @@
+﻿@using System.Data
+@model DataTable
+
+@{
+    ViewData["Title"] = "UpdateAsis";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>ListEstudiante Update</h1>
+<h2>Ciclo => @ViewBag.IdBlkAsCu</h2>
+
+<div class="bg-white p-4">
+    <button class="guardar" onclick="UpdateAsis(@ViewData["idBlkAsCu"])" type="submit">Guardar</button>
+    <input type="date" id="dateAsisUp" name="fechaUp" class="fechaUp" value="@ViewData["Fecha"]" />
+    <table id="listEstuAsisUpdate" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>IdAsis</th>
+                <th>IdAsEs</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Tipo</th>
+                <th>Comentario</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (DataRow r in Model.Rows)
+            {
+                <tr>
+                    <td> <input class="form-control-plaintext idasis" value="@Convert.ToString(r["id"])" readonly></td>
+                    <td> <input class="form-control-plaintext idases" value="@Convert.ToString(r["IdAsigEstudinate"])" readonly></td>
+                    <td> @Convert.ToString(r["NomEstudiante"]) </td>
+                    <td> @Convert.ToString(r["ApellEstudiante"]) </td>
+                    <td>
+                        @if (@Convert.ToString(r["Tipo"]) == "Presente")
+                        {
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input tipo" type="radio" name="inlineRadioOptions @Convert.ToString(r["IdAsigEstudinate"])" id="inlineRadio1 @Convert.ToString(r["IdAsigEstudinate"])" checked value="Presente">
+                                <label class="form-check-label" for="inlineRadio1 @Convert.ToString(r["IdAsigEstudinate"])">Presente</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input tipo" type="radio" name="inlineRadioOptions @Convert.ToString(r["IdAsigEstudinate"])" id="inlineRadio2 @Convert.ToString(r["IdAsigEstudinate"])" value="Ausente">
+                                <label class="form-check-label" for="inlineRadio2 @Convert.ToString(r["IdAsigEstudinate"])">Ausente</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input tipo" type="radio" name="inlineRadioOptions @Convert.ToString(r["IdAsigEstudinate"])" id="inlineRadio3 @Convert.ToString(r["IdAsigEstudinate"])" value="Justificado">
+                                <label class="form-check-label" for="inlineRadio3 @Convert.ToString(r["IdAsigEstudinate"])">Justificado</label>
+                            </div>
+                        }
+                        else if (@Convert.ToString(r["Tipo"]) == "Ausente")
+                        {
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input tipo" type="radio" name="inlineRadioOptions @Convert.ToString(r["IdAsigEstudinate"])" id="inlineRadio1 @Convert.ToString(r["IdAsigEstudinate"])" value="Presente">
+                                <label class="form-check-label" for="inlineRadio1 @Convert.ToString(r["IdAsigEstudinate"])">Presente</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input tipo" type="radio" name="inlineRadioOptions @Convert.ToString(r["IdAsigEstudinate"])" id="inlineRadio2 @Convert.ToString(r["IdAsigEstudinate"])" checked value="Ausente">
+                                <label class="form-check-label" for="inlineRadio2 @Convert.ToString(r["IdAsigEstudinate"])">Ausente</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input tipo" type="radio" name="inlineRadioOptions @Convert.ToString(r["IdAsigEstudinate"])" id="inlineRadio3 @Convert.ToString(r["IdAsigEstudinate"])" value="Justificado">
+                                <label class="form-check-label" for="inlineRadio3 @Convert.ToString(r["IdAsigEstudinate"])">Justificado</label>
+                            </div>
+                        }
+                        else if (@Convert.ToString(r["Tipo"]) == "Justificado")
+                        {
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input tipo" type="radio" name="inlineRadioOptions @Convert.ToString(r["IdAsigEstudinate"])" id="inlineRadio1 @Convert.ToString(r["IdAsigEstudinate"])" value="Presente">
+                                <label class="form-check-label" for="inlineRadio1 @Convert.ToString(r["IdAsigEstudinate"])">Presente</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input tipo" type="radio" name="inlineRadioOptions @Convert.ToString(r["IdAsigEstudinate"])" id="inlineRadio2 @Convert.ToString(r["IdAsigEstudinate"])" value="Ausente">
+                                <label class="form-check-label" for="inlineRadio2 @Convert.ToString(r["IdAsigEstudinate"])">Ausente</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input tipo" type="radio" name="inlineRadioOptions @Convert.ToString(r["IdAsigEstudinate"])" id="inlineRadio3 @Convert.ToString(r["IdAsigEstudinate"])" checked value="Justificado">
+                                <label class="form-check-label" for="inlineRadio3 @Convert.ToString(r["IdAsigEstudinate"])">Justificado</label>
+                            </div>
+                        }
+                    </td>
+                    <td> <input class="form-control-plaintext coment border" value="@Convert.ToString(r["Comentario"])"></td>
+                </tr>
+            }
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>IdAsis</th>
+                <th>IdAsEs</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Tipo</th>
+                <th>Comentario</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+@section Scripts{
+
+    <script src="~/js/Asistencia.js"></script>
+
+
+    <script>
+
+        $(document).ready(function () {
+            //Actualizar
+            cargarDatatableLsEstAs(@ViewData["idBlkAsCu"], @ViewData["IdCicloEscolar"], @ViewData["IdAsigCurso"]);
+
+
+        });
+    </script>
+
+}
+
+
+

@@ -19,11 +19,16 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
 
         public IEnumerable<SelectListItem> GetListaGrado()
         {
-            return _db.Grado.Select(i => new SelectListItem()
-            {
-                Text = i.NomGrado,
-                Value = i.Id.ToString()
-            }); ;
+            List<SelectListItem> list = null;
+            int est = 1;
+
+            // consulta Validada por estado 
+            var query = (from ca in _db.Grado
+                         where ca.Estado == est
+                         select new SelectListItem { Text = ca.NomGrado, Value = ca.Id.ToString() }).Distinct();
+            list = query.ToList();
+
+            return list;
         }
 
         public void Update(Grado grado)

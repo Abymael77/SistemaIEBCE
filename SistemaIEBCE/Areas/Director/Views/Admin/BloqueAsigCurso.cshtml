@@ -1,0 +1,61 @@
+﻿@model SistemaIEBCE.Models.ViewModels.BloqueAsigCursoVM
+
+@{
+    ViewData["Title"] = "BloqueAsigCurso";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/chosen.css" rel="stylesheet" />
+<link href="~/css/CreateForm.css" rel="stylesheet" />
+
+<h1>BloqueAsigCurso</h1>
+
+<div class='box mt-5 container-sm justify-content-center'>
+    <div class='box-form container-fluid mx-2'>
+        <div class='box-login-tab'></div>
+        <div class='box-login-title p-2 font-weight-bold text-primary'>
+            <h2> <i class="fa-solid fa-swatchbook"></i> &nbsp;&nbsp;&nbsp; Crear</h2>
+        </div>
+        <div class='box-login container-fluid'>
+            <div class='fieldset-body container-fluid' id='login_form'>
+
+                <form class="my-4 container-fluid" method="post" asp-action="BloqueAsigCurso">
+                    <div class="row border">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="col-12 mt-4">
+
+
+                            <div class="form-group row mt-3">
+                                <label asp-for="BloqueAsigCurso.IdBloque" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                                <div class="col-10">
+                                    @Html.DropDownListFor(m => m.BloqueAsigCurso.IdBloque, Model.ListaBloqueCrear,
+                                   "-Porfavor seleccione una opción-", new { @class = "form-control", @id = "bloque" })
+                                </div>
+                                <span asp-validation-for="BloqueAsigCurso.IdBloque" class="text-danger offset-2 col-10"></span>
+                            </div>
+
+                            <input asp-for="BloqueAsigCurso.Estado" value="1" hidden />
+
+                            <div class="form-group row mt-3">
+                                <div class="col-4 offset-4">
+                                    <div class="row justify-content-center">
+                                        <div class="m-2">
+                                            <button type="submit" class="btn bg-primary text-light px-5 form-control">Crear</button>
+
+                                        </div>
+                                        <div class="m-2">
+                                            <a href="/Director/Admin" class="btn btn-secondary px-5 form-control">Volver</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <input type='submit' id='do_login' value='' />
+    </div>
+</div>

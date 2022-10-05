@@ -53,7 +53,7 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
                 return View();
             }
         }
-
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Estudiante estudiante)

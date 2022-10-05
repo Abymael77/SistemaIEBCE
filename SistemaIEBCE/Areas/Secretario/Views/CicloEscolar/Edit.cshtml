@@ -1,0 +1,113 @@
+﻿@model SistemaIEBCE.Models.ViewModels.CicloEscolarVM
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var message = TempData["error"] ?? string.Empty;
+}
+
+<link href="~/css/CreateForm.css" rel="stylesheet" />
+
+@*create carpeta*@
+
+<div class='box mt-5 container-sm justify-content-center'>
+    <div class='box-form container-fluid mx-2'>
+        <div class='box-login-tab'></div>
+        <div class='box-login-title p-2 font-weight-bold text-primary'>
+            <h2> <i class="fa-solid fa-swatchbook"></i> &nbsp;&nbsp;&nbsp; Crear</h2>
+        </div>
+        <div class='box-login container-fluid'>
+            <div class='fieldset-body container-fluid' id='login_form'>
+
+                <form class="my-4 container-fluid" method="post" asp-action="Edit">
+                    <div class="row px-2 mx-2 border">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="col-12 mt-4">
+
+                            <input type="hidden" asp-for="CicloEscolar.Id"/>
+
+                            <div class="form-group row mt-3">
+                                <label asp-for="CicloEscolar.Anio" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                                <div class="col-10">
+                                    <input asp-for="CicloEscolar.Anio" value="@DateTime.Now.Year" class="form-control" readonly />
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-3">
+                                <label asp-for="CicloEscolar.IdGrado" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                                <div class="col-10">
+                                    @Html.DropDownListFor(m => m.CicloEscolar.IdGrado, Model.ListaGrado,
+                                   "-Porfavor seleccione una opción-", new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-3">
+                                <label asp-for="CicloEscolar.IdSeccion" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                                <div class="col-10">
+                                    @Html.DropDownListFor(m => m.CicloEscolar.IdSeccion, Model.ListaSeccion,
+                                   "-Porfavor seleccione una opción-", new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-3">
+                                <label asp-for="CicloEscolar.Estado" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                                <div class="col-10">
+                                    <select asp-for="CicloEscolar.Estado" class="form-control">
+                                        <option value="1">Activo</option>
+                                        <option value="0">Inactivo</option>
+                                    </select>
+                                    <span asp-validation-for="CicloEscolar.Estado" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-3">
+                                <div class="col-4 offset-4">
+                                    <div class="col">
+                                        <div class="col">
+                                            <button type="submit" class="btn btn-outline-primary form-control" asp-route-idBloque="@Model.CicloEscolar.Id">Actualizar</button>
+                                        </div>
+                                        <div class="col">
+                                            <a asp-action="Index" class="btn btn-outline-secondary form-control">Volver</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <input type='submit' id='do_login' value='' />
+    </div>
+</div>
+
+
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+                var message = '@message';
+                if (message) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'bottom-end',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Formulario Invalido: ' + message
+                    })
+                }
+            });
+    </script>
+}

@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewData["Title"] = "ListBloque";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var message = TempData["error"] ?? string.Empty;
+}
+
+
+<div class="container-fluid bg-white p-4 mt-4">
+
+    <div class="container">
+
+        <div class="row py-3">
+            <div class="col-4"> <h2>Bloques</h2> </div>
+            <div class="col-8 d-flex justify-content-end flex-nowrap">
+                <a asp-area="Secretario" asp-controller="Menu" asp-action="Index" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+                @*<a asp-action="Create" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-plus"></i> Crear Nuevo Nota</a>*@
+            </div>
+        </div>
+
+        <div class="row shadow p-3 mb-5 bg-white rounded py-2">
+            <div class="col-12">
+                <table id="tblBloque" class="table text-primary table-bordered table-responsive-lg table-hover" style="width:100%">
+                    <thead class="bg-primary text-light">
+                        <tr>
+                            <td>Id</td>
+                            <td>Bloque</td>
+                            <td>IdCiclo</td>
+                            <td>Accion</td>
+                        </tr>
+                    </thead>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+                var message = '@message';
+                if (message) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'bottom-end',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Error: ' + message
+                    })
+                }
+            if (message == "dodo") {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'bottom-end',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Operación Exitosa '
+                    })
+                }
+            });
+    </script>
+
+    <script src="~/js/ImpresionNota.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            cargarDatatableBloque1(@ViewData["idCicEs"]);
+        });
+    </script>
+
+}
+

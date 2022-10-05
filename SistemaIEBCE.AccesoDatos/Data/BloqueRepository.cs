@@ -20,11 +20,32 @@ namespace SistemaIEBCE.AccesoDatos.Data
 
         public IEnumerable<SelectListItem> GetListaBloque()
         {
-            return _db.Bloque.Select(i => new SelectListItem()
-            {
-                Text = i.NomBloque,
-                Value = i.Id.ToString()
-            }); ;
+            List<SelectListItem> list = null;
+            int est = 1;
+
+            // consulta Validada por estado 
+            var query = (from ca in _db.Bloque
+                         where ca.Estado == est
+                         select new SelectListItem { 
+                             Text = ca.NomBloque, 
+                             Value = ca.Id.ToString()
+                         }).Distinct();
+            list = query.ToList();
+
+            return list;
+        }
+
+        public IEnumerable<BloqueAsigCurso> GetListaBloqueEstado(int est) 
+        {
+            List<BloqueAsigCurso> list = null;
+
+            // consulta Validada por estado 
+            var query = (from ca in _db.BloqueAsigCurso
+                         where ca.Estado == est
+                         select new BloqueAsigCurso { Bloque = ca.Bloque, Id = ca.Id }).Distinct();
+            list = query.ToList();
+
+            return list;
         }
 
         public void Update(Bloque seccion)

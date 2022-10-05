@@ -1,0 +1,62 @@
+﻿@model SistemaIEBCE.Models.ViewModels.AsigEstudianteVM
+
+@{
+    ViewData["Title"] = "CreateAsistencia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>ListEstudiante</h1>
+<h2>Ciclo => @ViewBag.IdBlkAsCu</h2>
+
+<div class="bg-white p-4">
+    <button class="guardar" onclick="RegistrarAsis(@ViewData["idBlkAsCu"])" type="submit">Guardar</button>
+    <input type="date" id="dateAsis" name="fecha" class="fecha" value="datetime.now" />
+    <table id="listEstuAsis" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>IdAsEs</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Tipo</th>
+                <th>Comentario</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            @*<tr>
+                    <td>Tiger Nixon</td>
+                    <td><input type="text" id="row-1-age" name="row-1-age" value="61"></td>
+                </tr>*@
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>IdAsEs</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Tipo</th>
+                <th>Comentario</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+@section Scripts{
+
+    <script src="~/js/Asistencia.js"></script>
+
+
+    <script>
+
+        $(document).ready(function () {
+            //fecha actual
+            document.getElementById('dateAsis').valueAsDate = new Date();
+
+            //guardar asis
+            cargarDatatableLsEstAs(@ViewData["idBlkAsCu"], @ViewData["IdCicloEscolar"], @ViewData["IdAsigCurso"]);
+
+        });
+    </script>
+
+}
+

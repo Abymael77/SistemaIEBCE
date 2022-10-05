@@ -5,11 +5,71 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href="~/css/ProfileCardHover.css" rel="stylesheet" />
+@*<link href="~/css/ProfileCardHover.css" rel="stylesheet" />*@
+<link href="~/css/verPerfil.css" rel="stylesheet" />
+
+<section class="mt-lg-5">
+    <div class="container1">
+        <div class="contactInfo">
+            <div>
+                <h2>Estudiante</h2>
+                <ul class="info">
+                    <li>
+                        <span>
+                            @if (Model.Sexo == "M")
+                            {
+                                <img src="~/img/Man_Student.svg" />
+                            }
+                            else
+                            {
+                                <img src="~/img/Woman_Student.svg" />
+                            }
+                        </span>
+                    </li>
+                    <li><button onclick="javascript: history.go(-1)"> <i class="fa-solid fa-arrow-left"></i> Volver</button></li>
+                </ul>
+            </div>
+        </div>
+        <div class="contactForm">
+            <h2>Información del Estudiante</h2>
+            <div class="formBox">
+                <div class="inputBox w50">
+                    <input asp-for="NomEstudiante" disabled />
+                    <span>Nombres</span>
+                </div>
+                <div class="inputBox w50">
+                    <input asp-for="ApellEstudiante" disabled />
+                    <span>Apellidos</span>
+                </div>
+                <div class="inputBox w50">
+                    <input asp-for="Sexo" disabled />
+                    <span>Sexo</span>
+                </div>
+                <div class="inputBox w50">
+                    <input asp-for="TelEstudiante" disabled />
+                    <span>Teléfono</span>
+                </div>
+                <div class="inputBox w100">
+                    <input asp-for="Encargado" disabled />
+                    <span>Encargado</span>
+                </div>
+                <div class="inputBox w50">
+                    <input asp-for="TelEncargado" disabled />
+                    <span>Teléfono Encargado</span>
+                </div>
+                <div class="inputBox w50">
+                    <input id="est" asp-for="Estado" hidden />
+                    <input id="eee" disabled />
+                    <span>Estado</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
 
-
-<div class="container-fluid  p-2 mt-2">
+@*<div class="container-fluid  p-2 mt-2">
     <div class="container-fluid text-right p">
         <a asp-area="Secretario" asp-controller="Estudiante" asp-action="Index" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
     </div>
@@ -98,16 +158,17 @@
 
     </div>
 
-</div>
+</div>*@
+
 
 <script>
     let inputValue = document.getElementById("est").value;
 
     if (inputValue == 1) {
-        document.getElementById("eee").innerHTML = "Activo";
+        document.getElementById("eee").value = "Activo";
     }
     else {
-        document.getElementById("eee").innerHTML = "Inactivo";
+        document.getElementById("eee").value = "Inactivo";
     }
 
 </script> 

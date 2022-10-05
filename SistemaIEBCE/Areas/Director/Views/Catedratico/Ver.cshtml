@@ -6,108 +6,73 @@
 }
 
 <link href="~/css/ProfileCardHover.css" rel="stylesheet" />
+<link href="~/css/verPerfil.css" rel="stylesheet" />
 
 
-
-<div class="container-fluid  p-2 mt-2">
-    <div class="container-fluid text-right p">
-        <a asp-area="Director" asp-controller="Catedratico" asp-action="Index" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
-    </div>
-    <div class="card border-0 bg-light text-primary">
-
-        <div class="slide slide1">
-
-            <div class="content">
-
-                <div class="icon">
-
-                    <i class="fa fa-user-circle" aria-hidden="true"></i>
-
+<section class="mt-lg-5">
+    <div class="container1">
+        <div class="contactInfo">
+            <div>
+                <h2>Catedrático</h2>
+                <ul class="info">
+                    <li>
+                        <span>
+                            @if (Model.Sexo == "M")
+                            {
+                                <img src="~/img/Man_Teacher.svg" />
+                            }
+                            else
+                            {
+                                <img src="~/img/Woman_Teacher.svg" />
+                            }
+                        </span>
+                    </li>
+                    <li><button onclick="javascript: history.go(-1)"> <i class="fa-solid fa-arrow-left"></i> Volver</button></li>
+                </ul>
+            </div>
+        </div>
+        <div class="contactForm">
+            <h2>Información del Catedrático</h2>
+            <div class="formBox">
+                <div class="inputBox w50">
+                    <input asp-for="NomCatedratico" disabled />
+                    <span>Nombres</span>
                 </div>
-
+                <div class="inputBox w50">
+                    <input asp-for="ApellCatedratico" disabled />
+                    <span>Apellidos</span>
+                </div>
+                <div class="inputBox w50">
+                    <input asp-for="Sexo" disabled />
+                    <span>Sexo</span>
+                </div>
+                <div class="inputBox w50">
+                    <input asp-for="Tel" disabled />
+                    <span>Teléfono</span>
+                </div>
+                <div class="inputBox w100">
+                    <input asp-for="Profesion" disabled />
+                    <span>Profesion</span>
+                </div>
+                <div class="inputBox w50">
+                    <input id="est" asp-for="Estado" hidden />
+                    <input id="eee" disabled />
+                    <span>Estado</span>
+                </div>
             </div>
 
         </div>
-
-        <div class="slide slide2 bg-white font-weight-bold">
-
-            <div class="content container-fluid">
-
-                <h3>Catedrático</h3>
-                <div class="form-row d-flex justify-content-around">
-                    <div class="col-5">
-                        <div class="form-group row mt-3">
-                            <label class="col-sm-4 col-form-label col-form-label-lg text-center">Nombres</label>
-                            <div class="col-8">
-                                <input asp-for="NomCatedratico" class="border-top-0 border-primary form-control-plaintext form-control-lg text-center" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-5">
-                        <div class="form-group row mt-3">
-                            <label class="col-sm-4 col-form-label col-form-label-lg text-center">Apellidos</label>
-                            <div class="col-8">
-                                <input asp-for="ApellCatedratico" class="border-top-0 border-primary form-control-plaintext form-control-lg text-center" disabled />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-row d-flex justify-content-around">
-                    <div class="col-5">
-                        <div class="form-group row mt-3">
-                            <label asp-for="Sexo" class="col-sm-4 col-form-label col-form-label-lg text-center"></label>
-                            <div class="col-8">
-                                <input asp-for="Sexo" class="border-top-0 border-primary form-control-plaintext form-control-lg text-center" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-5">
-                        <div class="form-group row mt-3">
-                            <label class="col-sm-4 col-form-label col-form-label-lg text-center">Teléfono</label>
-                            <div class="col-8">
-                                <input asp-for="Tel" class="border-top-0 border-primary form-control-plaintext form-control-lg text-center" disabled />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-row d-flex justify-content-around">
-                    <div class="col-sm-5">
-                        <div class="form-group row mt-3">
-                            <label class="col-sm-4 col-form-label col-form-label-lg text-center">Profesion</label>
-                            <div class="col-8">
-                                <input asp-for="Profesion" class="border-top-0 border-primary form-control-plaintext form-control-lg text-center" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-5">
-                        <div class="form-group row mt-3">
-                            <label asp-for="Estado" class="col-sm-4 col-form-label col-form-label-lg text-center"></label>
-                            <div class="col-8">
-                                <input id="est" asp-for="Estado" hidden />
-                                <p id="eee" class="border-top-0 border-primary form-control-plaintext form-control-lg text-center font-weight-normal"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
     </div>
-
-</div>
+</section>
 
 <script>
     let inputValue = document.getElementById("est").value;
 
     if (inputValue == 1) {
-        document.getElementById("eee").innerHTML = "Activo";
+        document.getElementById("eee").value = "Activo";
     }
     else {
-        document.getElementById("eee").innerHTML = "Inactivo";
+        document.getElementById("eee").value = "Inactivo";
     }
 
 </script> 

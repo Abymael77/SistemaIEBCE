@@ -20,11 +20,16 @@ namespace SistemaIEBCE.AccesoDatos.Data
 
         public IEnumerable<SelectListItem> GetListaSeccion()
         {
-            return _db.Seccion.Select(i => new SelectListItem()
-            {
-                Text = i.NomSeccion,
-                Value = i.Id.ToString()
-            }); ;
+            List<SelectListItem> list = null;
+            int est = 1;
+
+            // consulta Validada por estado 
+            var query = (from ca in _db.Seccion
+                         where ca.Estado == est
+                         select new SelectListItem { Text = ca.NomSeccion, Value = ca.Id.ToString() }).Distinct();
+            list = query.ToList();
+
+            return list;
         }
 
         public void Update(Seccion seccion)
