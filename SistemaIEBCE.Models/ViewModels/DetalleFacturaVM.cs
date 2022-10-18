@@ -8,14 +8,18 @@ using System.Threading.Tasks;
 
 namespace SistemaIEBCE.Models
 {
-    public class DetalleFactura
+    public class DetalleFacturaVM
     {
         [Key]
-        public Nullable<int> Id { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "El tipo de cuota es obligatorio")]
         [Display(Name = "Cuota")]
         public int IdCuota { get; set; }
+
+        [Required(ErrorMessage = "El tipo de cuota es obligatorio")]
+        [Display(Name = "Cuota")]
+        public string NomCuota { get; set; }
 
         [Required(ErrorMessage = "La refetencia a una factura es obligatorio")]
         [Display(Name = "Factura")]

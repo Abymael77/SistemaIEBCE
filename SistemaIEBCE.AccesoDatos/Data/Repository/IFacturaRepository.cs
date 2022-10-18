@@ -10,7 +10,7 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
 {
     public interface IFacturaRepository : IRepository<Factura>
     {
-
+        Factura GetFacturaUltimo();
         void Update(Factura factura);
     }
 }

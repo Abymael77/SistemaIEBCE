@@ -17,7 +17,12 @@ namespace SistemaIEBCE.AccesoDatos.Data
         {
             _db = db;
         }
-                
+        
+        public Factura GetFacturaUltimo()
+        {
+            return new Factura();
+        }
+
         public void Update(Factura factura)
         {
             var objDesdeDB = _db.Factura.FirstOrDefault(s => s.Id == factura.Id);

@@ -19,6 +19,12 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
         IEnumerable<Nota> GetListaNota(int? IdCiclo, int? est);
 
         IEnumerable<NotaFull> GetListaNotaBlk(int idAsigEstudinate, int idBloque);
+        IEnumerable<NotaFull> GetListaNotaPromedio(int idAsigEstudinate);
+        IEnumerable<SelectListItem> GetListaCurso(int idAsigEstudinate);
+        IEnumerable<SelectListItem> GetListaBloque(int idAsigEstudinate);
+
+        //tesoreria
+        IEnumerable<AsigEstudianteVM> GetListaAsigEstudianteCiclActivo(int est);
 
 
         void Update(AsigEstudiante AsigEstudiante);

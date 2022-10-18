@@ -18,6 +18,16 @@ namespace SistemaIEBCE.AccesoDatos.Data
             _db = db;
         }
 
+        public IEnumerable<DetalleFacturaVM> GetListIngresoTipoVM(int est)
+        {
+            return null;
+        }
+
+        public DetalleFactura GetPagoRealizado(int idAsEs)
+        {
+            return new DetalleFactura();
+        }
+
         public void Update(DetalleFactura detalleFactura)
         {
             var objDesdeDB = _db.DetalleFactura.FirstOrDefault(s => s.Id == detalleFactura.Id);

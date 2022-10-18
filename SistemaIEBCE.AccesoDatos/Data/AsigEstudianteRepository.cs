@@ -106,6 +106,7 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
             return list; ;
         }
 
+        //Notas por bloque
         public IEnumerable<NotaFull> GetListaNotaBlk(int idAsigEstudinate, int idBloque)
         {
             List<NotaFull> list = null;
@@ -133,6 +134,82 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
             return list; ;
         }
 
+        //Notas por Completa Con promedio
+        public IEnumerable<NotaFull> GetListaNotaPromedio(int idAsigEstudinate)
+        {
+            List<NotaFull> list = null;
+
+            // consulta Validada por estado 
+            var query = (from nt in _db.Nota
+                         join ases in _db.AsigEstudiante on nt.IdAsigEstudinate equals ases.Id
+                         join blascu in _db.BloqueAsigCurso on nt.IdBloqueAsigCurso equals blascu.Id
+                         join bl in _db.Bloque on blascu.IdBloque equals bl.Id
+                         join ascu in _db.AsigCurso on blascu.IdAsigCurso equals ascu.Id
+                         join es in _db.Estudiante on ases.IdEstudiante equals es.Id
+                         orderby ascu.Id descending
+                         where nt.asigEstudiante.Id == idAsigEstudinate
+                         select new NotaFull
+                         {
+                             Id = nt.Id,
+                             IdAsigEstudinate = nt.IdAsigEstudinate,
+                             IdBloqueAsigCurso = nt.IdBloqueAsigCurso,
+                             Punteo = nt.Punteo,
+                             Bloque = nt.BloqueAsigCurso.Bloque,
+                             Curso = nt.BloqueAsigCurso.AsigCurso.Curso
+
+                         });
+            list = query.ToList();
+
+            return list; ;
+        }
+
+        //Bloque del estudiante
+        public IEnumerable<SelectListItem> GetListaBloque(int idAsigEstudinate)
+        {
+            List<SelectListItem> list = null;
+
+            // consulta Validada por estado 
+            var query = (from nt in _db.Nota
+                         where nt.asigEstudiante.Id == idAsigEstudinate
+                         join ases in _db.AsigEstudiante on nt.IdAsigEstudinate equals ases.Id
+                         join blascu in _db.BloqueAsigCurso on nt.IdBloqueAsigCurso equals blascu.Id
+                         join bl in _db.Bloque on blascu.IdBloque equals bl.Id
+                         orderby bl.Id ascending
+                         select new SelectListItem
+                         {
+                             Text = bl.NomBloque,
+                             Value = bl.Id.ToString()
+
+                         }).Distinct();
+            list = query.ToList();
+
+            return list; ;
+        }
+
+        //Cursos del estudiante
+        public IEnumerable<SelectListItem> GetListaCurso(int idAsigEstudinate)
+        {
+            List<SelectListItem> list = null;
+
+            // consulta Validada por estado 
+            var query = (from nt in _db.Nota
+                         where nt.asigEstudiante.Id == idAsigEstudinate
+                         join ases in _db.AsigEstudiante on nt.IdAsigEstudinate equals ases.Id
+                         join blascu in _db.BloqueAsigCurso on nt.IdBloqueAsigCurso equals blascu.Id
+                         join ascu in _db.AsigCurso on blascu.IdAsigCurso equals ascu.Id
+                         join cu in _db.Curso on ascu.IdCurso equals cu.Id
+                         orderby cu.Id ascending
+                         select new SelectListItem
+                         {
+                             Text = cu.NomCurso,
+                             Value = cu.Id.ToString()
+
+                         }).Distinct();
+            list = query.ToList();
+
+            return list; ;
+        }
+
         public IEnumerable<SelectListItem> GetListaAsigCicloEscolar()
         {
             List<SelectListItem> list = null;
@@ -144,6 +221,25 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
                          select new SelectListItem { 
                              Text = ca.Anio.ToString() + " - " + ca.Grado.NomGrado + " - " + ca.Seccion.NomSeccion, 
                              Value = ca.Id.ToString() 
+                         }).Distinct();
+            list = query.ToList();
+
+            return list;
+        }
+
+        //Tesoreria ######################################################################################################
+
+        public IEnumerable<AsigEstudianteVM> GetListaAsigEstudianteCiclActivo(int est)
+        {
+            List<AsigEstudianteVM> list = null; 
+
+            // consulta Validada por estado 
+            var query = (from ases in _db.AsigEstudiante
+                         join es in _db.Estudiante on ases.IdEstudiante equals es.Id
+                         where ases.Estado == est
+                         select new AsigEstudianteVM
+                         { 
+                             AsigEstudiante = ases,
                          }).Distinct();
             list = query.ToList();
 
