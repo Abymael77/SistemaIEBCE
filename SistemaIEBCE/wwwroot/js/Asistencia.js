@@ -168,7 +168,7 @@ function cargarDatatableLsEstAs(IdBlkAsCu, IdCicloEscolar, IdAsigCurso) {
                 "render": function (data) {
                     return `<td><input class="form-control-plaintext idases" value='${data}' readonly ></td>`;
                 },
-                "width": "5%"
+                "width": "10%"
             },
             { "data": "estudiante.nomEstudiante", "width": "25%" },
             { "data": "estudiante.apellEstudiante", "width": "25%" },
@@ -204,7 +204,12 @@ function cargarDatatableLsEstAs(IdBlkAsCu, IdCicloEscolar, IdAsigCurso) {
             "url": "../lib/DataTables/idioma/es-ES.json",
             "emptyTable": "No hay registros"
         },
-        "width": "100%"
+        "width": "100%",
+        info: false,
+        search: false,
+        paging: false,
+        searching: false,
+        ordering: false,
     });
 }
 

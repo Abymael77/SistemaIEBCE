@@ -1,0 +1,103 @@
+﻿@using SistemaIEBCE.Models.ViewModels
+@model CajaVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var message = TempData["error"] ?? string.Empty;
+}
+
+
+<div class="container-fluid bg-white p-4 mt-4">
+    <h1 class="mt-4 text-center">Nuevo Gasto</h1>
+
+    <form method="post" asp-action="Index">
+        <div class="row px-2 mx-2 border">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-12 mt-4">
+
+                <div class="form-group row mt-3">
+                    <label asp-for="DetalleGasto.IdGasto" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        @*<input asp-for="DetalleGasto.IdGasto" class="form-control" />*@
+                        <select asp-for="DetalleGasto.IdGasto" class="form-control">
+                            @foreach (var item in Model.Gastos)
+                            {
+                                <option value="@item.Id"> @item.NomGasto </option>
+                            }
+                        </select>
+                        <span asp-validation-for="DetalleGasto.IdGasto" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <input asp-for="DetalleGasto.IdCaja" type="hidden" value="@Model.Caja.Id" class="form-control" />
+
+                <div class="form-group row mt-3">
+                    <label asp-for="DetalleGasto.Monto" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <input asp-for="DetalleGasto.Monto" class="form-control" />
+                        <span asp-validation-for="DetalleGasto.Monto" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label asp-for="DetalleGasto.Fecha" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <input asp-for="DetalleGasto.Fecha" id="dateGasto" class="form-control" readonly />
+                        <span asp-validation-for="DetalleGasto.Fecha" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label asp-for="DetalleGasto.NoFactura" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <input asp-for="DetalleGasto.NoFactura" class="form-control" />
+                        <span asp-validation-for="DetalleGasto.NoFactura" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3 row d-flex justify-content-center">
+                    <div class="row justify-content-center">
+                        <div class="m-2">
+                            <button type="submit" class="btn bg-primary text-white px-5 form-control">Agregar</button>
+
+                        </div>
+                        <div class="m-2">
+                            <a asp-controller="Menu" asp-action="Index" class="btn btn-secondary px-5 form-control">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            document.getElementById('dateGasto').valueAsDate = new Date();
+
+                var message = '@message';
+                if (message) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'bottom-end',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Formulario Invalido: ' + message
+                    })
+                }
+            });
+    </script>
+}

@@ -41,6 +41,10 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         {//id = IdCicloEscolar
             try
             {
+                if (IdCicloEscolar == null)
+                {
+                    return RedirectToAction("Error?StatusCode=404", "Menu", "Invitado");
+                }
                 var conn = configuration.GetValue<string>("ConnectionStrings:conSQL2");
                 SqlDataAdapter da = new SqlDataAdapter("SELECT AsCu.Id, Cur.NomCurso, Cat.NomCatedratico, Cat.ApellCatedratico FROM AsigCurso AS AsCu INNER JOIN Curso As Cur ON AsCu.IdCurso = Cur.Id INNER JOIN Catedratico AS Cat ON AsCu.IdCatedratico = Cat.Id WHERE AsCu.IdCicloEscolar = " + IdCicloEscolar, conn);
 
@@ -62,6 +66,11 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         [HttpGet]
         public IActionResult Bloque(int? id, int? IdCicloEscolar)
         {//id = IdAsigCurso
+
+            if (id == null || IdCicloEscolar == null)
+            {
+                return RedirectToAction("Error?StatusCode=404", "Menu", "Invitado");
+            }
             ViewData["asigcur"] = id;
             ViewData["IdCicloEscolar"] = IdCicloEscolar;
 
@@ -72,6 +81,11 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         [HttpGet]
         public IActionResult CreateBloqueAsigCurso(int? id, int? IdCicloEscolar)
         {
+            if (id == null || IdCicloEscolar == null)
+            {
+                return RedirectToAction("Error?StatusCode=404", "Menu", "Invitado");
+            }
+
             ViewData["asig"] = id;
             ViewData["IdCicloEscolar"] = IdCicloEscolar;
 
@@ -177,6 +191,10 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         [HttpGet]
         public IActionResult ListEstudiante(int? IdBlkAsCu, int IdCicloEscolar, int IdAsigCurso)
         {
+            if (IdBlkAsCu == null || IdCicloEscolar.ToString() == null  || IdAsigCurso.ToString() == null)
+            {
+                return RedirectToAction("Error?StatusCode=404", "Menu", "Invitado");
+            }
             //ViewBag.IdBlkAsCu = IdBlkAsCu;
             //ViewBag.IdCicloEscolar = IdCicloEscolar;
             //ViewBag.IdAsigCurso = IdAsigCurso;
@@ -191,6 +209,10 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         [HttpGet]
         public IActionResult ListEstudianteLS(int? IdBlkAsCu, int? est, int IdCicloEscolar, int IdAsigCurso)
         {
+            if (IdBlkAsCu == null || est == null)
+            {
+                return RedirectToAction("Error?StatusCode=404", "Menu", "Invitado");
+            }
             ViewData["Estado"] = est;
 
             int idCicloEsc = 0;
@@ -212,6 +234,11 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         [HttpGet]
         public IActionResult ListNota(int? IdBlkAsCu, int? est)
         {
+            if (IdBlkAsCu == null || est == null)
+            {
+                return RedirectToAction("Error?StatusCode=404", "Menu", "Invitado");
+            }
+
             ViewData["Estado"] = est;
 
             int idCicloEsc = 0;
@@ -235,6 +262,8 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         {
             Nota nota = new Nota();
 
+            //hay que valiar que las notas no sean nullas aqui da un error de vez en cuando
+
             var ListConcat = ListaIdEst1.Zip(ListaEstNota1, (ides, nt) => new { IdAsigEstudinate = ides, Punteo = nt});
 
             DataTable NotaAll = new DataTable();
@@ -245,12 +274,26 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
 
             foreach (var item in ListConcat)
             {
-                NotaAll.Rows.Add(new Object[] { 
+                if (item.Punteo == null)
+                {
+                    var punt = 0;
+                    NotaAll.Rows.Add(new Object[] {
+                    0,
+                    item.IdAsigEstudinate,
+                    IdBlkAsCu1,
+                    punt
+                    });
+                }
+                else
+                {
+                    NotaAll.Rows.Add(new Object[] {
                     0,
                     item.IdAsigEstudinate,
                     IdBlkAsCu1,
                     item.Punteo
-                });
+                    });
+                }
+                
             }
 
             for (int i = 0; i < NotaAll.Rows.Count; i++)
@@ -284,6 +327,7 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         [HttpGet]
         public IActionResult ListNotaCurso(int idAsigEstudinate, int idBloque)
         {
+
             ViewData["idAsigEstudinate"] = idAsigEstudinate;
 
             //idAsigEstudinate = (int)TempData["idAsigEstudinate"];

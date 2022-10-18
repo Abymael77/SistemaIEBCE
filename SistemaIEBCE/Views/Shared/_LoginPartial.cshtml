@@ -14,7 +14,7 @@
                         </a>
                         <div class="dropdown-menu text-center" aria-labelledby="NavbarDropDown">
                             <a class="nav-link text-primary" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Cuenta</a>
-                            <form class="form-inline justify-content-center" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <form class="form-inline justify-content-center" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Inicio", "Home", new { area = "" })">
                                 <button type="submit" class="nav-link btn btn-link text-danger"> <i class="fa-solid fa-power-off"></i> Salir </button>
                             </form>
                         </div>
@@ -27,7 +27,7 @@
     else
     {
         <li class="nav-item">
-            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login">Acceder</a>
+            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login"> <i class="fa-solid fa-key"></i> Acceder</a>
         </li>
     }
 </ul>

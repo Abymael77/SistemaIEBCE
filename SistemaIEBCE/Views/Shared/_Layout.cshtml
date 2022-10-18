@@ -16,7 +16,7 @@
     <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" />
     <link href="~/lib/toastr/toastr.min.css" rel="stylesheet" />
     <link href="~/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
-    <link href="~/lib/toastr/toastr.min.css" rel="stylesheet" />
+
 
 </head>
 <body style="background: #F0F0F7">
@@ -24,7 +24,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand pl-lg-4" asp-area="Invitado" asp-controller="Home" asp-action="Index">
+                <a class="navbar-brand pl-lg-4" asp-area="Invitado" asp-controller="Home" asp-action="Inicio">
                     <div class="row d-flex align-items-center">
                         <div class="col-4 "><img style="width: 30px" src="~/img/logoIEBCE.png" /></div>
                         <div class="col-8 text-left">IEBCE</div>
@@ -37,39 +37,26 @@
                     <ul class="navbar-nav me-auto">
                         @if (User.IsInRole(CNT.Director))
                         {
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle text-white" id="NavbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Director
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="NavbarDropDown">
-                                    <a class="dropdown-item" asp-area="Director" asp-controller="Menu" asp-action="Index">Menu</a>
-                                    <a class="dropdown-item" asp-area="Director" asp-controller="Usuario" asp-action="Index">Usuario</a>
-                                </div>
-                            </li>
+                            <a class="text-white" asp-area="Director" asp-controller="Menu" asp-action="Index"> <i class="fa-solid fa-bars"></i> Menu</a>
                         }
 
                         @if (User.IsInRole(CNT.Secretario))
                         {
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle text-white" id="NavbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Secretaría
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="NavbarDropDown">
-                                    <a class="dropdown-item" asp-area="Secretario" asp-controller="Menu" asp-action="Index">Menu</a>
-                                </div>
-                            </li>
+                            <a class="text-white" asp-area="Secretario" asp-controller="Menu" asp-action="Index"> <i class="fa-solid fa-bars"></i> Menu</a>
                         }
 
                         @if (User.IsInRole(CNT.Tesorero))
                         {
-                            <li class="nav-item dropdown">
+                            @*<li class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle text-white" id="NavbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Tesorería
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="NavbarDropDown">
                                     <a class="dropdown-item" asp-area="Tesorero" asp-controller="Menu" asp-action="Index">Menu</a>
                                 </div>
-                            </li>
+                            </li>*@
+                            <a class="text-white" asp-area="Tesorero" asp-controller="Menu" asp-action="Index"> <i class="fa-solid fa-bars"></i> Menu</a>
+
                         }
 
                     </ul>
@@ -97,7 +84,6 @@
     <script src="~/lib/DataTables/datatables.js"></script>
     <script src="~/lib/fontawesome/js/fontawesome.js"></script>
     <script src="~/lib/sweetalert2/sweetalert2.all.min.js"></script>
-    <script src="~/lib/toastr/toastr.min.js"></script>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

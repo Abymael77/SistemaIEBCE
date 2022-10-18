@@ -26,6 +26,11 @@ namespace SistemaIEBCE.Controllers
             return View();
         }
 
+        public IActionResult Inicio()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

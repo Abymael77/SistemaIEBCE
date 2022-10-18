@@ -25,8 +25,11 @@ function cargarDatatable() {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="d-flex justify-content-center flex-nowrap">
-                            <a href='/Secretario/ImpresionNota/ListBloque/?idCicEs=${data}' class='btn btn-outline-primary mr-1' title="Cursos">
-                            <i class='fas fa-edit'></i>
+                            <a href='/Secretario/ImpresionNota/ListBloque/?idCicEs=${data}' class='btn btn-outline-primary mr-1' title="Bloque">
+                            <i class="fa-solid fa-cube"></i>
+                            </a>
+                            <a href='/Secretario/ImpresionNota/ListEstudiante/?IdBloque=-1000&IdCicloEsc=${data}' class='btn btn-outline-primary mr-1' title="Estudiantes">
+                            <i class="fa-solid fa-print"></i>
                             </a>
                             </div>`;
                 }, "width": "15%"
@@ -55,8 +58,8 @@ function cargarDatatableBloque1(idCicEs) {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="d-flex justify-content-center flex-nowrap">
-                            <a href='/Secretario/ImpresionNota/ListEstudiante/?IdBloque=${data}&IdCicloEsc=${idCicEs}' class='btn btn-outline-primary mr-1' title="Cursos">
-                            <i class='fas fa-edit'></i>
+                            <a href='/Secretario/ImpresionNota/ListEstudiante/?IdBloque=${data}&IdCicloEsc=${idCicEs}' class='btn btn-outline-primary mr-1' title="Estudiantes">
+                            <i class="fa-solid fa-cube"></i>
                             </a>
                             </div>`;
                 }, "width": "15%"
@@ -86,9 +89,14 @@ function cargarDatatableEstudiante(IdBloque, IdCicloEsc) {
             {
                 "data": "id",
                 "render": function (data) {
-                    return `<div class="d-flex justify-content-center flex-nowrap">
-                            <a href='/Secretario/ImpresionNota/Boleta/?idAsigEstudinate=${data}&IdBloque=${IdBloque}' class='btn btn-outline-primary mr-1' title="Cursos">
-                            <i class='fas fa-edit'></i>
+                    return IdBloque < 0 ? `<div class="d-flex justify-content-center flex-nowrap">
+                            <a href='/Secretario/ImpresionNota/BoletaPromedio/?idAsigEstudinate=${data}' class='btn btn-outline-danger mr-1' title="Notas">
+                            <i class="fa-solid fa-print"></i>
+                            </a>
+                            </div>` : 
+                        `<div class="d-flex justify-content-center flex-nowrap">
+                            <a href='/Secretario/ImpresionNota/Boleta/?idAsigEstudinate=${data}&IdBloque=${IdBloque}' class='btn btn-outline-primary mr-1' title="Bloques">
+                            <i class="fa-solid fa-print"></i>
                             </a>
                             </div>`;
                 }, "width": "5%"
@@ -99,6 +107,36 @@ function cargarDatatableEstudiante(IdBloque, IdCicloEsc) {
             "emptyTable": "No hay registros"
         },
         "width": "100%"
+    });
+}
+
+function CargarBoletaPromedio(cols) {
+    dataTable = $('#NotasFull').DataTable({
+        "createdRow": function (row, data, index) {
+            if (data[cols] < 60) {
+                $('td', row).eq(cols).css({
+                    'font-weight': 'bold',
+                    'color': '#CF0A0A',
+                    'font-size': '110%',
+                })
+            } else {
+                $('td', row).eq(cols).css({
+                    'font-weight': 'bold',
+                    'color': '#083AA9',
+                    'font-size':'110%',
+                })
+            }
+        },
+        "language": {
+            "url": "../lib/DataTables/idioma/es-ES.json",
+            "emptyTable": "No hay registros"
+        },
+        "width": "100%",
+        info: false,
+        search: false,
+        paging: false,
+        searching: false,
+
     });
 }
 
@@ -115,7 +153,7 @@ function CargarBoleta(idAsigEstudinate, idBloque) {
             {
                 "data": "punteo",
                 "render": function (data) {
-                    return data >= 60 ? `<div class="d-flex justify-content-center"> <span class="text-primary">${data}</span> </div>` : `<div class="d-flex justify-content-center"> <span class="text-danger">${data}</span> </div>`;
+                    return data >= 60 ? `<div class="d-flex justify-content-center"> <span class="text-infos font-weight-bolder">${data}</span> </div>` : `<div class="d-flex justify-content-center"> <span class="text-danger font-weight-bolder">${data}</span> </div>`;
                 },
                 "width": "20%"
             }

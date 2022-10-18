@@ -13,8 +13,22 @@ function cargarDatatable() {
         },
         "columns": [
             { "data": "id", "width": "5%" },
-            { "data": "inicio", "width": "30%" },
-            { "data": "fin", "width": "40%" },
+            {
+                "data": "inicio",
+                "render": function (data) {
+                    var dd = data.split('T');
+                    return dd[0];
+                },
+                "width": "30%"
+            },
+            {
+                "data": "fin",
+                "render": function (data) {
+                    var dd = data.split('T');
+                    return dd[0];
+                },
+                "width": "40%"
+            },
             { "data": "montoInicial", "width": "5%" },
             {
                 "data": "estado",
@@ -29,6 +43,9 @@ function cargarDatatable() {
                     return `<div class="d-flex justify-content-center flex-nowrap">
                             <a href='/Tesorero/Caja/Edit/${data}' class='btn btn-outline-primary mr-1' title="Editar">
                             <i class='fas fa-edit'></i>
+                            </a>
+                            <a href='/Tesorero/Caja/CajaDetalleVer/?idCaja=${data}' class='btn btn-outline-primary' title="Ver">
+                            <i class="fa-regular fa-eye"></i>
                             </a>
                             <a onclick="Delete('/Tesorero/Caja/Delete/${data}')" class='btn btn-outline-danger' title="Eliminar">
                             <i class='fas fa-trash-alt'></i>

@@ -40,7 +40,12 @@
                             <td> @Convert.ToString(r["Id"]) </td>
                             <td> @Convert.ToString(r["NomCatedratico"]) </td>
                             <td> @Convert.ToString(r["NomCurso"]) </td>
-
+                            <td>
+                                <a href="/Secretario/Nota/Bloque/@r["Id"]?IdCicloEscolar=@ViewData["IdCicloEscolar"]" class='btn btn-outline-primary mr-1' title="Editar">
+                                    <i class='fas fa-edit'></i>
+                                </a>
+                            </td>
+                            
                         </tr>
                     }
 

@@ -13,7 +13,7 @@ function cargarDatatableLsEst(IdBlkAsCu, IdCicloEscolar, IdAsigCurso) {
                 "render": function (data) {
                     return `<td><input class="form-control-plaintext idnt" value='${data}' readonly ></td>`;
                 },
-                "width": "5%"
+                "width": "10%"
             },
             {
                 "data": "nota.idAsigEstudinate",
@@ -22,16 +22,16 @@ function cargarDatatableLsEst(IdBlkAsCu, IdCicloEscolar, IdAsigCurso) {
                 },
                 "width": "10%"
             },
-            { "data": "estudiante.nomEstudiante", "width": "35%" },
-            { "data": "estudiante.apellEstudiante", "width": "35%" },
+            { "data": "estudiante.nomEstudiante", "width": "30%" },
+            { "data": "estudiante.apellEstudiante", "width": "30%" },
             {
                 "data": "nota.punteo",
                 "render": function (data) {
                     if (data == null) {
-                        return `<td><input class="innota" value="0" type="number" min="0" max="100"></td>`;
+                        return `<td><input class="innota form-control" value="0" type="number" min="0" max="100"></td>`;
                     }
                     else {
-                        return `<td><input class="innota" value="${data}" type="number" min="0" max="100"></td>`;
+                        return `<td><input class="innota form-control" value="${data}" type="number" min="0" max="100"></td>`;
                     }
                 },
                 "width": "20%"
@@ -41,7 +41,12 @@ function cargarDatatableLsEst(IdBlkAsCu, IdCicloEscolar, IdAsigCurso) {
             "url": "../lib/DataTables/idioma/es-ES.json",
             "emptyTable": "No hay registros"
         },
-        "width": "100%"
+        "width": "100%",
+        info: false,
+        search: false,
+        paging: false,
+        searching: false,
+        ordering: false,
     });
 }
 

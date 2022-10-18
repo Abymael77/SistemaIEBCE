@@ -1,0 +1,140 @@
+﻿@*@model SistemaIEBCE.Models.ViewModels.NotaPromedioVM*@
+@using System.Data
+@model DataTable
+
+@{
+    ViewData["Title"] = "BoletaPromedio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var res = ViewData["res"];
+}
+
+<div class="container-fluid my-2 text-center">
+    <h1 class="">Boleta de Calificaciones Final</h1>
+</div>
+<div class="bg-white text-center p-3" style="height: 529px;" id="boleta">
+    <h4>EVALUACIÓN DE LAS ASIGNATURAS</h4>
+    <div class="row">
+        <div class="col-10">
+            <table id="NotasFull" class="table table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        @foreach (DataColumn column in Model.Columns)
+                        {
+                            <td>@column.ColumnName</td>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DataRow Notas in Model.Rows)
+                    {
+                        <tr>
+                            @foreach (DataColumn col in Model.Columns)
+                            {
+                                <td>@Convert.ToString(Notas[col.ColumnName])</td>
+                            }
+                            @*<td>@Convert.ToString(Notas["No."])</td>
+                            <td>@Convert.ToString(Notas["Curso"])</td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-2 d-flex align-items-start flex-column">
+            <h6 class="font-weight-bolder">Firma de Aprobación</h6>
+            <div class="row pt-4 pl-2 ml-1 border-bottom" style="width:100%">
+                <p>f)</p>
+            </div>
+            <div class="text-center " style="width:100%"> <h6>Ciclo completo</h6> </div>
+            <div class="row mt-5 border p-2 mt-auto mb-3 bd-highlight">
+                <p class="text-justify" style="font-size: 10px;">
+                    Cada unidad tiene un valor de 100 puntos. <br /><br />
+                    Al estudiante se le concidera que ha ganado la unidad, si ha obtenido como minimo 60 puntos. <br /><br />
+                    Se realizra examen de recuperación a final del ciclo escolar en una sola oportunidad cuando es reprobado
+                    cuatro áreas o sub áreas. (Acuerdo Ministerial 1171-2010). <br /><br />
+                    Por cada unidad se suplica firmar de enterado.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="btn bg-primary text-white" type="button" onclick="printDiv('boleta')" value="imprimir div">
+    Imprimir
+</button>
+<button class="btn bg-primary text-white" type="button" onclick="printDiv('boletafr')" value="imprimir div">
+    Imprimir frente
+</button>
+<button class="btn bg-primary text-white" type="button" onclick="jspdfStar()" value="imprimir div">
+    JSPDF
+</button>
+
+<div class="container-fluid bg-white" id="boletafr" style="height: 529px; width: 831px">
+
+    <div class="row p-3">
+        <div class="" style="border-style: double; border-width: 4px; width: 378px;">
+            <div class="container-fluid border border-danger" style="height: 491px">
+                <h1>coco</h1>
+            </div>
+        </div>
+        <div class="" style="width: 30px"></div>
+        <div class=" pt-2 border border-primary" style="width: 378px">
+            <div class="bg- text-center p-2" style="height: 100px;">
+                <p class="h5"><font face="Corbel-Light">INSTITUTO DE EDUCACIÓN BÁSICA POR COOPERATIVA DE ENSEÑANZA <br /> SANTA CLARA LA LAGUNA SOLOLÁ</font></p>
+                @*<h5><font face=”Corbel-Light”></font></h5>
+                <h5><font face=”Corbel-Light”></font></h5>*@
+            </div>
+            <div class=" d-flex justify-content-center" style="height: 210px;">
+                <img style="height: 180px;" src="~/img/logoIEBCE.png" />
+            </div>
+            <div class=" text-center" style="height: 40px;">
+                <p class="h2 text-uppercase font-weight-bold"><font face="Bernard MT Condensed">Boleta de Calificaciones</font></p>
+            </div>
+            <div class="p-2 text-center" style="height: 140px;">
+                <div class="form-group row d-flex justify-content-center m-0 mb-1" style="height: 30px;">
+                    <label class="form-control-sm"> <font face=”Corbel-Light”>Estudiante:</font> </label>
+                    <label class="form-control-sm font-weight-bold border-bottom border-primary border-top-0"> <font face=”Corbel-Light”>Lisbet Catarina Catarina Catarina Abigail Pur To</font> </label>
+                </div>
+                <div class="form-group row d-flex justify-content-center m-0 mb-1" style="height: 30px;">
+                    <label class="form-control-sm"> <font face=”Corbel-Light”>Grado:</font> </label>
+                    <label class="form-control-sm col-6 font-weight-bold border-bottom border-primary border-top-0"> <font face=”Corbel-Light”>SEGUNDO BÁSICO</font> </label>
+                </div>
+                <div class="form-group row d-flex justify-content-center m-0 mb-1" style="height: 30px;">
+                    <label class="form-control-sm"> <font face=”Corbel-Light”>Sección:</font> </label>
+                    <label class="form-control-sm col-6 font-weight-bold border-bottom border-primary border-top-0"> <font face=”Corbel-Light”>"A"</font> </label>
+                </div>
+                <div class="form-group row d-flex justify-content-center m-0 mb-1" style="height: 30px;">
+                    <label class="form-control-sm"> <font face=”Corbel-Light”>Ciclo Escolar:</font> </label>
+                    <label class="form-control-sm font-weight-bold border-bottom border-primary border-top-0"> <font face=”Corbel-Light”>2022</font> </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script src="~/js/ImpresionNota.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            CargarBoletaPromedio(@Model.Columns.Count-1);
+
+        });
+    </script>
+
+    <script>
+        function printDiv(nombreDiv) {
+            var contenido = document.getElementById(nombreDiv).innerHTML;
+            var contenidoOriginal = document.body.innerHTML;
+
+            document.body.innerHTML = contenido;
+
+            window.print();
+
+            document.body.innerHTML = contenidoOriginal;
+        }
+    </script>
+
+    
+}

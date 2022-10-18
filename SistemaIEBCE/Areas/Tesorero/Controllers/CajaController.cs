@@ -7,10 +7,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
+using Microsoft.AspNetCore.Http;
+using SistemaIEBCE.Extensions;
 
 namespace SistemaIEBCE.Areas.Director.Controllers
 {
-    [Authorize(Roles = "Tesorero")]
+    //[Authorize(Roles = "Tesorero")]
     [Area("Tesorero")]
     public class CajaController : Controller
     {
@@ -45,21 +48,33 @@ namespace SistemaIEBCE.Areas.Director.Controllers
                     return View(caja);
                 }
 
-                //debo obtener la caja con estado 1 en la Bd
-                CajaVM cajaEst = new CajaVM()
-                { 
-                    Caja = (Caja)db.Caja.CajaActiva(1)
-                };
+                var ca = db.Caja.CajaActiva(1);
+                Caja cajaEst = new Caja();
 
-                //if(cajaEst.Estado == 1)
-                //{
-                //    cajaEst.Estado = 0;
-                //    //db.Caja.Update(cajaEst);
-                //    //db.Save();
-                //}
+                foreach (Caja c in ca)
+                {
+                    cajaEst.Id = c.Id;
+                    cajaEst.Inicio = c.Inicio;
+                    cajaEst.Fin = c.Fin;
+                    cajaEst.MontoInicial = c.MontoInicial;
+                    cajaEst.Estado = c.Estado;
+                }
 
-                //db.Caja.Add(caja);
-                //db.Save();
+                if (cajaEst.Estado == 1)
+                {
+                    cajaEst.Estado = 0;
+                    if (cajaEst.Fin == null)
+                    {
+                        cajaEst.Fin = DateTime.Now.Date;
+                    }
+                    db.Caja.Update(cajaEst);
+                    db.Save();
+                }
+
+                db.Caja.Add(caja);
+                db.Save();
+                ViewData["cajaActiva"] = cajaEst;
+                HttpContext.Session.SetObject("cajaEst", caja);
                 TempData["error"] = "dodo";
                 return RedirectToAction(nameof(Index));
             }
@@ -103,18 +118,38 @@ namespace SistemaIEBCE.Areas.Director.Controllers
                     TempData["error"] = "Error en validacion de modelo.";
                     return View(caja);
                 }
-
-                Caja cajaEst = new Caja();
-                cajaEst = (Caja)db.Caja.CajaActiva(1);
-                if (caja.Estado == 1 && cajaEst.Estado == 1)
+                else if (caja.Estado == 1)
                 {
-                    cajaEst.Estado = 0;
-                    //db.Caja.Update(cajaEst);
-                    //db.Save();
+                    var ca = db.Caja.CajaActiva(1);
+                    Caja cajaEst = new Caja();
+
+                    foreach (Caja c in ca)
+                    {
+                        cajaEst.Id = c.Id;
+                        cajaEst.Inicio = c.Inicio;
+                        cajaEst.Fin = c.Fin;
+                        cajaEst.MontoInicial = c.MontoInicial;
+                        cajaEst.Estado = c.Estado;
+                    }
+
+                    if (cajaEst.Estado == 1)
+                    {
+                        cajaEst.Estado = 0;
+                        if (cajaEst.Fin == null)
+                        {
+                            cajaEst.Fin = DateTime.Now.Date;
+                        }
+                        db.Caja.Update(cajaEst);
+                        db.Save();
+                    }
+                    ViewData["cajaActiva"] = cajaEst;
                 }
 
-                //db.Caja.Update(caja);
-                //db.Save();
+
+
+                db.Caja.Update(caja);
+                db.Save();
+                HttpContext.Session.SetObject("cajaEst", caja);
                 TempData["error"] = "dodo";
                 return RedirectToAction(nameof(Index));
             }
@@ -122,6 +157,87 @@ namespace SistemaIEBCE.Areas.Director.Controllers
             {
                 TempData["error"] = "Error de sistema.";
                 return View(caja);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult CajaDetalle(int idCaja)
+        {
+            if (HttpContext.Session.GetObject<Caja>("cajaEst") == null)
+            {
+                ViewData["MENSAJE"] = "LA SESSION ESTA VACIA";
+                return RedirectToAction("Create", "Caja");
+            }
+
+            Caja cajaEst = HttpContext.Session.GetObject<Caja>("cajaEst");
+
+            if (cajaEst.Estado == 0)
+            {
+                return RedirectToAction("Create", "Caja");
+            }
+
+            IEnumerable<DetalleGasto> dega = db.DetalleGasto.GetAll(filter: hw => hw.IdCaja == cajaEst.Id, includePropieties: "Gasto");
+            IEnumerable<DetalleFacturaVM> defavm = db.DetalleFactura.GetListIngresoTipoVM(cajaEst.Id);
+            CajaVM ca = new CajaVM()
+            {
+                Caja = cajaEst,
+                DetalleGastoLst = dega,
+                DetalleFacturaVM = defavm
+            };
+            return View(ca);
+        }
+
+        [HttpGet]
+        public IActionResult CajaDetalleVer(int idCaja)
+        {
+
+            Caja caja = db.Caja.GetFirstOrDefault(filter: c => c.Id == idCaja);
+            IEnumerable<DetalleGasto> dega = db.DetalleGasto.GetAll(filter: hw => hw.IdCaja == idCaja, includePropieties: "Gasto");
+            IEnumerable<DetalleFacturaVM> defavm = db.DetalleFactura.GetListIngresoTipoVM(idCaja);
+            CajaVM ca = new CajaVM()
+            {
+                Caja = caja,
+                DetalleGastoLst = dega,
+                DetalleFacturaVM = defavm
+            };
+            return View(ca);
+        }
+
+        [HttpGet]
+        public IActionResult lsCobros(int idCaja)
+        {
+            return Json(new { data = db.Caja.GetFirstOrDefault(filter: c => c.Id == idCaja)
+            });
+        }
+
+        [HttpGet]
+        public IActionResult CerrarCaja()
+        {
+            try
+            {
+                if (HttpContext.Session.GetObject<Caja>("cajaEst") == null)
+                {
+                    ViewData["MENSAJE"] = "LA SESSION ESTA VACIA";
+                    return RedirectToAction("Create", "Caja");
+                }
+
+                Caja caja = HttpContext.Session.GetObject<Caja>("cajaEst");
+
+                if (caja.Estado == 0)
+                {
+                    return RedirectToAction("Create", "Caja");
+                }
+
+                caja.Estado = 0;
+
+                db.Caja.Update(caja);
+                db.Save();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = "Error de sistema.";
+                return View();
             }
         }
 

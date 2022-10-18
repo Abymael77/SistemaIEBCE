@@ -41,6 +41,10 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         {//id = IdCicloEscolar
             try
             {
+                if (IdCicloEscolar == null)
+                {
+                    return RedirectToAction("Error?StatusCode=404", "Menu", "Invitado");
+                }
                 var conn = configuration.GetValue<string>("ConnectionStrings:conSQL2");
                 SqlDataAdapter da = new SqlDataAdapter("SELECT AsCu.Id, Cur.NomCurso, Cat.NomCatedratico, Cat.ApellCatedratico FROM AsigCurso AS AsCu INNER JOIN Curso As Cur ON AsCu.IdCurso = Cur.Id INNER JOIN Catedratico AS Cat ON AsCu.IdCatedratico = Cat.Id WHERE AsCu.IdCicloEscolar = " + IdCicloEscolar, conn);
 
@@ -63,6 +67,10 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         [HttpGet]
         public IActionResult Bloque(int? id, int? IdCicloEscolar)
         {//id = IdAsigCurso
+            if (id == null || IdCicloEscolar == null)
+            {
+                return RedirectToAction("Error?StatusCode=404", "Menu", "Invitado");
+            }
             ViewData["asigcur"] = id;
             ViewData["IdCicloEscolar"] = IdCicloEscolar;
 
@@ -90,10 +98,14 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         [HttpGet]
         public IActionResult TblAsistencia(int IdBlkAsCu, int IdCicloEscolar, int IdAsigCurso)
         {
+            if (IdBlkAsCu == 0 || IdCicloEscolar == 0 || IdAsigCurso == 0)
+            {
+                return RedirectToAction("Error?StatusCode=404", "Menu", "Invitado");
+            }
+
             ViewData["IdBlkAsCu"] = IdBlkAsCu;
             ViewData["IdCicloEscolar"] = IdCicloEscolar;
             ViewData["IdAsigCurso"] = IdAsigCurso;
-
 
             var conn = configuration.GetValue<string>("ConnectionStrings:conSQL2");
             SqlDataAdapter da = new SqlDataAdapter("SELECT asis.IdBloqueAsigCurso, asis.Fecha FROM Asistencia As asis WHERE asis.IdBloqueAsigCurso = " + IdBlkAsCu + " GROUP BY asis.Fecha, asis.IdBloqueAsigCurso", conn);
@@ -101,6 +113,8 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
             DataTable dt = new DataTable();
 
             da.Fill(dt);
+
+            
 
             return View(dt);
         }
@@ -114,6 +128,10 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         [HttpGet]
         public IActionResult UpdateAsis(int IdBlkAsCu, int IdCicloEscolar, string Fecha)
         {
+            if (IdBlkAsCu == 0 || IdCicloEscolar == 0 || Fecha == null)
+            {
+                return RedirectToAction("Error?StatusCode=404", "Menu", "Invitado");
+            }
             ViewData["IdBlkAsCu"] = IdBlkAsCu;
             ViewData["IdCicloEscolar"] = IdCicloEscolar;
             //ViewData["Fecha"] = Fecha;
@@ -190,6 +208,10 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         [HttpGet]
         public IActionResult GetAllAsis(int IdBlkAsCu, int IdCicloEscolar, string Fecha)
         {
+            if (IdBlkAsCu == 0 || IdCicloEscolar == 0 || Fecha == null)
+            {
+                return RedirectToAction("Error?StatusCode=404", "Menu", "Invitado");
+            }
             ViewData["IdBlkAsCu"] = IdBlkAsCu;
             ViewData["IdCicloEscolar"] = IdCicloEscolar;
 
@@ -210,6 +232,10 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         [HttpGet]
         public IActionResult CreateAsistencia(int? IdBlkAsCu, int IdCicloEscolar, int IdAsigCurso)
         {
+            if (IdBlkAsCu == 0 || IdCicloEscolar == 0 || IdAsigCurso == 0)
+            {
+                return RedirectToAction("Error?StatusCode=404", "Menu", "Invitado");
+            }
             //ViewBag.IdBlkAsCu = IdBlkAsCu;
             //ViewBag.IdCicloEscolar = IdCicloEscolar;
             //ViewBag.IdAsigCurso = IdAsigCurso;
@@ -224,6 +250,11 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         [HttpGet]
         public IActionResult CreateAsistenciaLstEst(int? IdBlkAsCu, int? est, int IdCicloEscolar, int IdAsigCurso)
         {
+            if (IdBlkAsCu == null || est == null || IdCicloEscolar == 0 || IdAsigCurso == 0)
+            {
+                return RedirectToAction("Error?StatusCode=404", "Menu", "Invitado");
+            }
+
             ViewData["Estado"] = est;
 
             int idCicloEsc = 0;

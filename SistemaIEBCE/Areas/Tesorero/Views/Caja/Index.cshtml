@@ -1,4 +1,5 @@
-﻿
+﻿@using SistemaIEBCE.Utilidades
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,7 +14,14 @@
         <div class="row py-3">
             <div class="col-4"> <h2>Cajas</h2> </div>
             <div class="col-8 d-flex justify-content-end flex-nowrap">
-                <a asp-area="Tesorero" asp-controller="AdminTes" asp-action="Index" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+                @if (User.IsInRole(CNT.Director))
+                {
+                    <a asp-area="Director" asp-controller="Tesoreria" asp-action="Index" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+                }
+                @if (User.IsInRole(CNT.Tesorero)) 
+                { 
+                    <a asp-area="Tesorero" asp-controller="AdminTes" asp-action="Index" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+                }
                 <a asp-action="Create" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-plus"></i> Crear Caja</a>
             </div>
         </div>
