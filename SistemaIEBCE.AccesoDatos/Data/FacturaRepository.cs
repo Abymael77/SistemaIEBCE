@@ -20,7 +20,24 @@ namespace SistemaIEBCE.AccesoDatos.Data
         
         public Factura GetFacturaUltimo()
         {
-            return new Factura();
+            Factura list = null;
+
+            // consulta Validada por estado 
+            var query = (from fa in _db.Factura
+                         orderby fa.Id descending
+                         select new Factura
+                         {
+                             Id = fa.Id,
+                             IdAsigEstudiante = fa.IdAsigEstudiante,
+                             IdCaja = fa.IdCaja,
+                             NoFactura = fa.NoFactura,
+                             Fecha = fa.Fecha
+                             ///Arreglar factura 
+                             /////debe retornar la ultima factura registrada
+                         }).FirstOrDefault();
+            list = query;
+
+            return list; 
         }
 
         public void Update(Factura factura)

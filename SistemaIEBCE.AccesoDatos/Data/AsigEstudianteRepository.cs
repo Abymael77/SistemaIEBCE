@@ -207,7 +207,7 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
                          }).Distinct();
             list = query.ToList();
 
-            return list; ;
+            return list;
         }
 
         public IEnumerable<SelectListItem> GetListaAsigCicloEscolar()

@@ -10,8 +10,10 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
 {
     public interface IDetalleFacturaRepository : IRepository<DetalleFactura>
     {
-        IEnumerable<DetalleFacturaVM> GetListIngresoTipoVM(int est);
-        DetalleFactura GetPagoRealizado(int idAsEs);
+        IEnumerable<DetalleFacturaVM> GetListIngresoTipoVM(int idCaja);
+
+        IEnumerable<DetalleFactura> GetPagoRealizado(int idAsEs);
+
         void Update(DetalleFactura detalleFactura);
     }
 }

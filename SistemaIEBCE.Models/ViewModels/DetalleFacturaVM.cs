@@ -18,7 +18,7 @@ namespace SistemaIEBCE.Models
         public int IdCuota { get; set; }
 
         [Required(ErrorMessage = "El tipo de cuota es obligatorio")]
-        [Display(Name = "Cuota")]
+        [Display(Name = "NomCuota")]
         public string NomCuota { get; set; }
 
         [Required(ErrorMessage = "La refetencia a una factura es obligatorio")]

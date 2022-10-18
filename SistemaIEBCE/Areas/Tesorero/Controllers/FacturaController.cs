@@ -115,8 +115,8 @@ namespace SistemaIEBCE.Areas.Director.Controllers
             factura.NoFactura = noRecibo;
             factura.Fecha = Convert.ToDateTime(fecha);
             //guardar factura
-            db.Factura.Add(factura);
-            db.Save();
+            //db.Factura.Add(factura);
+            //db.Save();
 
             //obtener factura
             Factura nuevaFactura = db.Factura.GetFacturaUltimo();
@@ -166,8 +166,8 @@ namespace SistemaIEBCE.Areas.Director.Controllers
                 detalleFactura.Monto = ListaMonto1[i];
                 detalleFactura.Cantidad = Convert.ToInt32(DetFacturaAll.Rows[i]["Cantidad"]);
 
-                db.DetalleFactura.Add(detalleFactura);
-                db.Save();
+                //db.DetalleFactura.Add(detalleFactura);
+                //db.Save();
             }
 
 
