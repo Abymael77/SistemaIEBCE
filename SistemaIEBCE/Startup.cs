@@ -96,6 +96,10 @@ namespace SistemaIEBCE
                     pattern: "{area=Invitado}/{controller=Home}/{action=Inicio}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            //rotativa PDF
+            Rotativa.AspNetCore.RotativaConfiguration.Setup(env.WebRootPath, "../wwwroot/lib/Rotativa/Windows");
+
         }
     }
 

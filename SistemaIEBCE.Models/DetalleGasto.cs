@@ -22,7 +22,7 @@ namespace SistemaIEBCE.Models
         public int IdCaja { get; set; }
 
         [Required(ErrorMessage = "El Monto de la Cuota es obligatorio")]
-        [Display(Name = "Monto Inicial")]
+        [Display(Name = "Monto")]
         public float Monto { get; set; }
 
         [Required(ErrorMessage = "La fecha es obligatoria")]

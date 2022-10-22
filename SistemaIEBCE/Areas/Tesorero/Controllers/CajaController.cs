@@ -242,6 +242,41 @@ namespace SistemaIEBCE.Areas.Director.Controllers
         }
 
 
+        //detalle de cobros
+        [HttpGet]
+        public IActionResult DetalleCuotaCaja(int idCaja, int idCuota)
+        {
+            TempData["idCaja"] = idCaja;
+            TempData["idCuota"] = idCuota;
+
+            IEnumerable<Cuota> cuota = db.Cuota.GetAll(filter: c => c.Id == idCuota);
+            IEnumerable<DetalleFacturaVM> defavm = db.DetalleFactura.GetListIngresoTipoVMVer(idCaja, idCuota);
+
+
+            CajaVM cajaVM = new CajaVM()
+            {
+                //DetalleCuota = new Models.DetalleCuota(),
+                Cuotas = cuota,
+                DetalleFacturaVM = defavm
+
+            };
+
+            return View(cajaVM);
+        }
+
+
+
+        [HttpGet]
+        public IActionResult DetFaturaCuotaCaja(int idFactura)
+        {
+            IEnumerable<DetaFacVM> defac = db.DetalleFactura.GetDetFacEstud(idFactura);
+
+            return View(defac);
+        }
+
+
+
+
         #region LLAMADAS A LA API
         [HttpGet]
         public IActionResult GetAll()
@@ -264,6 +299,29 @@ namespace SistemaIEBCE.Areas.Director.Controllers
                 db.Save();
                 TempData["error"] = "dodo";
                 return Json(new { success = true, message = "Caja borrado correctamente" });
+            }
+            catch (Exception)
+            {
+                TempData["error"] = "Error de sistema.";
+                return null;
+            }
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteGastoCaja(int IdGasto)
+        {
+            try
+            {
+                var recordDB = db.DetalleGasto.Get(IdGasto);
+                if (recordDB == null)
+                {
+                    return Json(new { success = false, message = "Error borrando Gasto" });
+                }
+
+                db.DetalleGasto.Remove(recordDB);
+                db.Save();
+                TempData["error"] = "dodo";
+                return Json(new { success = true, message = "Gasto borrado correctamente" });
             }
             catch (Exception)
             {

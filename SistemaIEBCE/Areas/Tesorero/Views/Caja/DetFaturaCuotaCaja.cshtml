@@ -1,0 +1,132 @@
+﻿@model System.Collections.Generic.List<SistemaIEBCE.Models.ViewModels.DetaFacVM>;
+
+@{
+    ViewData["Title"] = "DetFaturaCuotaCaja";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var fec = 0;
+    var num = 1;
+}
+
+<h1>DetFaturaCuotaCaja</h1>
+
+
+<div class="row oculto-impresion">
+    <div class="col-8">
+        <h1 class="">Comprobante</h1>
+    </div>
+    <div class="col-4 d-flex justify-content-end p-2">
+        <a asp-controller="Caja" asp-action="DetalleCuotaCaja" asp-route-idCaja="@TempData["idCaja"].ToString()" asp-route-idCuota="@TempData["idCuota"].ToString()" class="btn btn-secondary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+        <a class="btn text-white bg-primary m-1" onclick="print()"><i class="fa-solid fa-print"></i> Imprimir </a>
+    </div>
+</div>
+
+<div class="row bg-white px-4">
+    <div class="col-2 p-4"> <img src="~/img/logoIEBCE.png" style="height: 100px;" /> </div>
+    <div class="col-8 text-center p-lg-4">
+        <h5> INSTITUTO DE EDUCACION BASICA POR COOPERATIVA DE ENSEÑANZA </h5>
+        <h5>SANTA CLARA LA LAGUNA</h5>
+        <h5>NIT.: 2016526-9  TEL.: 7927-1969</h5>
+    </div>
+
+    @foreach (var item in Model)
+    {
+        @if (fec == 0)
+        {
+            <div class="col-2 p-4">
+                <div class="border text-center border-dark p-2">
+                    <h6>RECIBO NO.</h6>
+                    <input class="text-center bg-white border-top-0 border-dark border-left-0 border-right-0 form-control" type="number" value="@item.Factura.NoFactura" readonly />
+                </div>
+            </div>
+
+            <div class="col-6 my-3">
+                <div class="form-group row mt-3">
+                    <label class="col-sm-2 col-form-label-sm font-weight-bold"> Estudiante </label>
+                    <div class="col-10">
+                        <input class="form-control bg-white" type="text" name="name" readonly value="@item.Estudiante.NomEstudiante @item.Estudiante.ApellEstudiante" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 my-3">
+                <div class="form-group row mt-3">
+                    <label class="col-sm-2 col-form-label-sm font-weight-bold"> Fecha </label>
+                    <div class="col-10">
+                        <input class="form-control bg-white" type="text" id="fecha" value="@item.Factura.Fecha.Date.ToShortDateString()" readonly />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label-sm font-weight-bold"> Grado </label>
+                    <div class="col-10">
+                        <input class="form-control bg-white" type="text" id="grado" value="@item.Grado.NomGrado" readonly />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label-sm font-weight-bold"> Sección </label>
+                    <div class="col-10">
+                        <input class="form-control bg-white" type="text" id="seccion" value="@item.Seccion.NomSeccion" readonly />
+                    </div>
+                </div>
+            </div>
+            fec = 1;
+        }
+    }
+
+
+    <div class="col-12 mt-3">
+        <table id="tblGasto" class="table text-primary table-bordered table-responsive-lg table-hover" style="width:100%">
+            <thead class="bg-light text-dark">
+                <tr>
+                    <td style="width:10%">#</td>
+                    <td style="width:30%">Tipo</td>
+                    <td style="width:10%">No. Pagos Establecidos</td>
+                    <td style="width:10%">Pagos Realizados</td>
+                    <td style="width:10%">Monto</td>
+                    <td style="width:15%">Subtotal</td>
+                </tr>
+            </thead>
+            <tbody id="list">
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Convert.ToInt32(num++)</td>
+                        <td>@item.Cuota.NomCuota</td>
+                        <td>@item.Cuota.Cantidad</td>
+                        <td>@item.DetalleFactura.Cantidad</td>
+                        <td>@item.DetalleFactura.Monto</td>
+                        <td> <input class="subt bg-white form-control border-0" type="number" value="@Convert.ToInt32(item.DetalleFactura.Cantidad*item.DetalleFactura.Monto)" readonly /> </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-12">
+        <h3 class="text-right" id="TotalCuota"></h3>
+    </div>
+
+    <div class="col-12 p-2">
+        <h5 class="h3 text-right" id="tlsumCuota"> Total Q</h5>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var sumSubt = 0;
+            $('.subt').each(function () {
+                sumSubt += parseFloat($(this).val());
+            });
+
+            document.getElementById("tlsumCuota").innerHTML += sumSubt;
+        });
+    </script>
+}

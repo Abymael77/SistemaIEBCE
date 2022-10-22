@@ -120,3 +120,60 @@ function Delete(url) {
     });
 
 }
+
+function DeleteAl(url) {
+    swal.fire({
+        icon: 'error',
+        iconColor: "#FF6565",
+        title: "Esta seguro de borrar?",
+        text: "Este contenido no se puede recuperar! ",
+        showCancelButton: true,
+        cancelButtonColor: "#17172b",
+        confirmButtonColor: "#FF6565",
+        confirmButtonText: "Si, borrar!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: 'DELETE',
+                url: url,
+                success: function (data) {
+                    if (data.success) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'bottom-end',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+                        Toast.fire({
+                            icon: 'success',
+                            title: data.message
+                        })
+                        location.reload();
+                    }
+                    else {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'bottom-end',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+                        Toast.fire({
+                            icon: 'error',
+                            title: data.message
+                        })
+                    }
+                }
+            });
+        }
+    });
+}

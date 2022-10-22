@@ -1,0 +1,119 @@
+﻿@model SistemaIEBCE.Models.ViewModels.BoletaListEst
+
+@{
+    ViewData["Title"] = "BoletaLSTEstu";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es-es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SistemaIEBCE</title>
+
+    <!-- Plugins -->
+    <link href="~/lib/fontawesome/css/fontawesome.css" rel="stylesheet" />
+    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/Boleta.css" rel="stylesheet" />
+
+</head>
+<body>
+    @*<div class="">*@
+        @*//////////////////////////////////////////////////////////////////////////////////////////////*@
+        @*<h1>BoletaLSTEstu</h1>
+
+        @foreach (var item in Model.AsigEstudianteLs)
+        {
+            <h2>@item.Estudiante.NomEstudiante</h2>
+        }*@
+
+    <div class="book">
+        @foreach (var item in Model.AsigEstudianteLs)
+        {
+            <div class="page">
+                <div class="subpage">
+                    
+
+
+
+                    <div class="boleta" id="boletafr">
+                        <div class="cuadro">
+                            <div class="himno">
+                                <p class="h6 text-center font-weight-bold"><font face="Abadi"><u>HIMNO AL INSTITUTO.</u></font></p>
+                                <p class="text-center">l</p>
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp; Por la honra y amor a la partía hoy luchamos con mucha inquietud se de ella la gloria obtenida del terruño los padres y tú. </p>
+                                <p class="text-center">CORO</p>
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp; Loor a ti Santa Clara en el triunfo que tu hijo cultura llevará y la luz del sagrado universo tu saber y tu ciencia será.</p>
+                                <p class="text-center">ll</p>
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp; El estudio es la honra del hombre piensa siempre lo que es el saber no presumas lo que has aprendido que estudiar es poder comprender.</p>
+                                <p class="text-center">CORO……</p>
+                                <p class="text-center">lll</p>
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp; Por tu Dios por la tierra por ti el recuerdo en la cumbre estará la corona y gran laurel tu bandera siembre portará.</p>
+                                <p class="text-center">CORO……</p>
+                                <p>Autor letra: Prof. José Rodolfo Juárez Turcios <br />  Autor Música: Prof. Eliseo de León Rosales </p>
+                            </div>
+                            <div class="reflex">
+                                <br />
+                                <p>Los padres tienen la responsabilidad de velar por sus hijos e hijas, proporcionándoles amor, seguridad, educación, salud y un ambiente emocional sano.</p>
+                                <p>El ser humano está diseñado para aprender. Como padres debemos deja que nuestros hijos desarrollen su potencial, brindándoles las posibilidades y las herramientas necesarias para que aprendan a acercarse al conocimiento. Además, debemos valorar cada pregunta, contarles cómo y dónde puede aprender, apoyar sus gustos e intereses, mostrar entusiasmo fuerte a sus dudas y averiguar juntos las respuestas, esto les brindara a sus hijos seguridad para que asuman la incertidumbre como un elemento fundamental del aprendizaje y no teman preguntar en el establecimiento.</p>
+
+                            </div>
+                        </div>
+                        <div class="cuadro2">
+                            <div class="titleiebce">
+                                <p class="h3 text-center"><font face="Corbel-Light">INSTITUTO DE EDUCACIÓN BÁSICA POR COOPERATIVA DE ENSEÑANZA <br /> SANTA CLARA LA LAGUNA SOLOLÁ</font></p>
+                            </div>
+                            <div class="logo text-center my-3">
+                                <img style="height: 50mm;" src="~/img/logoIEBCE.png" />
+                            </div>
+                            <div class="titleboleta">
+                                <p class="h2 text-uppercase text-center font-weight-bold"><font face="Bernard MT Condensed">Boleta de Calificaciones</font></p>
+                            </div>
+                            <div class="infoestudiante">
+                                <div class="itemdorm form-group">
+                                    <label class=""> <font face=”Corbel-Light”>Estudiante:</font> </label>
+                                    <label class="subr font-weight-bold col-9 "> <font face=”Corbel-Light”> @item.Estudiante.NomEstudiante @item.Estudiante.ApellEstudiante</font> </label>
+                                </div>
+                                <div class="itemdorm form-group">
+                                    <label class=""> <font face=”Corbel-Light”>Grado:</font> </label>
+                                    <label class="subr font-weight-bold text-uppercase col-6"> <font face=”Corbel-Light”>@Model.ListaCicloEscolar.Grado.NomGrado</font> </label>
+                                </div>
+                                <div class="itemdorm form-group">
+                                    <label class=""> <font face=”Corbel-Light”>Sección:</font> </label>
+                                    <label class="subr font-weight-bold col-3"> <font face=”Corbel-Light”>" @Model.ListaCicloEscolar.Seccion.NomSeccion "</font> </label>
+                                </div>
+                                <div class="itemdorm form-group">
+                                    <label class=""> <font face=”Corbel-Light”>Ciclo Escolar</font> </label>
+                                    <label class=""> <font face=”Corbel-Light”>@Model.ListaCicloEscolar.Anio </font> </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                @*<div class="subpage">Page 1/2</div>*@
+            </div>
+        }
+        
+        @*<div class="page">
+            <div class="subpage">Page 2/2</div>
+        </div>*@
+    </div>
+
+
+        
+
+        @*//////////////////////////////////////////////////////////////////////////////////////////////*@
+    @*</div>*@
+
+    <footer class="border-top footer text-muted shadow-lg">
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

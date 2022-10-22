@@ -1,0 +1,71 @@
+﻿@model System.Collections.Generic.List<SistemaIEBCE.Models.ViewModels.FacturaVM>;
+
+@{
+    ViewData["Title"] = "ListFacturas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="row shadow p-3 my-5 bg-white rounded py-2">
+    <div class="col-12 row">
+        <div class="col-8">
+            <h1>Facturas Generadas</h1>
+        </div>
+        <div class="col-4 p-2 d-flex justify-content-end">
+            <a class="btn btn-primary" asp-controller="Menu" asp-action="Index" > <i class="fa-solid fa-arrow-left"></i> Volver</a>
+        </div>
+    </div>
+    <div class="col-12">
+        <table id="tblFacList" class="table text-primary table-bordered table-responsive-lg table-hover" style="width:100%">
+            <thead class="bg-primary text-light">
+                <tr>
+                    <td>Id</td>
+                    <td>Fecha</td>
+                    <td>No. Recibo</td>
+                    <td>Estudiante</td>
+                    <td>Acción</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td> @item.Factura.Id</td>
+                        <td> @item.Factura.Fecha.Date.ToShortDateString()</td>
+                        <td> @item.Factura.NoFactura</td>
+                        <td> @item.EstLstFact.NomEstudiante, @item.EstLstFact.ApellEstudiante</td>
+                        <td class="text-center">  <a href="/Tesorero/Factura/DetFactEst/?IdFac=@item.Factura.Id&IdAsEs=@item.Factura.IdAsigEstudiante"> <i class="fa-solid fa-circle-info"></i>  </a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#tblFacList').DataTable({
+                "language": {
+                    "url": "../lib/DataTables/idioma/es-ES.json",
+                    "emptyTable": "Ningún dato disponible en esta tabla",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    },
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "zeroRecords": "No se encontraron resultados",
+                    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                },
+            });
+        });
+    </script>
+}

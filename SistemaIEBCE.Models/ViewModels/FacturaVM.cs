@@ -14,6 +14,10 @@ namespace SistemaIEBCE.Models.ViewModels
 
         public Caja Caja { get; set; } //
 
+        public IEnumerable<Factura> FacturaIEnum { get; set; }//
+
+        public Estudiante EstLstFact { get; set; }//
+
         public AsigEstudiante AsigEstudiante { get; set; }
 
         public AsigEstudianteVM AsigEstudianteVM { get; set; }

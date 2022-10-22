@@ -1,0 +1,77 @@
+﻿.boleta {
+    /*background: #ffd800;*/
+    height: 100%;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.cuadro {
+    height: 100%;
+    width: 50%;
+    float display: block;
+    float: left;
+    /*background: #CCC;*/
+    padding: 2%;
+    border: solid 4px #000;
+    border: double 3px #000;
+}
+
+.himno {
+    font-size: 10px;
+    text-align: justify;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.reflex {
+    font-size: 13px;
+    text-align: justify;
+}
+
+.cuadro2 {
+    height: 100%;
+    width: 45%;
+    float display: block;
+    float: left;
+    /*background: #CCC;*/
+    padding: 2%;
+    border: double 3px #000;
+    margin-left: 5%;
+}
+
+.infoestudiante {
+    padding: 5%;
+    text-align: center;
+}
+
+.subr {
+    border-bottom: 1px solid ;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    /*background-color: #ffd800;*/
+    font: 12pt "Tahoma";
+}
+
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.page {
+    width: 30cm;
+    min-height: 38.5cm;
+    padding: 1cm;
+    margin: 1cm auto;
+    /*border: 1px #D3D3D3 solid;*/
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.subpage {
+    /*border: 5px red solid;*/
+    height: 18cm;
+    /*outline: 0.5cm #FFEAEA solid;*/
+}

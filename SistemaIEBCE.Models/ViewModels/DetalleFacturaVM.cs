@@ -13,6 +13,8 @@ namespace SistemaIEBCE.Models
         [Key]
         public int Id { get; set; }
 
+        public int IdCaja { get; set; }
+
         [Required(ErrorMessage = "El tipo de cuota es obligatorio")]
         [Display(Name = "Cuota")]
         public int IdCuota { get; set; }

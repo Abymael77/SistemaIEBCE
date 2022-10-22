@@ -12,6 +12,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Rotativa.AspNetCore;
 
 namespace SistemaIEBCE.Areas.Secretario.Controllers
 {
@@ -38,8 +39,7 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
             return View();
         }
 
-
-
+        
         [HttpGet]
         public IActionResult CicloEscolar(int est)
         {
@@ -157,8 +157,10 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
             }
             ViewData["idBloque"] = IdBloque;
             ViewData["idAsigEstudinate"] = idAsigEstudinate;
-            TempData["idBloque"] = IdBloque;
-            TempData["idAsigEstudinate"] = idAsigEstudinate;
+
+            Bloque cies = db.Bloque.GetFirstOrDefault(filter: b => b.Id == IdBloque);
+            ViewData["bloque"] = cies.NomBloque;
+
             return View();
         }
 
@@ -173,6 +175,8 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
 
             //idAsigEstudinate = (int)TempData["idAsigEstudinate"];
             // idBloque = (int)TempData["idBloque"];
+
+            
 
 
             return Json(new
@@ -306,6 +310,29 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
             }
             );
         }
+
+        // impresion de boletas con Rotativa ///////////////////////////////////////////////////////
+        public IActionResult BoletaLSTEstu(int IdCiEs)
+        {
+
+            IEnumerable<AsigEstudiante> ases = db.AsigEstudiante.GetAll(filter: es => es.IdCicloEscolar ==IdCiEs, includePropieties: "Estudiante");
+
+            CicloEscolar cies = db.CicloEscolar.GetFirstOrDefault(filter: c => c.Id == IdCiEs, includePropieties: "Seccion,Grado");
+
+            //tengo que devolver toda la lsita de estudiantes 
+            BoletaListEst bolleta = new BoletaListEst()
+            {
+                AsigEstudianteLs = ases,
+                ListaCicloEscolar = cies
+            };
+
+            return new ViewAsPdf("BoletaLSTEstu", bolleta)
+            {
+                PageMargins = new Rotativa.AspNetCore.Options.Margins(0,0,0,0),
+                PageSize = Rotativa.AspNetCore.Options.Size.Letter
+            };
+        }
+
 
         #region
         [HttpGet]

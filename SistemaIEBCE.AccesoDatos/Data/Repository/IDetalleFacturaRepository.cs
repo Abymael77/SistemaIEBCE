@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using SistemaIEBCE.Models;
+using SistemaIEBCE.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,11 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
     {
         IEnumerable<DetalleFacturaVM> GetListIngresoTipoVM(int idCaja);
 
+        IEnumerable<DetalleFacturaVM> GetListIngresoTipoVMVer(int idCaja, int idCuota);
+
         IEnumerable<DetalleFactura> GetPagoRealizado(int idAsEs);
+
+        IEnumerable<DetaFacVM> GetDetFacEstud(int IdFactura);
 
         void Update(DetalleFactura detalleFactura);
     }

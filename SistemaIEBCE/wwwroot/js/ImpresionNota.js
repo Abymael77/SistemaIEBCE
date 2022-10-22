@@ -25,11 +25,14 @@ function cargarDatatable() {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="d-flex justify-content-center flex-nowrap">
-                            <a href='/Secretario/ImpresionNota/ListBloque/?idCicEs=${data}' class='btn btn-outline-primary mr-1' title="Bloque">
-                            <i class="fa-solid fa-cube"></i>
+                            <a href='/Secretario/ImpresionNota/ListBloque/?idCicEs=${data}' class='btn btn-outline-primary mr-1' title="Bloques">
+                                <i class="fa-solid fa-cube"></i>
                             </a>
-                            <a href='/Secretario/ImpresionNota/ListEstudiante/?IdBloque=-1000&IdCicloEsc=${data}' class='btn btn-outline-primary mr-1' title="Estudiantes">
-                            <i class="fa-solid fa-print"></i>
+                            <a href='/Secretario/ImpresionNota/ListEstudiante/?IdBloque=-1000&IdCicloEsc=${data}' class='btn btn-outline-primary mr-1' title="Boteta Completa">
+                                <i class="fa-solid fa-print"></i>
+                            </a>
+                            <a target="_blank" href='/Secretario/ImpresionNota/BoletaLSTEstu/?IdCiEs=${data}' class='btn btn-outline-primary mr-1' title="Portada">
+                                <i class="fa-solid fa-file-image"></i>
                             </a>
                             </div>`;
                 }, "width": "15%"

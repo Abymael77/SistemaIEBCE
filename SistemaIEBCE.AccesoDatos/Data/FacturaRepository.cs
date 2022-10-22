@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using SistemaIEBCE.AccesoDatos.Data.Repository;
 using SistemaIEBCE.Models;
+using SistemaIEBCE.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,26 @@ namespace SistemaIEBCE.AccesoDatos.Data
         public FacturaRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
+        }
+        
+        public IEnumerable<FacturaVM> GetAllFactura()
+        {
+            List<FacturaVM> list = null;
+
+            // consulta Validada por estado 
+            var query = (from fa in _db.Factura
+                         join ases in _db.AsigEstudiante on fa.IdAsigEstudiante equals ases.Id
+                         join es in _db.Estudiante on ases.IdEstudiante equals es.Id
+                         select new FacturaVM
+                         {
+                             Factura = fa,
+                             EstLstFact = es
+                             ///Arreglar factura 
+                             /////debe retornar la ultima factura registrada
+                         }).Distinct();
+            list = query.ToList();
+
+            return list; 
         }
         
         public Factura GetFacturaUltimo()

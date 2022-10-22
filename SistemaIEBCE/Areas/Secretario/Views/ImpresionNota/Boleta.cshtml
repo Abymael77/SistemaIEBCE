@@ -3,11 +3,16 @@
 @{
     ViewData["Title"] = "Boleta";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var bl = ViewData["bloque"];
 }
 
 <h1>Boleta</h1>
 
-<div class="bg-white text-center p-5" id="boleta">
+<button class="btn bg-primary text-white" type="button" onclick="printDiv('boleta')" value="imprimir div">
+    Imprimir
+</button>
+
+<div class="subpage bg-white text-center p-5" id="boleta" style=" height: 18cm;">
     <h4>EVALUACIÓN DE LAS ASIGNATURAS</h4>
     <div class="row">
         <div class="col-10">
@@ -20,8 +25,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                   
-
                 </tbody>
             </table>
         </div>
@@ -30,7 +33,7 @@
             <div class="row pt-4 pl-2 ml-1 border-bottom" style="width:100%">
                 <p>f)</p>
             </div>
-            <div class="text-center " style="width:100%"> <h6>Bloque I</h6> </div>
+            <div class="text-center " style="width:100%"> <h6> @bl  </h6> </div>
             <div class="row mt-5 border p-2 mt-auto mb-3 bd-highlight">
                 <p class="text-justify" style="font-size: 10px;">
                     Cada unidad tiene un valor de 100 puntos. <br /><br />
@@ -44,9 +47,6 @@
     </div>
 </div>
 
-<button class="btn bg-primary text-white" type="button" onclick="printDiv('boleta')" value="imprimir div">
-    Imprimir
-</button>
 
 @section Scripts{
 
@@ -54,10 +54,10 @@
 
     <script>
         $(document).ready(function () {
-
             CargarBoleta(@ViewData["idAsigEstudinate"], @ViewData["idBloque"]);
 
         });
+
     </script>
 
     <script>

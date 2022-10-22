@@ -8,6 +8,8 @@
     var res = ViewData["res"];
 }
 
+<link href="~/css/Boleta.css" rel="stylesheet" />
+
 <div class="container-fluid my-2 text-center">
     <h1 class="">Boleta de Calificaciones Final</h1>
 </div>
@@ -61,55 +63,6 @@
 <button class="btn bg-primary text-white" type="button" onclick="printDiv('boleta')" value="imprimir div">
     Imprimir
 </button>
-<button class="btn bg-primary text-white" type="button" onclick="printDiv('boletafr')" value="imprimir div">
-    Imprimir frente
-</button>
-<button class="btn bg-primary text-white" type="button" onclick="jspdfStar()" value="imprimir div">
-    JSPDF
-</button>
-
-<div class="container-fluid bg-white" id="boletafr" style="height: 529px; width: 831px">
-
-    <div class="row p-3">
-        <div class="" style="border-style: double; border-width: 4px; width: 378px;">
-            <div class="container-fluid border border-danger" style="height: 491px">
-                <h1>coco</h1>
-            </div>
-        </div>
-        <div class="" style="width: 30px"></div>
-        <div class=" pt-2 border border-primary" style="width: 378px">
-            <div class="bg- text-center p-2" style="height: 100px;">
-                <p class="h5"><font face="Corbel-Light">INSTITUTO DE EDUCACIÓN BÁSICA POR COOPERATIVA DE ENSEÑANZA <br /> SANTA CLARA LA LAGUNA SOLOLÁ</font></p>
-                @*<h5><font face=”Corbel-Light”></font></h5>
-                <h5><font face=”Corbel-Light”></font></h5>*@
-            </div>
-            <div class=" d-flex justify-content-center" style="height: 210px;">
-                <img style="height: 180px;" src="~/img/logoIEBCE.png" />
-            </div>
-            <div class=" text-center" style="height: 40px;">
-                <p class="h2 text-uppercase font-weight-bold"><font face="Bernard MT Condensed">Boleta de Calificaciones</font></p>
-            </div>
-            <div class="p-2 text-center" style="height: 140px;">
-                <div class="form-group row d-flex justify-content-center m-0 mb-1" style="height: 30px;">
-                    <label class="form-control-sm"> <font face=”Corbel-Light”>Estudiante:</font> </label>
-                    <label class="form-control-sm font-weight-bold border-bottom border-primary border-top-0"> <font face=”Corbel-Light”>Lisbet Catarina Catarina Catarina Abigail Pur To</font> </label>
-                </div>
-                <div class="form-group row d-flex justify-content-center m-0 mb-1" style="height: 30px;">
-                    <label class="form-control-sm"> <font face=”Corbel-Light”>Grado:</font> </label>
-                    <label class="form-control-sm col-6 font-weight-bold border-bottom border-primary border-top-0"> <font face=”Corbel-Light”>SEGUNDO BÁSICO</font> </label>
-                </div>
-                <div class="form-group row d-flex justify-content-center m-0 mb-1" style="height: 30px;">
-                    <label class="form-control-sm"> <font face=”Corbel-Light”>Sección:</font> </label>
-                    <label class="form-control-sm col-6 font-weight-bold border-bottom border-primary border-top-0"> <font face=”Corbel-Light”>"A"</font> </label>
-                </div>
-                <div class="form-group row d-flex justify-content-center m-0 mb-1" style="height: 30px;">
-                    <label class="form-control-sm"> <font face=”Corbel-Light”>Ciclo Escolar:</font> </label>
-                    <label class="form-control-sm font-weight-bold border-bottom border-primary border-top-0"> <font face=”Corbel-Light”>2022</font> </label>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 @section Scripts{
 

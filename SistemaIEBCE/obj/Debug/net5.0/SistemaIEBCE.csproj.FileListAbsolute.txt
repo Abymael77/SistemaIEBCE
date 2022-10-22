@@ -561,3 +561,12 @@ C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\D
 C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Views\Shared\_LayoutWaves.cshtml.g.cs
 C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Invitado\Views\Home\Inicio.cshtml.g.cs
 C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Secretario\Views\ImpresionNota\BoletaPromedio.cshtml.g.cs
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Director\Views\CicloEcolar\Index.cshtml.g.cs
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\bin\Debug\net5.0\Rotativa.AspNetCore.dll
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Secretario\Views\ImpresionNota\BoletaLSTEstu.cshtml.g.cs
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Tesorero\Views\Factura\ListFacturas.cshtml.g.cs
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Tesorero\Views\Factura\DetFactEst.cshtml.g.cs
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Tesorero\Views\DetalleCuota\DetalleCuotaCaja.cshtml.g.cs
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Tesorero\Views\DetalleCuota\DetFaturaCuotaCaja.cshtml.g.cs
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Tesorero\Views\Caja\DetalleCuotaCaja.cshtml.g.cs
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Tesorero\Views\Caja\DetFaturaCuotaCaja.cshtml.g.cs

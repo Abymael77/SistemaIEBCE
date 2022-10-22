@@ -25,6 +25,28 @@ namespace SistemaIEBCE.Areas.Director.Controllers
             db = DbContext;
         }
 
+
+        [HttpGet]
+        public IActionResult ListFacturas()
+        {
+            IEnumerable<FacturaVM> fac = db.Factura.GetAllFactura();
+
+
+            return View(fac);
+        }
+
+        [HttpGet]
+        public IActionResult DetFactEst(int IdFac, int IdAsEs)
+        {
+            IEnumerable<DetaFacVM> defac = db.DetalleFactura.GetDetFacEstud(IdFac);
+            
+            AsigEstudiante asigEstudiante = db.AsigEstudiante.GetFirstOrDefault(filter: ases => ases.Id == IdAsEs, includePropieties: "Estudiante");
+
+            ViewData["NomEstudiante"] = asigEstudiante.Estudiante.NomEstudiante + asigEstudiante.Estudiante.ApellEstudiante;
+                 
+            return View(defac);
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -40,7 +62,7 @@ namespace SistemaIEBCE.Areas.Director.Controllers
             {
                 return RedirectToAction("Create", "Caja");
             }
-            
+
             IEnumerable<Cuota> cuotas = db.Cuota.GetAll(filter: ct => ct.Estado == 1);
 
             IEnumerable<AsigEstudiante> asigEstudiante = db.AsigEstudiante.GetAll(filter: hw => hw.Estado == 1, includePropieties: "Estudiante,CicloEscolar");
@@ -115,8 +137,8 @@ namespace SistemaIEBCE.Areas.Director.Controllers
             factura.NoFactura = noRecibo;
             factura.Fecha = Convert.ToDateTime(fecha);
             //guardar factura
-            //db.Factura.Add(factura);
-            //db.Save();
+            db.Factura.Add(factura);
+            db.Save();
 
             //obtener factura
             Factura nuevaFactura = db.Factura.GetFacturaUltimo();
@@ -166,8 +188,8 @@ namespace SistemaIEBCE.Areas.Director.Controllers
                 detalleFactura.Monto = ListaMonto1[i];
                 detalleFactura.Cantidad = Convert.ToInt32(DetFacturaAll.Rows[i]["Cantidad"]);
 
-                //db.DetalleFactura.Add(detalleFactura);
-                //db.Save();
+                db.DetalleFactura.Add(detalleFactura);
+                db.Save();
             }
 
 

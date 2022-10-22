@@ -4,6 +4,8 @@
 @{
     ViewData["Title"] = "CajaDetalle";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var num = 1;
+    var num1 = 1;
 }
 
 @*<div class="row">
@@ -57,12 +59,13 @@
             <tbody>
                 @foreach (var item in Model.DetalleGastoLst)
                 {
-                    <tr>
-                        <td>@item.Id</td>
+                    <tr> 
+                        @*<td>@item.Id</td>*@
+                        <td>@Convert.ToInt32(num++)</td>
                         <td>@item.Gasto.NomGasto</td>
                         <td>@item.Gasto.DescGasto</td>
                         <td><input type="number" class="montoGas form-control border-0 bg-transparent" readonly value="@item.Monto" /></td>
-                        <td> <i class="text-danger fa-solid fa-square-xmark"></i> </td>
+                        <td class="text-center"> <i onclick="DeleteAl('/Tesorero/Caja/DeleteGastoCaja/?IdGasto=' + @item.Id)" class="text-danger fa-solid fa-square-xmark"></i> </td>
                     </tr>
                 }
             </tbody>
@@ -91,13 +94,14 @@
             <tbody>
                 @foreach (var item in Model.DetalleFacturaVM)
                 {
-                    <tr>
-                        <td>@item.IdCuota</td>
-                        <td>@item.NomCuota</td>
-                        <td>@item.Cantidad</td>
-                        <td><input type="number" class="montoCuo form-control border-0 bg-transparent" readonly value="@item.Monto" /></td>
-                        <td> <i class="text-danger fa-solid fa-square-xmark"></i> </td>
-                    </tr>
+                <tr>
+                    @*<td>@item.IdCuota</td>*@
+                    <td>@Convert.ToInt32(num1++)</td>
+                    <td>@item.NomCuota</td>
+                    <td>@item.Cantidad</td>
+                    <td><input type="number" class="montoCuo form-control border-0 bg-transparent" readonly value="@item.Monto" /></td>
+                    <td class="text-center"> <a asp-controller="DetalleCuota" asp-action="DetalleCuotaCaja" asp-route-idCaja="@item.IdCaja" asp-route-idCuota="@item.IdCuota" > <i class="fa-solid fa-circle-info"></i>  </a> </td>
+                </tr>
                 }
             </tbody>
         </table>
@@ -124,4 +128,6 @@
         });
 
     </script>
+
+    <script src="~/js/Caja.js"></script>
 }

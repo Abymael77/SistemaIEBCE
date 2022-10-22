@@ -24,7 +24,7 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
         IEnumerable<SelectListItem> GetListaBloque(int idAsigEstudinate);
 
         //tesoreria
-        IEnumerable<AsigEstudianteVM> GetListaAsigEstudianteCiclActivo(int est);
+        IEnumerable<AsigEstudianteVM> GetListaAsigEstudianteCiclActivo(int est);    
 
 
         void Update(AsigEstudiante AsigEstudiante);

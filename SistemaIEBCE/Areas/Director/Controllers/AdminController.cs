@@ -64,10 +64,6 @@ namespace SistemaIEBCE.Areas.Director.Controllers
                     data = db.AsigCurso.GetListaAsigCursoEst(estado),
                 });
 
-
-
-
-                
                 //db.BloqueAsigCurso.Add(bloqueAsigCursoVM.BloqueAsigCurso);
                 //db.Save();
                 TempData["error"] = "dodo";

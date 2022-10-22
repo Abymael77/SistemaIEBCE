@@ -51,7 +51,10 @@
                     <td style="width:40%">Tipo</td>
                     <td style="width:30%">Descripcion</td>
                     <td style="width:10%">Monto</td>
-                    <td style="width:10%">Acción</td>
+                    @if (Model.Caja.Estado == 1)
+                    {
+                        <td style="width:10%">Acción</td>
+                    }
                 </tr>
             </thead>
             <tbody>
@@ -62,7 +65,10 @@
                         <td>@item.Gasto.NomGasto</td>
                         <td>@item.Gasto.DescGasto</td>
                         <td><input type="number" class="montoGas form-control border-0 bg-transparent" readonly value="@item.Monto" /></td>
-                        <td>Acción</td>
+                        @if (Model.Caja.Estado == 1)
+                        {
+                            <td class="text-center"> <i onclick="DeleteAl('/Tesorero/Caja/DeleteGastoCaja/?IdGasto=' + @item.Id)" class="text-danger fa-solid fa-square-xmark"></i> </td>
+                        }
                     </tr>
                 }
             </tbody>
@@ -86,6 +92,7 @@
                     <td style="width:30%">No. Pagos</td>
                     <td style="width:10%">Monto</td>
                     <td style="width:10%">Acción</td>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -96,7 +103,8 @@
                         <td>@item.NomCuota</td>
                         <td>@item.Cantidad</td>
                         <td><input type="number" class="montoCuo form-control border-0 bg-transparent" readonly value="@item.Monto" /></td>
-                        <td>Acción</td>
+                        <td class="text-center"> <a asp-controller="Caja" asp-action="DetalleCuotaCaja" asp-route-idCaja="@item.IdCaja" asp-route-idCuota="@item.IdCuota" > <i class="fa-solid fa-circle-info"></i>  </a> </td>
+
                     </tr>
                 }
             </tbody>
@@ -124,4 +132,7 @@
         });
 
     </script>
+
+    <script src="~/js/Caja.js"></script>
+
 }
