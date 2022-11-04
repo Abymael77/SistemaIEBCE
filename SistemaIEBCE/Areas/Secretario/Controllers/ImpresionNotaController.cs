@@ -161,7 +161,14 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
             Bloque cies = db.Bloque.GetFirstOrDefault(filter: b => b.Id == IdBloque);
             ViewData["bloque"] = cies.NomBloque;
 
-            return View();
+            IEnumerable<NotaFull> ases = db.AsigEstudiante.GetListaNotaBlk(idAsigEstudinate, IdBloque);
+
+            //return View(ases);
+            return new ViewAsPdf("Boleta", ases)
+            {
+                PageMargins = new Rotativa.AspNetCore.Options.Margins(0, 0, 0, 0),
+                PageSize = Rotativa.AspNetCore.Options.Size.Letter
+            };
         }
 
         [HttpGet]
@@ -286,7 +293,12 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
             //el ultimo regisstro de nota 
             //hay que evitar la sobreescritura de las notas anteriores en la tabla
 
-            return View(dt);
+            //return View(dt);
+            return new ViewAsPdf("BoletaPromedio", dt)
+            {
+                PageMargins = new Rotativa.AspNetCore.Options.Margins(0, 0, 0, 0),
+                PageSize = Rotativa.AspNetCore.Options.Size.Letter
+            };
         }
 
         [HttpGet]

@@ -1,52 +1,97 @@
-﻿@model SistemaIEBCE.Models.NotaFull
+﻿@model System.Collections.Generic.List<SistemaIEBCE.Models.NotaFull>;
+
 
 @{
     ViewData["Title"] = "Boleta";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    var bl = ViewData["bloque"];
+    Layout = null;
+    var bl = "";
+    var num = 0;
 }
 
-<h1>Boleta</h1>
+@*<h1>Boleta</h1>
 
-<button class="btn bg-primary text-white" type="button" onclick="printDiv('boleta')" value="imprimir div">
-    Imprimir
-</button>
+    <button class="btn bg-primary text-white" type="button" onclick="printDiv('boleta')" value="imprimir div">
+        Imprimir
+    </button>*@
 
-<div class="subpage bg-white text-center p-5" id="boleta" style=" height: 18cm;">
-    <h4>EVALUACIÓN DE LAS ASIGNATURAS</h4>
-    <div class="row">
-        <div class="col-10">
-            <table id="Notas" class="table table-bordered" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Asignatura</th>
-                        <th>Nota</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-2 d-flex align-items-start flex-column">
-            <h6 class="font-weight-bolder">Firma de Aprobación</h6>
-            <div class="row pt-4 pl-2 ml-1 border-bottom" style="width:100%">
-                <p>f)</p>
-            </div>
-            <div class="text-center " style="width:100%"> <h6> @bl  </h6> </div>
-            <div class="row mt-5 border p-2 mt-auto mb-3 bd-highlight">
-                <p class="text-justify" style="font-size: 10px;">
-                    Cada unidad tiene un valor de 100 puntos. <br /><br />
-                    Al estudiante se le concidera que ha ganado la unidad, si ha obtenido como minimo 60 puntos. <br /><br />
-                    Se realizra examen de recuperación a final del ciclo escolar en una sola oportunidad cuando es reprobado
-                    cuatro áreas o sub áreas. (Acuerdo Ministerial 1171-2010). <br /><br />
-                    Por cada unidad se suplica firmar de enterado.
-                </p>
+<!DOCTYPE html>
+<html lang="es-es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SistemaIEBCE</title>
+
+    <!-- Plugins -->
+    <link href="~/lib/fontawesome/css/fontawesome.css" rel="stylesheet" />
+    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/Boleta.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="book">
+        <div class="page">
+            <div class="subpage">
+                <div class="boleta" id="boletafr">
+                    <div class="cuadroTbl">
+                        <h4 class="text-center">EVALUACIÓN DE LAS ASIGNATURAS</h4>
+                        <table id="Notas" class="table table-bordered" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Asignatura</th>
+                                    <th>Nota</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th>@Convert.ToInt32(num = num + 1)</th>
+                                        <th class="font-weight-normal text-left">@item.Curso.NomCurso</th>
+                                        @if (item.Punteo >= 60)
+                                        {
+                                            <th class="text-info">@item.Punteo</th>
+                                        }
+                                        else
+                                        {
+                                            <th class="text-danger">@item.Punteo</th>
+                                            bl= item.Bloque.NomBloque;
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="cuadro2Firma">
+                        <h6 class="font-weight-bolder mt-5">Firma de Aprobación</h6>
+                        <div class="row pt-4 pl-2 ml-1 border-bottom" style="width:100%">
+                            <p>f)</p>
+                        </div>
+                        <div class="text-center" style="width:100%"> <h6> @bl  </h6> </div>
+                        <div class="row mt-5 border p-2  bd-highlight">
+                            <p class="text-justify" style="font-size: 10px;">
+                                Cada unidad tiene un valor de 100 puntos. <br /><br />
+                                Al estudiante se le concidera que ha ganado la unidad, si ha obtenido como minimo 60 puntos. <br /><br />
+                                Se realizra examen de recuperación a final del ciclo escolar en una sola oportunidad cuando es reprobado
+                                cuatro áreas o sub áreas. (Acuerdo Ministerial 1171-2010). <br /><br />
+                                Por cada unidad se suplica firmar de enterado.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <footer class="border-top footer text-muted shadow-lg">
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
 
 @section Scripts{
 
@@ -60,16 +105,4 @@
 
     </script>
 
-    <script>
-        function printDiv(nombreDiv) {
-            var contenido = document.getElementById(nombreDiv).innerHTML;
-            var contenidoOriginal = document.body.innerHTML;
-
-            document.body.innerHTML = contenido;
-
-            window.print();
-
-            document.body.innerHTML = contenidoOriginal;
-        }
-    </script>
 }

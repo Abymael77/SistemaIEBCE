@@ -37,6 +37,31 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
             return list; ;
         }
 
+        public IEnumerable<AsigEstudianteVM> GetListaAsigEstCuclo(int anio)
+        {
+            List<AsigEstudianteVM> list = null;
+
+            // consulta Validada por estado 
+            var query = (from ases in _db.AsigEstudiante
+                         join es in _db.Estudiante on ases.IdEstudiante equals es.Id
+                         join cies in _db.CicloEscolar on ases.IdCicloEscolar equals cies.Id
+                         join gr in _db.Grado on cies.IdGrado equals gr.Id
+                         join se in _db.Seccion on cies.IdSeccion equals se.Id
+                         where cies.Anio == anio
+                         select new AsigEstudianteVM
+                         {
+                             id = ases.Id,
+                             idEstu = es.Id,
+                             nombres = es.NomEstudiante,
+                             apellidos = es.ApellEstudiante,
+                             cicloEscolar = gr.NomGrado + " - " + se.NomSeccion + " - " + cies.Anio,
+                             estado = ases.Estado
+                         }).Distinct();
+            list = query.ToList();
+
+            return list; ;
+        }
+
         public IEnumerable<NotaAllVM> GetListaAsigEstudianteCiclo(int? IdBlkAsCu, int? est, int IdCicloEscolar, int IdAsigCurso)
         {
             List<NotaAllVM> list = null;

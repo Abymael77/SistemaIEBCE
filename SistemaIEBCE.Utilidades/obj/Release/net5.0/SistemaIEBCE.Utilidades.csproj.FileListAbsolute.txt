@@ -1,0 +1,12 @@
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.Utilidades\bin\Release\net5.0\SistemaIEBCE.Utilidades.deps.json
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.Utilidades\bin\Release\net5.0\SistemaIEBCE.Utilidades.dll
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.Utilidades\bin\Release\net5.0\ref\SistemaIEBCE.Utilidades.dll
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.Utilidades\bin\Release\net5.0\SistemaIEBCE.Utilidades.pdb
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.Utilidades\obj\Release\net5.0\SistemaIEBCE.Utilidades.csproj.AssemblyReference.cache
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.Utilidades\obj\Release\net5.0\SistemaIEBCE.Utilidades.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.Utilidades\obj\Release\net5.0\SistemaIEBCE.Utilidades.AssemblyInfoInputs.cache
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.Utilidades\obj\Release\net5.0\SistemaIEBCE.Utilidades.AssemblyInfo.cs
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.Utilidades\obj\Release\net5.0\SistemaIEBCE.Utilidades.csproj.CoreCompileInputs.cache
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.Utilidades\obj\Release\net5.0\SistemaIEBCE.Utilidades.dll
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.Utilidades\obj\Release\net5.0\ref\SistemaIEBCE.Utilidades.dll
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.Utilidades\obj\Release\net5.0\SistemaIEBCE.Utilidades.pdb

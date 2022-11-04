@@ -8,8 +8,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var message = TempData["error"] ?? string.Empty;
 }
-
-<div class="bg-danger mt-5" id="ases" hidden >idAsEs</div>
+<link href="~/css/chosen.css" rel="stylesheet" />
+<link href="~/css/CreateForm.css" rel="stylesheet" />
+<div class="bg-danger mt-5" id="ases" hidden>idAsEs</div>
 
 <div class="row">
     <div class="col-8">
@@ -44,7 +45,7 @@
                     <option selected disabled>-- Seleccione una opción --</option>
                     @foreach (var item in Model.AsigEstudiantes)
                     {
-                        <option value="@item.IdCicloEscolar-@item.Id"> @item.Estudiante.NomEstudiante - @item.Estudiante.ApellEstudiante #-# @item.CicloEscolar.IdGrado - @item.CicloEscolar.IdSeccion</option>
+                        <option value="@item.IdCicloEscolar-@item.Id"> @item.Estudiante.NomEstudiante  @item.Estudiante.ApellEstudiante </option>
                     }
                 </select>
             </div>
@@ -104,13 +105,20 @@
 
 
 <div class="row">
-    
+
 </div>
 
 
 
-@section Scripts{   
-    
+@section Scripts{
+
+    <script type="text/javascript">
+        $(function () {
+            $("#estu").chosen({ width: "100%" });
+            
+        });
+    </script>
+
     <script>
         var lscob = [];
         var pagado = [];
@@ -152,8 +160,9 @@
                 }
             });
         }
-        
+
         function cargarCurso() {
+            $("#estu").attr('disabled', true).trigger("chosen:updated")
             var estu = document.getElementById("estu");
             var arr = estu.value.split('-');
             fetch("@Url.Action("GetCiloEscEstu", "Factura")" + "/?idCicEsc=" + arr[0] + "&idAsEs=" + arr[1])
@@ -170,7 +179,7 @@
                     $("#grado").val(res);
                     $("#seccion").val(Rsec);
                     document.getElementById("ases").innerHTML = idAsEs;
-                    estu.disabled = true;
+                    //estu.disabled = true;
                 })
         }
 
@@ -276,7 +285,7 @@
                     //    nomCuota: ${result.value.nomCuota}
                     //`.trim())
                 })
-                //$("#lstPagadoSWA2").load(cuotaPagado(idAsEs));//cargar datos a select 
+                //$("#lstPagadoSWA2").load(cuotaPagado(idAsEs));//cargar datos a select
                 //$("#listCuotaSWA2").load(opt());//cargar datos a select onchange="monto(${result.value.IdCuota})"
             }
 
@@ -379,4 +388,6 @@
     </script>
 
     <script src="~/js/Factura.js"></script>
+    <script src="~/js/chosen.jquery.js"></script>
+
 }

@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewData["Title"] = "RepCaja";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/ChartStile.css" rel="stylesheet" />
+
+<div class="container-fluid bg-white mt-4 p-4">
+    <div class="col-12 row">
+        <div class="col-8">
+            <h1 class="m-3">Caja # @TempData["idCaja"]</h1>
+        </div>
+        <div class="col-4 p-2 d-flex justify-content-end">
+            @if (Convert.ToInt32(ViewData["est"]) == 1)
+            {
+                <a class="btn btn-primary" asp-controller="Caja" asp-action="CajaDetalle"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+            }
+            else
+            {
+                <a class="btn btn-primary" asp-controller="Caja" asp-action="CajaDetalleVer" asp-route-idCaja="@TempData["idCaja"]"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+            }
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        @*<div class=" chartCard">
+                <div class="chartBox">
+                    <canvas id="chart3"></canvas>
+                </div>
+            </div>
+            <div class="chartCardLine">
+                <div class="chartBoxLine">
+                    <canvas id="chart1"></canvas>
+                </div>
+            </div>*@
+
+
+
+
+        <div class="mt-2 col-6 chart-container">
+            <div class="card">
+                <div class="card-header">
+                    Gastos 
+                </div>
+                <div class="card-body">
+
+                    <canvas id="chart1" width="100" height="50"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mt-2 col-6 chart-container">
+            <div class="card">
+                <div class="card-header">
+                    Cuotas
+                </div>
+                <div class="card-body">
+
+                    <canvas id="chart2" width="100" height="50"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+@section Scripts{
+    <script src="~/lib/Chart.js/chart.js"></script>
+    <script src="~/js/Rep/Caja.js"></script>
+    <script>
+        $(document).ready(function () {
+            GastoPorCaja(@TempData["idCaja"]);
+            CuotaPorCaja(@TempData["idCaja"]);
+
+            console.log(Date.now)
+        });
+    </script>
+
+    <script>
+
+    </script>
+
+}

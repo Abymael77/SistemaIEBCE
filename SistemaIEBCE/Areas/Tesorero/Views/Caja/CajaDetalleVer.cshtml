@@ -20,7 +20,14 @@
         <h2 class="ml-4">Caja #@Model.Caja.Id</h2>
         <p class="ml-4 h6">
             Fecha Inicio: @Model.Caja.Inicio.Date.ToShortDateString() <br />
-            Fecha de Cierre: @Model.Caja.Fin.Value.ToShortDateString() <br />
+            Fecha de Cierre: @if (@Model.Caja.Fin == null)
+            {
+                <span>----</span>
+            }
+            else
+            {
+                @Model.Caja.Fin.Value.ToShortDateString()
+            } <br />
             Estado: @if (Model.Caja.Estado == 1)
             {<span class="badge badge-primary">Activo</span> }
             else
@@ -30,6 +37,7 @@
     <div class="col-6 text-right">
         <h2 class="mr-4 text-right" id="total">Saldo: Q </h2>
         <h6 class="mr-4 text-right">Monto Inicial: Q @Model.Caja.MontoInicial</h6>
+        <a type="button" class="btn btn-dark" asp-controller="Caja" asp-action="RepCaja" asp-route-idCaja="@Model.Caja.Id" asp-route-est="@Model.Caja.Estado"><i class="fa-solid fa-chart-pie"></i> Detalle</a>
         @if (Model.Caja.Estado == 1)
         {
             <a type="button" class="btn btn-danger " asp-controller="Caja" asp-action="CerrarCaja"><i class="fa-solid fa-lock"></i> Cerrar Caja</a>

@@ -358,11 +358,11 @@ namespace SistemaIEBCE.AccesoDatos.Migrations
                     b.Property<int>("Estado")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("FechaFin")
+                    b.Property<DateTime?>("Fin")
                         .HasColumnType("Date")
                         .HasColumnName("Fin");
 
-                    b.Property<DateTime>("FechaInicio")
+                    b.Property<DateTime>("Inicio")
                         .HasColumnType("Date")
                         .HasColumnName("Inicio");
 
@@ -485,8 +485,8 @@ namespace SistemaIEBCE.AccesoDatos.Migrations
 
                     b.Property<string>("NomCurso")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -495,7 +495,7 @@ namespace SistemaIEBCE.AccesoDatos.Migrations
 
             modelBuilder.Entity("SistemaIEBCE.Models.DetalleFactura", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -675,6 +675,40 @@ namespace SistemaIEBCE.AccesoDatos.Migrations
                     b.ToTable("Grado");
                 });
 
+            modelBuilder.Entity("SistemaIEBCE.Models.HistoryInventario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comentario")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("Estado")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("Date")
+                        .HasColumnName("Fecha");
+
+                    b.Property<int>("IdProducto")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Tipo")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdProducto");
+
+                    b.ToTable("HistoryInventario");
+                });
+
             modelBuilder.Entity("SistemaIEBCE.Models.Nota", b =>
                 {
                     b.Property<int?>("Id")
@@ -698,6 +732,34 @@ namespace SistemaIEBCE.AccesoDatos.Migrations
                     b.HasIndex("IdBloqueAsigCurso");
 
                     b.ToTable("Nota");
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.Producto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Codigo")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Descripcion")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("Estado")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NomProducto")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Producto");
                 });
 
             modelBuilder.Entity("SistemaIEBCE.Models.Seccion", b =>
@@ -929,6 +991,17 @@ namespace SistemaIEBCE.AccesoDatos.Migrations
                     b.Navigation("AsigEstudiante");
 
                     b.Navigation("Caja");
+                });
+
+            modelBuilder.Entity("SistemaIEBCE.Models.HistoryInventario", b =>
+                {
+                    b.HasOne("SistemaIEBCE.Models.Producto", "Producto")
+                        .WithMany()
+                        .HasForeignKey("IdProducto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Producto");
                 });
 
             modelBuilder.Entity("SistemaIEBCE.Models.Nota", b =>

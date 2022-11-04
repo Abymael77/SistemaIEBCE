@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SistemaIEBCE.Areas.Secretario.Controllers
 {
-    [Authorize(Roles = "Secretario")]
+    //[Authorize(Roles = "Secretario")]
     [Area("Secretario")]
     public class AsigCursoController : Controller
     {
@@ -44,9 +44,28 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(AsigCursoVM AsigCursoVM)
         {
+            var exist = 0;
             try
             {
-                if (ModelState.IsValid)
+                var anio = 0;
+                //IEnumerable<CicloEscolar> cies = db.CicloEscolar.GetListaCicloEscolar();
+                IEnumerable<CicloEscolar> ciesEst = db.CicloEscolar.GetListaCicloEscolarEst(1);
+
+                foreach (var item in ciesEst)
+                {
+                    anio = item.Anio;
+                }
+
+                IEnumerable<AsigCurso> ascu = db.AsigCurso.GetAll(filter: a => a.CicloEscolar.Anio == anio);
+                foreach (var item in ascu)
+                {
+                    if (item.IdCicloEscolar == AsigCursoVM.AsigCurso.IdCicloEscolar & item.IdCatedratico == AsigCursoVM.AsigCurso.IdCatedratico & item.IdCurso == AsigCursoVM.AsigCurso.IdCurso) 
+                    {
+                        exist = 1;
+                    }
+                }
+
+                if (ModelState.IsValid & exist == 0)
                 {
                     db.AsigCurso.Add(AsigCursoVM.AsigCurso);
                     db.Save();
@@ -55,8 +74,14 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
                 }
                 else
                 {
-                    TempData["error"] = "Error en validación de modelo.";
-
+                    if (exist == 1)
+                    {
+                        TempData["error"] = "Asignación existente";
+                    }
+                    else
+                    {
+                        TempData["error"] = "Error en validación de modelo.";
+                    }
                     AsigCursoVM.ListaCatedratico = db.Catedratico.GetListaCatedratico();
                     AsigCursoVM.ListaCurso = db.Curso.GetListaCurso();
                     AsigCursoVM.ListaCicloEscolar = db.AsigCurso.GetListaAsigCicloEscolar();
@@ -138,6 +163,22 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
             return Json(new { data = db.AsigCurso.GetAll(includePropieties: "Catedratico,Curso,CicloEscolar"),
                                 //data1 = db.Grado.GetAll(includePropieties: "Grado"),
                                 //data2 = db.Seccion.GetAll(includePropieties: "Seccion")
+                            }
+            );
+        }
+
+        [HttpGet]
+        public IActionResult GetAllCiEs()
+        {
+            var anio = 0;
+            IEnumerable<CicloEscolar> ciesEst = db.CicloEscolar.GetListaCicloEscolarEst(1);
+
+            foreach (var item in ciesEst)
+            {
+                anio = item.Anio;
+            }
+
+            return Json(new { data = db.AsigCurso.GetListaAsigCursoVM()
                             }
             );
         }

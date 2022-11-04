@@ -14,6 +14,8 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
         IEnumerable<SelectListItem> GetListaAsigEstudiante();
         IEnumerable<SelectListItem> GetListaAsigCicloEscolar();
 
+        IEnumerable<AsigEstudianteVM> GetListaAsigEstCuclo(int anio);
+
         IEnumerable<NotaAllVM> GetListaAsigEstudianteCiclo(int? IdCiclo, int? est, int IdCicloEscolar, int IdAsigCurso);
         IEnumerable<AsigEstudiante> GetListaAsigEstCiclo(int? IdCiclo);
         IEnumerable<Nota> GetListaNota(int? IdCiclo, int? est);

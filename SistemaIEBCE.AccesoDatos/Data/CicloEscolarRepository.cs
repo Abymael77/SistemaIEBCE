@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using SistemaIEBCE.Models;
+using SistemaIEBCE.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,15 +18,58 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
             _db = db;
         }
 
-        public IEnumerable<SelectListItem> GetListaCicloEscolar()
+        public IEnumerable<CicloEscolar> GetListaCicloEscolar()
         {
-            List<SelectListItem> list = null;
-            int est = 1;
+            List<CicloEscolar> list = null;
 
             // consulta Validada por estado 
-            var query = (from ca in _db.CicloEscolar
-                         where ca.Estado == est
-                         select new SelectListItem { Text = ca.Anio.ToString(), Value = ca.Id.ToString() }).Distinct();
+            var query = (from cies in _db.CicloEscolar
+                         group new { cies.Anio, cies.Estado} by cies.Anio into cic
+                         select new CicloEscolar { 
+                             Anio = cic.Max(c => c.Anio),
+                             Estado = cic.Max(c => c.Estado)
+                         }).Distinct();
+            list = query.ToList();
+
+            return list;
+        }
+
+        public IEnumerable<CicloEscolar> GetListaCicloEscolarEst(int est)
+        {
+            List<CicloEscolar> list = null;
+
+            // consulta Validada por estado 
+            var query = (from cies in _db.CicloEscolar
+                         where cies.Estado == est
+                         group new { cies.Anio, cies.Estado} by cies.Anio into cic
+                         select new CicloEscolar { 
+                             Anio = cic.Max(c => c.Anio),
+                             Estado = cic.Max(c => c.Estado)
+                         }).Distinct();
+            list = query.ToList();
+
+            return list;
+        }
+
+        public IEnumerable<RepCiEsVM> GetListaAsEs(int est)
+        {
+            List<RepCiEsVM> list = null;
+
+            // consulta Validada por estado 
+            var query = (from ases in _db.AsigEstudiante
+                         join es in _db.Estudiante on ases.IdEstudiante equals es.Id
+                         join cies in _db.CicloEscolar on ases.IdCicloEscolar equals cies.Id
+                         join gr in _db.Grado on cies.IdGrado equals gr.Id
+                         join se in _db.Seccion on cies.IdSeccion equals se.Id
+                         //group new { ases.Estado, ases.Id} by ases.Estado into repes
+                         //where ases.Estado == est
+                         select new RepCiEsVM
+                         { 
+                             AsigEstudiante = ases,
+                             gradoAs = gr,
+                             SeccionAs = se,
+                             CantX = ases.IdCicloEscolar
+                         }).Distinct();
             list = query.ToList();
 
             return list;

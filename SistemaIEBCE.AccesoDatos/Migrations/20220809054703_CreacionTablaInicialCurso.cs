@@ -52,7 +52,7 @@ namespace SistemaIEBCE.AccesoDatos.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NomCurso = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    NomCurso = table.Column<string>(type: "nvarchar(100)", maxLength: 50, nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Estado = table.Column<int>(type: "int", nullable: false)
                 },

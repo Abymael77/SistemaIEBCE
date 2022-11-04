@@ -1,0 +1,72 @@
+﻿@model SistemaIEBCE.Models.AsigEstudiante
+
+@{
+    ViewData["Title"] = "RepPagos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/ChartStile.css" rel="stylesheet" />
+
+<div class="container-fluid bg-white mt-4 p-4">
+    <div class="col-12 row">
+        <div class="col-8">
+            <h2 class="m-3"><i class="fa-regular fa-user"></i> @Model.Estudiante.NomEstudiante @Model.Estudiante.ApellEstudiante</h2>
+        </div>
+        <div class="col-4 p-2 d-flex justify-content-end">
+            <a class="btn btn-primary mx-2" asp-controller="Factura" asp-action="Index"> <i class="fa-solid fa-sack-dollar"></i> </i> Cobrar</a>
+            <a class="btn btn-primary" asp-controller="Cuota" asp-action="Estudiantes"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+
+
+        <div class="mt-2 col-12 chart-container">
+            <div class="card">
+                <div class="card-header">
+                    Pagos Realizados
+                </div>
+                <div class="card-body">
+
+                    <canvas id="chart1" width="100" height="25"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mt-2 col-12 chart-container">
+            <div class="card">
+                <div class="card-header">
+                    Cuotas Establecidas
+                </div>
+                <div class="card-body">
+
+                    <canvas id="chart2" width="100" height="25"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+@section Scripts{
+    <script src="~/lib/Chart.js/chart.js"></script>
+    <script src="~/js/Rep/RepPagos.js"></script>
+    <script>
+        $(document).ready(function () {
+            CuentaEstudiante(@TempData["idAsEs"]);
+            ListCuotas();
+
+        });
+    </script>
+
+    <script>
+
+    </script>
+
+}
+
+

@@ -12,8 +12,12 @@
     <div class="container">
 
         <div class="row py-3">
-            <div class="col-4"> <h2>Bloques</h2> </div>
-            <div class="col-8 d-flex justify-content-end flex-nowrap">
+            <div class="col-4"> 
+                <h3>Bloques</h3> 
+                <p class="h6">@ViewData["NomCurso"]</p>
+                <p class="h6">@ViewData["NomGrado"]-@ViewData["NomSeccion"]-@ViewData["Anio"]</p>
+            </div>
+            <div class="col-8 text-right flex-nowrap">
                 <a href="/Secretario/Nota/Curso/?IdCicloEscolar=@ViewData["IdCicloEscolar"]" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
                 @*<a asp-action="Create" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-plus"></i> Agregar Bloque</a>*@
                 <a href="/Secretario/Nota/CreateBloqueAsigCurso/@ViewData["asigcur"]?IdCicloEscolar=@ViewData["IdCicloEscolar"]" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-plus"></i> Agregar Bloque</a>

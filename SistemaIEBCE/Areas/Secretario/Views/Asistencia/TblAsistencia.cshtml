@@ -18,8 +18,12 @@
     <div class="container">
 
         <div class="row py-3">
-            <div class="col-4"> <h2>Asistencias</h2> </div>
-            <div class="col-8 d-flex justify-content-end flex-nowrap">
+            <div class="col-4">
+                <h2>Asistencias</h2>
+                <p class="h6">@ViewData["NomCurso"] - @ViewData["NomBloque"] </p>
+                <p class="h6">@ViewData["NomGrado"] - @ViewData["NomSeccion"] - @ViewData["Anio"]</p>
+            </div>
+            <div class="col-8 text-right">
                 <a href="/Secretario/Asistencia/Bloque/@ViewData["IdAsigCurso"]?IdCicloEscolar=@ViewData["IdCicloEscolar"]" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
                 @*<a asp-action="Create" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-plus"></i> Agregar Bloque</a>*@
                 <a href="/Secretario/Asistencia/CreateAsistencia/?IdBlkAsCu=@ViewData["idBlkAsCu"]&IdCicloEscolar=@ViewData["IdCicloEscolar"]&IdAsigCurso=@ViewData["IdAsigCurso"]" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-plus"></i> Agregar Asistencia</a>
@@ -42,8 +46,8 @@
                         <tr>
                             <td> @Convert.ToString(r["IdBloqueAsigCurso"]) </td>
                             <td> @Convert.ToDateTime(r["Fecha"]).ToShortDateString() </td>
-                            <td>
-                                <a href="/Secretario/Asistencia/UpdateAsis/?IdBlkAsCu=@r["IdBloqueAsigCurso"]&IdCicloEscolar=@ViewData["IdCicloEscolar"]&Fecha=@Convert.ToDateTime(r["Fecha"]).ToString("yyyy-MM-dd")" class='btn btn-outline-primary mr-1' title="Editar">
+                            <td class="text-center">
+                                <a href="/Secretario/Asistencia/UpdateAsis/?IdBlkAsCu=@r["IdBloqueAsigCurso"]&IdCicloEscolar=@ViewData["IdCicloEscolar"]&IdAsigCurso=@ViewData["IdAsigCurso"]&Fecha=@Convert.ToDateTime(r["Fecha"]).ToString("yyyy-MM-dd")" class='btn btn-outline-primary mr-1' title="Editar">
                                     <i class='fas fa-edit'></i>
                                 </a>
                             </td>

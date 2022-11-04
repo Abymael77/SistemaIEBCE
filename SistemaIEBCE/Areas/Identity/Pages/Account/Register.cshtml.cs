@@ -52,12 +52,12 @@ namespace SistemaIEBCE.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "El Correo es obligatorio")]
             [EmailAddress]
             [Display(Name = "Correo Electronico")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "La contaseña es un campo obligatorio")]
             [StringLength(100, ErrorMessage = "La {0} debe ser al menos de {2} y maximo {1} de caracteres de longitud.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Contraseña")]
@@ -69,7 +69,7 @@ namespace SistemaIEBCE.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [Display(Name = "Telefono")]
-            public string PhoneNumber { get; set; }
+            public int PhoneNumber { get; set; }
 
             [Required]
             [Display(Name = "Nombre de Usuario")]
@@ -84,14 +84,14 @@ namespace SistemaIEBCE.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
+            returnUrl ??= Url.Content("~/Director/Usuario/Index");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
                 var user = new IdentityUser { 
                     UserName = Input.Email, 
                     Email = Input.Email,
-                    PhoneNumber = Input.PhoneNumber,
+                    PhoneNumber = Input.PhoneNumber.ToString(),
                     EmailConfirmed = true
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -124,8 +124,11 @@ namespace SistemaIEBCE.Areas.Identity.Pages.Account
 
                     _logger.LogInformation("Usuario creado con éxito.");
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
+
+                    //return RedirectToAction("Index", "Usuario");
+
 
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

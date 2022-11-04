@@ -32,6 +32,8 @@ namespace SistemaIEBCE.AccesoDatos.Data
         public DbSet<Asistencia> Asistencia { get; set; }
 
         //tesoreria
+        public DbSet<Producto> Producto { get; set; }
+        public DbSet<HistoryInventario> HistoryInventario { get; set; }
         public DbSet<Cuota> Cuota { get; set; }
         public DbSet<Gasto> Gasto { get; set; }
         public DbSet<Caja> Caja { get; set; }

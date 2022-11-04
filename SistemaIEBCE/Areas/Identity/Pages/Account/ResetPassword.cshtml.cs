@@ -27,18 +27,26 @@ namespace SistemaIEBCE.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "El Correo es obligatorio")]
             [EmailAddress]
+            [Display(Name = "Correo")]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "La Contaseña Actual es obligatorio")]
+            [StringLength(100, ErrorMessage = "La {0} debe ser al menos de {2} y maximo {1} de caracteres de longitud.", MinimumLength = 6)]
             [DataType(DataType.Password)]
+            [Display(Name = "Contaseña Actual")]
+            public string PasswordActual { get; set; }
+
+            [Required(ErrorMessage = "La Nueva Contaseña es obligatorio")]
+            [StringLength(100, ErrorMessage = "La {0} debe ser al menos de {2} y maximo {1} de caracteres de longitud.", MinimumLength = 6)]
+            [DataType(DataType.Password)]
+            [Display(Name = "Nueva Contaseña")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Confirmar Nueva Contraseña")]
+            [Compare("Password", ErrorMessage = "La contaseña no coincide con la conformación de contraseña")]
             public string ConfirmPassword { get; set; }
 
             public string Code { get; set; }
@@ -46,18 +54,18 @@ namespace SistemaIEBCE.Areas.Identity.Pages.Account
 
         public IActionResult OnGet(string code = null)
         {
-            if (code == null)
-            {
-                return BadRequest("A code must be supplied for password reset.");
-            }
-            else
-            {
-                Input = new InputModel
-                {
-                    Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
-                };
-                return Page();
-            }
+            //if (code == null)
+            //{
+            //    return BadRequest("A code must be supplied for password reset.");
+            //}
+            //else
+            //{
+            //Input = new InputModel
+            //{
+            //    Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
+            //};
+            return Page();
+            //}
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -74,7 +82,7 @@ namespace SistemaIEBCE.Areas.Identity.Pages.Account
                 return RedirectToPage("./ResetPasswordConfirmation");
             }
 
-            var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
+            var result = await _userManager.ChangePasswordAsync(user, Input.PasswordActual, Input.Password);
             if (result.Succeeded)
             {
                 return RedirectToPage("./ResetPasswordConfirmation");

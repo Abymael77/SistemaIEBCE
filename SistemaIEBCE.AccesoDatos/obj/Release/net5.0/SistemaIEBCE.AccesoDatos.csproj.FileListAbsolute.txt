@@ -1,0 +1,17 @@
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.AccesoDatos\bin\Release\net5.0\SistemaIEBCE.AccesoDatos.deps.json
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.AccesoDatos\bin\Release\net5.0\SistemaIEBCE.AccesoDatos.dll
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.AccesoDatos\bin\Release\net5.0\ref\SistemaIEBCE.AccesoDatos.dll
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.AccesoDatos\bin\Release\net5.0\SistemaIEBCE.AccesoDatos.pdb
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.AccesoDatos\bin\Release\net5.0\SistemaIEBCE.Models.dll
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.AccesoDatos\bin\Release\net5.0\SistemaIEBCE.Utilidades.dll
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.AccesoDatos\bin\Release\net5.0\SistemaIEBCE.Models.pdb
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.AccesoDatos\bin\Release\net5.0\SistemaIEBCE.Utilidades.pdb
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.AccesoDatos\obj\Release\net5.0\SistemaIEBCE.AccesoDatos.csproj.AssemblyReference.cache
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.AccesoDatos\obj\Release\net5.0\SistemaIEBCE.AccesoDatos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.AccesoDatos\obj\Release\net5.0\SistemaIEBCE.AccesoDatos.AssemblyInfoInputs.cache
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.AccesoDatos\obj\Release\net5.0\SistemaIEBCE.AccesoDatos.AssemblyInfo.cs
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.AccesoDatos\obj\Release\net5.0\SistemaIEBCE.AccesoDatos.csproj.CoreCompileInputs.cache
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.AccesoDatos\obj\Release\net5.0\SistemaIEBCE.AccesoDatos.csproj.CopyComplete
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.AccesoDatos\obj\Release\net5.0\SistemaIEBCE.AccesoDatos.dll
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.AccesoDatos\obj\Release\net5.0\ref\SistemaIEBCE.AccesoDatos.dll
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE.AccesoDatos\obj\Release\net5.0\SistemaIEBCE.AccesoDatos.pdb

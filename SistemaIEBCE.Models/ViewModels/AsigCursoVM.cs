@@ -17,5 +17,12 @@ namespace SistemaIEBCE.Models.ViewModels
 
         public IEnumerable<SelectListItem> ListaCicloEscolar { get; set; }
 
+        public int id { get; set; }
+        public string catedratico { get; set; }
+        public string curso { get; set; }
+        public string cicloEscolar { get; set; }
+        public int estado { get; set; }
+
+
     }
 }

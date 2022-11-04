@@ -1,0 +1,100 @@
+﻿@model CicloEscolar
+
+@{
+    ViewData["Title"] = "RepCiclo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid bg-white mt-4 p-4">
+    <div class="col-12 row">
+        <div class="col-8">
+            <h1 class="m-3">@Model.Grado.NomGrado @Model.Seccion.NomSeccion @Model.Anio</h1>
+        </div>
+        <div class="col-4 p-2 d-flex justify-content-end">
+            <a class="btn btn-primary" asp-controller="CicloEscolar" asp-action="Index"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="mt-2 p-4 col-7 chart-container">
+            <div class="card">
+                <div class="card-header">
+                    Total de Estudiantes
+                </div>
+                <div class="card-body">
+
+                    <canvas id="chart4" width="50" height="50"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="mt-2 col-4 chart-container">
+            <div class="card">
+                <div class="card-header">
+                    Estudiantes
+                </div>
+                <div class="card-body">
+
+                    <canvas id="chart1" width="100" height="50"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    Estiudiantes Activos
+                </div>
+                <div class="card-body">
+
+                    <canvas id="chart2" width="100" height="50"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    Estudiantes Retirados
+                </div>
+                <div class="card-body">
+
+                    <canvas id="chart3"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mt-2 col-4 chart-container">
+            
+        </div>
+
+        <div class="mt-2 col-4 chart-container">
+            
+        </div>
+
+
+    </div>
+
+</div>
+
+@section Scripts{
+    <script src="~/lib/Chart.js/chart.js"></script>
+    <script src="~/js/Rep/CicloEscolarSecre.js"></script>
+    <script>
+        $(document).ready(function () {
+            EstPorGenero(@ViewData["IdCiEs"]);
+            EstuPorGeneroEstado(@ViewData["IdCiEs"]);
+            EstuPorGeneroEstado0(@ViewData["IdCiEs"]);
+            EstuPorEstado(@ViewData["IdCiEs"]);
+
+
+            console.log(Date.now)
+        });
+    </script>
+
+    <script>
+
+    </script>
+
+}

@@ -25,4 +25,15 @@
     <ProjectReference Include="..\SistemaIEBCE.AccesoDatos\SistemaIEBCE.AccesoDatos.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\lib\Rotativa\Windows\wkhtmltoimage.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\lib\Rotativa\Windows\wkhtmltopdf.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
 </Project>

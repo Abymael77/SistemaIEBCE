@@ -52,6 +52,11 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
 
                 da.Fill(dt);
                 ViewData["IdCicloEscolar"] = IdCicloEscolar;
+                CicloEscolar cies = db.CicloEscolar.GetFirstOrDefault(filter: c => c.Id == IdCicloEscolar, includePropieties: "Grado,Seccion");
+
+                ViewData["Anio"] = cies.Anio;
+                ViewData["NomGrado"] = cies.Grado.NomGrado;
+                ViewData["NomSeccion"] = cies.Seccion.NomSeccion;
 
                 //return tabla de cursos
                 return View(dt);
@@ -73,6 +78,13 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
             }
             ViewData["asigcur"] = id;
             ViewData["IdCicloEscolar"] = IdCicloEscolar;
+            CicloEscolar cies = db.CicloEscolar.GetFirstOrDefault(filter: c => c.Id == IdCicloEscolar, includePropieties: "Grado,Seccion");
+            AsigCurso ascu = db.AsigCurso.GetFirstOrDefault(filter: a => a.Id == id, includePropieties: "Curso");
+
+            ViewData["Anio"] = cies.Anio;
+            ViewData["NomGrado"] = cies.Grado.NomGrado;
+            ViewData["NomSeccion"] = cies.Seccion.NomSeccion;
+            ViewData["NomCurso"] = ascu.Curso.NomCurso;
 
             return View();
         }
@@ -114,19 +126,23 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
 
             da.Fill(dt);
 
-            
+            CicloEscolar cies = db.CicloEscolar.GetFirstOrDefault(filter: c => c.Id == IdCicloEscolar, includePropieties: "Grado,Seccion");
+            AsigCurso ascu = db.AsigCurso.GetFirstOrDefault(filter: a => a.Id == IdAsigCurso, includePropieties: "Curso");
+            BloqueAsigCurso blascu = db.BloqueAsigCurso.GetFirstOrDefault(filter: b => b.Id == IdBlkAsCu, includePropieties: "Bloque");
+
+            ViewData["Anio"] = cies.Anio;
+            ViewData["NomGrado"] = cies.Grado.NomGrado;
+            ViewData["NomSeccion"] = cies.Seccion.NomSeccion;
+            ViewData["NomCurso"] = ascu.Curso.NomCurso;
+            ViewData["NomBloque"] = blascu.Bloque.NomBloque;
 
             return View(dt);
         }
 
 
 
-
-
-
-
         [HttpGet]
-        public IActionResult UpdateAsis(int IdBlkAsCu, int IdCicloEscolar, string Fecha)
+        public IActionResult UpdateAsis(int IdBlkAsCu, int IdCicloEscolar, int IdAsigCurso, string Fecha)
         {
             if (IdBlkAsCu == 0 || IdCicloEscolar == 0 || Fecha == null)
             {
@@ -134,6 +150,7 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
             }
             ViewData["IdBlkAsCu"] = IdBlkAsCu;
             ViewData["IdCicloEscolar"] = IdCicloEscolar;
+            ViewData["IdAsigCurso"] = IdAsigCurso;
             //ViewData["Fecha"] = Fecha;
 
             Fecha = Convert.ToDateTime(Fecha).ToString("dd/MM/yyyy");
@@ -144,10 +161,19 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
             DataTable dt = new DataTable();
 
             da.Fill(dt);
-
-            
+                        
             //ViewData["Fecha"] = String.Join("-", Fecha.Split('/').Reverse());
             ViewData["Fecha"] = Convert.ToDateTime(Fecha).ToString("yyyy-MM-dd");
+
+            CicloEscolar cies = db.CicloEscolar.GetFirstOrDefault(filter: c => c.Id == IdCicloEscolar, includePropieties: "Grado,Seccion");
+            AsigCurso ascu = db.AsigCurso.GetFirstOrDefault(filter: a => a.Id == IdAsigCurso, includePropieties: "Curso");
+            BloqueAsigCurso blascu = db.BloqueAsigCurso.GetFirstOrDefault(filter: b => b.Id == IdBlkAsCu, includePropieties: "Bloque");
+
+            ViewData["Anio"] = cies.Anio;
+            ViewData["NomGrado"] = cies.Grado.NomGrado;
+            ViewData["NomSeccion"] = cies.Seccion.NomSeccion;
+            ViewData["NomCurso"] = ascu.Curso.NomCurso;
+            ViewData["NomBloque"] = blascu.Bloque.NomBloque;
 
             return View(dt);
         }
@@ -243,6 +269,15 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
             ViewData["IdCicloEscolar"] = IdCicloEscolar;
             ViewData["IdAsigCurso"] = IdAsigCurso;
 
+            CicloEscolar cies = db.CicloEscolar.GetFirstOrDefault(filter: c => c.Id == IdCicloEscolar, includePropieties: "Grado,Seccion");
+            AsigCurso ascu = db.AsigCurso.GetFirstOrDefault(filter: a => a.Id == IdAsigCurso, includePropieties: "Curso");
+            BloqueAsigCurso blascu = db.BloqueAsigCurso.GetFirstOrDefault(filter: b => b.Id == IdBlkAsCu, includePropieties: "Bloque");
+
+            ViewData["Anio"] = cies.Anio;
+            ViewData["NomGrado"] = cies.Grado.NomGrado;
+            ViewData["NomSeccion"] = cies.Seccion.NomSeccion;
+            ViewData["NomCurso"] = ascu.Curso.NomCurso;
+            ViewData["NomBloque"] = blascu.Bloque.NomBloque;
 
             return View();
         }

@@ -1,23 +1,29 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using SistemaIEBCE.AccesoDatos.Data.Repository;
 using SistemaIEBCE.Models;
+using SistemaIEBCE.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace SistemaIEBCE.Areas.Director.Controllers
 {
-    [Authorize(Roles = "Tesorero")]
+    //[Authorize(Roles = "Tesorero")]
     [Area("Tesorero")]
     public class CuotaController : Controller
     {
         private readonly IContenedorTrabajo db;
+        private readonly IConfiguration configuration;
 
-        public CuotaController(IContenedorTrabajo DbContext)
+        public CuotaController(IConfiguration _configuration, IContenedorTrabajo DbContext)
         {
             db = DbContext;
+            configuration = _configuration;
         }
 
         [HttpGet]
@@ -102,6 +108,79 @@ namespace SistemaIEBCE.Areas.Director.Controllers
             }
         }
 
+
+
+        [HttpGet]
+        public IActionResult Estudiantes()
+        {
+            var anio = 0;
+            //IEnumerable<CicloEscolar> cies = db.CicloEscolar.GetListaCicloEscolar();
+            IEnumerable<CicloEscolar> ciesEst = db.CicloEscolar.GetListaCicloEscolarEst(1);
+
+            foreach (var item in ciesEst)
+            {
+                anio = item.Anio;
+            }
+            IEnumerable<AsigEstudianteVM> ases = db.AsigEstudiante.GetListaAsigEstCuclo(anio);
+             
+            return View(ases);
+        }
+
+        [HttpGet]
+        public IActionResult RepPagos(int idAsEs)
+        {
+            TempData["idAsEs"] = idAsEs;
+            AsigEstudiante ases = db.AsigEstudiante.GetFirstOrDefault(filter: e => e.Id == idAsEs, includePropieties: "Estudiante");
+            return View(ases);
+        }
+
+        [HttpGet]
+        public IActionResult CuentaEstudiante(int idAsEs)
+        {
+            List<RepCiEsVM> repEstuGrado = new List<RepCiEsVM>();
+
+            var conn = configuration.GetValue<string>("ConnectionStrings:conSQL2");
+
+            using (SqlConnection conexion = new SqlConnection(conn))
+            {
+                string query = "SP_CuentaEstudiante";
+
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idAsEs", idAsEs);
+
+
+                conexion.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        repEstuGrado.Add(new RepCiEsVM()
+                        {
+                            StrCantY = dr["NomCuota"].ToString(),
+                            CantX = int.Parse(dr["Pagado"].ToString()),
+                            CantY = int.Parse(dr["Cantidad"].ToString()),
+                        });
+                    }
+                }
+
+            }
+
+            return Json(new
+            {
+                data = repEstuGrado
+            });
+        }
+
+        [HttpGet]
+        public IActionResult ListCuotas()
+        {
+            return Json(new
+            {
+                data = db.Cuota.GetAll()
+            });
+        }
 
         #region LLAMADAS A LA API
         [HttpGet]

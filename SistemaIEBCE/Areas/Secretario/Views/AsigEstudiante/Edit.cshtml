@@ -28,12 +28,11 @@
 
                             <input type="hidden" asp-for="AsigEstudiante.Id" />
 
-
                             <div class="form-group row mt-3">
                                 <label asp-for="AsigEstudiante.IdEstudiante" class="col-sm-2 col-form-label "></label>
                                 <div class="col-10">
-                                    @Html.DropDownListFor(m => m.AsigEstudiante.IdEstudiante, Model.ListaEstudiante,
-                                   "-Porfavor seleccione una opción-", new { @class = "form-control", @id = "estudiantes" })
+                                    <input type="text" class="form-control" readonly value="@Model.AsigEstudiante.Estudiante.NomEstudiante @Model.AsigEstudiante.Estudiante.ApellEstudiante" />
+                                    <input type="text" asp-for="AsigEstudiante.IdEstudiante" hidden class="form-control" />
                                 </div>
                                 <span asp-validation-for="AsigEstudiante.IdEstudiante" class="text-danger offset-2 col-10"></span>
                             </div>
@@ -87,7 +86,7 @@
 
     <script type="text/javascript">
         $(function () {
-            $("#estudiantes").chosen({ width: "90%" });
+            //$("#estudiantes").chosen({ width: "90%" });
             $("#catedraticos").chosen({ width: "90%" });
             $("#cicloescolar").chosen({ width: "90%" });
             $("#estado").chosen({ width: "90%" });

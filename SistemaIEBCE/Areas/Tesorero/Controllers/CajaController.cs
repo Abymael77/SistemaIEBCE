@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNetCore.Http;
 using SistemaIEBCE.Extensions;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace SistemaIEBCE.Areas.Director.Controllers
 {
@@ -18,9 +21,11 @@ namespace SistemaIEBCE.Areas.Director.Controllers
     public class CajaController : Controller
     {
         private readonly IContenedorTrabajo db;
+        private readonly IConfiguration configuration;
 
-        public CajaController(IContenedorTrabajo DbContext)
+        public CajaController(IConfiguration _configuration, IContenedorTrabajo DbContext)
         {
+            configuration = _configuration;
             db = DbContext;
         }
 
@@ -228,6 +233,12 @@ namespace SistemaIEBCE.Areas.Director.Controllers
                     return RedirectToAction("Create", "Caja");
                 }
 
+                if (caja.Fin == null)
+                {
+                    caja.Fin = DateTime.Now.Date;
+                }
+                //var fin = DateTime.Now.Date;
+
                 caja.Estado = 0;
 
                 db.Caja.Update(caja);
@@ -272,6 +283,90 @@ namespace SistemaIEBCE.Areas.Director.Controllers
             IEnumerable<DetaFacVM> defac = db.DetalleFactura.GetDetFacEstud(idFactura);
 
             return View(defac);
+        }
+
+        [HttpGet]
+        public IActionResult RepCaja(int idCaja, int est)
+        {
+            TempData["idCaja"] = idCaja;
+            ViewData["est"] = est;
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult GastoPorCaja(int idCaja)
+        {
+            List<RepCiEsVM> repEstuGrado = new List<RepCiEsVM>();
+
+            var conn = configuration.GetValue<string>("ConnectionStrings:conSQL2");
+
+            using (SqlConnection conexion = new SqlConnection(conn))
+            {
+                string query = "SP_GastoPorCaja";
+
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idCaja", idCaja);
+
+
+                conexion.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        repEstuGrado.Add(new RepCiEsVM()
+                        {
+                            StrCantY = dr["NomGasto"].ToString(),
+                            CantX = int.Parse(dr["Total"].ToString()),
+                        });
+                    }
+                }
+
+            }
+
+            return Json(new
+            {
+                data = repEstuGrado
+            });
+        }
+        
+        [HttpGet]
+        public IActionResult CuotaPorCaja(int idCaja)
+        {
+            List<RepCiEsVM> repEstuGrado = new List<RepCiEsVM>();
+
+            var conn = configuration.GetValue<string>("ConnectionStrings:conSQL2");
+
+            using (SqlConnection conexion = new SqlConnection(conn))
+            {
+                string query = "SP_CuotaPorCaja";
+
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idCaja", idCaja);
+
+
+                conexion.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        repEstuGrado.Add(new RepCiEsVM()
+                        {
+                            StrCantY = dr["NomCuota"].ToString(),
+                            CantX = int.Parse(dr["Total"].ToString()),
+                        });
+                    }
+                }
+
+            }
+
+            return Json(new
+            {
+                data = repEstuGrado
+            });
         }
 
 

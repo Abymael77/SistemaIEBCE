@@ -9,12 +9,15 @@
 <h2>Ciclo => @ViewBag.IdBlkAsCu</h2>*@
 
 <div class="bg-white p-4 mt-lg-5">
-    <form asp-action="Index" onsubmit="RegistrarNota(@ViewBag.IdBlkAsCu)" method="post">
+    <form asp-action="Curso" asp-route-IdCicloEscolar="@ViewData["IdCicloEscolar"]" onsubmit="RegistrarNota(@ViewBag.IdBlkAsCu)" method="post">
         <div class="row mb-3 ">
             <div class="col-7">
-                <h2>Lista de Estudiantes </h2>
+                <h3>Lista de Estudiantes </h3>
+                <p class="h6">@ViewData["NomCurso"] - @ViewData["NomBloque"] </p>
+                <p class="h6">@ViewData["NomGrado"] - @ViewData["NomSeccion"] - @ViewData["Anio"]</p>
             </div>
-            <div class="col-5 text-right" >
+            <div class="col-5 text-right">
+                <a href="/Secretario/Nota/Bloque/?IdAsigCurso=@ViewData["IdAsigCurso1"]&IdCicloEscolar=@ViewData["IdCicloEscolar"]" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
                 <button class="guardar btn btn-dark" type="submit"> <i class="fa-solid fa-floppy-disk"></i> Guardar Notas</button>
             </div>
         </div>
@@ -46,7 +49,7 @@
     <script>
         $(document).ready(function () {
 
-            cargarDatatableLsEst(@ViewData["idBlkAsCu"], @ViewData["IdCicloEscolar"], @ViewData["IdAsigCurso"]);
+            cargarDatatableLsEst(@ViewData["idBlkAsCu"], @ViewData["IdCicloEscolar"], @ViewData["IdAsigCurso1"]);
 
             $('button.guardar').click(function () {
                 //innota

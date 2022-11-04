@@ -13,7 +13,7 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
     {
         Factura GetFacturaUltimo();
 
-        IEnumerable<FacturaVM> GetAllFactura();
+        IEnumerable<FacturaVM> GetAllFactura(int idCaja);
 
         void Update(Factura factura);
     }

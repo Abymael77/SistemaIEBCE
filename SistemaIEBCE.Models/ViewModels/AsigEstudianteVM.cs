@@ -17,5 +17,13 @@ namespace SistemaIEBCE.Models.ViewModels
 
         public IEnumerable<AsigEstudiante> ListaEstudianteNota { get; set; }
 
+        public int id { get; set; }
+        public int idEstu { get; set; }
+        public string nombres { get; set; }
+        public string apellidos { get; set; }
+        public string cicloEscolar { get; set; }
+        public int estado { get; set; }
+
+
     }
 }

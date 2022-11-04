@@ -1,0 +1,147 @@
+﻿@model System.Collections.Generic.List<SistemaIEBCE.Models.CicloEscolar>;
+
+@{
+    ViewData["Title"] = "Ciclos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var num = 1;
+}
+
+<div class="row shadow p-3 my-5 bg-white rounded py-2">
+    <div class="col-12 row">
+        <div class="col-8">
+            <h1 class="">Ciclos</h1>
+        </div>
+        <div class="col-4 p-2 d-flex justify-content-end">
+            <a class="btn btn-primary" asp-controller="Admin" asp-action="Index"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+            <a class="btn btn-danger mx-2 text-white" onclick="NuevoCiEs()">  <i class="fa-solid fa-plus"></i> Crear</a>
+        </div>
+    </div>
+    <div class="col-12">
+        <table id="tblFacList" class="table text-primary table-bordered table-responsive-lg table-hover" style="width:100%">
+            <thead class="bg-primary text-light">
+                <tr>
+                    <td>Id</td>
+                    <td>Anio</td>
+                    <td>Estado</td>
+                    <td>Acción</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td> @Convert.ToInt32(num++)</td>
+                        <td> @item.Anio</td>
+                        <td>
+                            @if (item.Estado == 1)
+                            {
+                                <div class="d-flex justify-content-center"> <span class="badge badge-primary">Activo</span> </div>
+                            }
+                            else
+                            {
+                                <div class="d-flex justify-content-center"> <span class="badge badge-secondary">Inactivo</span> </div>
+                            }
+                        </td>
+                        <td class="text-center">
+                            <a href="/Director/CicloEcolar/Index/?anio=@item.Anio" class="btn border-primary text-info"> <i class="fa-solid fa-circle-info"></i>  </a>
+                            @if (item.Estado == 1)
+                            {
+                                <a class="btn btn-danger text-white" onclick="cerrarCiEs(@item.Anio)" title="Cerra Ciclo"> <i class="fa-solid fa-lock-open"></i>  </a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-primary text-white" onclick="abrirCiEs(@item.Anio)" title="Reanudar Ciclo"> <i class="fa-sharp fa-solid fa-lock"></i>  </a>
+                            }
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        function cerrarCiEs(anio) {
+            Swal.fire({
+                icon: 'error',
+                title: "Cerrar el Ciclo Escolar " + anio,
+                text: "Esta acción afectara la información mostrada en Secretaría y Tesorería",
+                confirmButtonText: 'Aceptar',
+                showCancelButton: true,
+                cancelButtonColor: "#17172b",
+                confirmButtonColor: "#FF6565",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/Director/CicloEcolar/CicloCerrar/?anio=' + anio,
+                        success: function (data) {
+                            location.reload();
+                        }
+                    });
+                }
+            });
+        }
+
+        function abrirCiEs(anio) {
+            Swal.fire({
+                icon: 'warning',
+                title: "Reanudar el Ciclo Escolar " + anio,
+                text: "Esta acción afectara la información mostrada en Secretaría y Tesorería",
+                confirmButtonText: 'Aceptar',
+                showCancelButton: true,
+                cancelButtonColor: "#17172b",
+                confirmButtonColor: "#f39c12",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/Director/CicloEcolar/CicloAbrir/?anio=' + anio,
+                        success: function (data) {
+                            location.reload();
+                        }
+                    });
+                }
+            });
+        }
+
+        function NuevoCiEs() {
+            Swal.fire({
+                icon: 'warning',
+                title: "Crear Nuevo Ciclo Escolar ",
+                text: "Esta Acción Cerrará el Ciclo Actual y Creará uno Nuevo",
+                html: '<input class="form-control" id="imputanio" type="number" min="2000" max="2100" value="@DateTime.Now.Year"/>',
+                stopKeydownPropagation: false,
+                preConfirm: () => {
+                    const anio = document.getElementById("imputanio").value
+                    if (anio <= 2000 | anio >= 2100) {
+                        Swal.showValidationMessage(`Ciclo Escolar Incorrecto`)
+                        /*console.log(anio);*/
+                    }
+                    else {
+                        return anio
+                    }
+                },
+                confirmButtonText: 'Aceptar',
+                showCancelButton: true,
+                cancelButtonColor: "#17172b",
+                confirmButtonColor: "#FF6565"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/Director/CicloEcolar/CicloNuevo/?anio=' + result.value,
+                        success: function (data) {
+                            location.reload();
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+}
+
+

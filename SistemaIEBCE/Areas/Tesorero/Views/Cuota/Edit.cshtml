@@ -41,7 +41,8 @@
                 <div class="form-group row mt-3">
                     <label asp-for="Cantidad" class="col-sm-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
-                        <input asp-for="Cantidad" class="form-control" />
+                        <input asp-for="Cantidad" readonly class="form-control" />
+                        @*<span class="text-primary border form-control"> @Model.Cantidad </span>*@
                         <span asp-validation-for="Cantidad" class="text-danger"></span>
                     </div>
                 </div>

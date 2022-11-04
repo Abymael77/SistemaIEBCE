@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SistemaIEBCE.AccesoDatos.Data.Repository;
 using System;
@@ -14,10 +15,13 @@ namespace SistemaIEBCE.Areas.Director.Controllers
     public class UsuarioController : Controller
     {
         private readonly IContenedorTrabajo db;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public UsuarioController(IContenedorTrabajo _db)
+
+        public UsuarioController(IContenedorTrabajo _db, UserManager<IdentityUser> userManager)
         {
             db = _db;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -56,6 +60,37 @@ namespace SistemaIEBCE.Areas.Director.Controllers
         public IActionResult GetAll()
         {
             return Json(new { data = db.Usuario.GetAll() });
+        }
+
+
+        public async Task<IActionResult> Delete(string idUser)
+        {
+            var recordDB = db.Usuario.GetFirstOrDefault(filter: u => u.Id == idUser);
+            var user = await _userManager.FindByEmailAsync(recordDB.Email);
+
+            if (recordDB == null || user == null)
+            {   
+                return Json(new { success = false, message = "Error borrando Usuario" });
+            }
+            /*
+             * Hay que actualizar la tabla de  los usuarios desíusd de una eliminacion 
+             * aun no se pude actualuzar
+             * ya se eliminan solo falta eso
+             */
+
+            var result = await _userManager.DeleteAsync(user);
+
+            if (result.Succeeded)
+            {
+                //return RedirectToAction(nameof(Index));
+                return Json(new { success = true, message = "Usuario borrado correctamente+" });
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+            return Json(new { success = true, message = "Usuario borrado correctamente ----" });
         }
         #endregion
     }

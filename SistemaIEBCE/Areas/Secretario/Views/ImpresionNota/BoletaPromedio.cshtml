@@ -4,65 +4,83 @@
 
 @{
     ViewData["Title"] = "BoletaPromedio";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
     var res = ViewData["res"];
 }
+<!DOCTYPE html>
+<html lang="es-es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SistemaIEBCE</title>
 
-<link href="~/css/Boleta.css" rel="stylesheet" />
+    <!-- Plugins -->
+    <link href="~/lib/fontawesome/css/fontawesome.css" rel="stylesheet" />
+    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/Boleta.css" rel="stylesheet" />
 
-<div class="container-fluid my-2 text-center">
-    <h1 class="">Boleta de Calificaciones Final</h1>
-</div>
-<div class="bg-white text-center p-3" style="height: 529px;" id="boleta">
-    <h4>EVALUACIÓN DE LAS ASIGNATURAS</h4>
-    <div class="row">
-        <div class="col-10">
-            <table id="NotasFull" class="table table-bordered" style="width:100%">
-                <thead>
-                    <tr>
-                        @foreach (DataColumn column in Model.Columns)
-                        {
-                            <td>@column.ColumnName</td>
-                        }
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (DataRow Notas in Model.Rows)
-                    {
-                        <tr>
-                            @foreach (DataColumn col in Model.Columns)
-                            {
-                                <td>@Convert.ToString(Notas[col.ColumnName])</td>
-                            }
-                            @*<td>@Convert.ToString(Notas["No."])</td>
-                            <td>@Convert.ToString(Notas["Curso"])</td>*@
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div class="col-2 d-flex align-items-start flex-column">
-            <h6 class="font-weight-bolder">Firma de Aprobación</h6>
-            <div class="row pt-4 pl-2 ml-1 border-bottom" style="width:100%">
-                <p>f)</p>
-            </div>
-            <div class="text-center " style="width:100%"> <h6>Ciclo completo</h6> </div>
-            <div class="row mt-5 border p-2 mt-auto mb-3 bd-highlight">
-                <p class="text-justify" style="font-size: 10px;">
-                    Cada unidad tiene un valor de 100 puntos. <br /><br />
-                    Al estudiante se le concidera que ha ganado la unidad, si ha obtenido como minimo 60 puntos. <br /><br />
-                    Se realizra examen de recuperación a final del ciclo escolar en una sola oportunidad cuando es reprobado
-                    cuatro áreas o sub áreas. (Acuerdo Ministerial 1171-2010). <br /><br />
-                    Por cada unidad se suplica firmar de enterado.
-                </p>
+</head>
+<body>
+    <div class="book">
+        <div class="page">
+            <div class="subpage">
+                <div class="boleta" id="boletafr">
+                    <div class="cuadroTbl">
+                        <h4 class="text-center">EVALUACIÓN DE LAS ASIGNATURAS</h4>
+                        <table id="NotasFull" class="table table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    @foreach (DataColumn column in Model.Columns)
+                                    {
+                                        <td class="text-nowrap">@column.ColumnName</td>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (DataRow Notas in Model.Rows)
+                                {
+                                    <tr>
+                                        @foreach (DataColumn col in Model.Columns)
+                                        {
+                                            <td>@Convert.ToString(Notas[col.ColumnName])</td>
+                                        }
+                                        @*<td>@Convert.ToString(Notas["No."])</td>
+                                            <td>@Convert.ToString(Notas["Curso"])</td>*@
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="cuadro2Firma">
+                        <h6 class="font-weight-bolder mt-5">Firma de Aprobación</h6>
+                        <div class="row pt-4 pl-2 ml-1 border-bottom" style="width:100%">
+                            <p>f)</p>
+                        </div>
+                        <div class="text-center" style="width:100%"> <h6> @res  </h6> </div>
+                        <div class="row mt-5 border p-2  bd-highlight">
+                            <p class="text-justify" style="font-size: 10px;">
+                                Cada unidad tiene un valor de 100 puntos. <br /><br />
+                                Al estudiante se le concidera que ha ganado la unidad, si ha obtenido como minimo 60 puntos. <br /><br />
+                                Se realizra examen de recuperación a final del ciclo escolar en una sola oportunidad cuando es reprobado
+                                cuatro áreas o sub áreas. (Acuerdo Ministerial 1171-2010). <br /><br />
+                                Por cada unidad se suplica firmar de enterado.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <footer class="border-top footer text-muted shadow-lg">
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-<button class="btn bg-primary text-white" type="button" onclick="printDiv('boleta')" value="imprimir div">
-    Imprimir
-</button>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
 
 @section Scripts{
 
@@ -76,18 +94,4 @@
         });
     </script>
 
-    <script>
-        function printDiv(nombreDiv) {
-            var contenido = document.getElementById(nombreDiv).innerHTML;
-            var contenidoOriginal = document.body.innerHTML;
-
-            document.body.innerHTML = contenido;
-
-            window.print();
-
-            document.body.innerHTML = contenidoOriginal;
-        }
-    </script>
-
-    
 }

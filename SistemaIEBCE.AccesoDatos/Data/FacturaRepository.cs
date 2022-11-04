@@ -19,7 +19,7 @@ namespace SistemaIEBCE.AccesoDatos.Data
             _db = db;
         }
         
-        public IEnumerable<FacturaVM> GetAllFactura()
+        public IEnumerable<FacturaVM> GetAllFactura(int idCaja)
         {
             List<FacturaVM> list = null;
 
@@ -27,6 +27,7 @@ namespace SistemaIEBCE.AccesoDatos.Data
             var query = (from fa in _db.Factura
                          join ases in _db.AsigEstudiante on fa.IdAsigEstudiante equals ases.Id
                          join es in _db.Estudiante on ases.IdEstudiante equals es.Id
+                         where fa.IdCaja == idCaja
                          select new FacturaVM
                          {
                              Factura = fa,

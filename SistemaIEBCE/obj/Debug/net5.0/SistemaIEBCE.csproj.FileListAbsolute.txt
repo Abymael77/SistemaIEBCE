@@ -570,3 +570,10 @@ C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\D
 C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Tesorero\Views\DetalleCuota\DetFaturaCuotaCaja.cshtml.g.cs
 C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Tesorero\Views\Caja\DetalleCuotaCaja.cshtml.g.cs
 C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Tesorero\Views\Caja\DetFaturaCuotaCaja.cshtml.g.cs
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\bin\Debug\net5.0\wwwroot\lib\Rotativa\Windows\wkhtmltoimage.exe
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\bin\Debug\net5.0\wwwroot\lib\Rotativa\Windows\wkhtmltopdf.exe
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Director\Views\CicloEcolar\Ciclos.cshtml.g.cs
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Secretario\Views\CicloEscolar\RepCiclo.cshtml.g.cs
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Tesorero\Views\Caja\RepCaja.cshtml.g.cs
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Tesorero\Views\Cuota\Estudiantes.cshtml.g.cs
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Tesorero\Views\Cuota\RepPagos.cshtml.g.cs

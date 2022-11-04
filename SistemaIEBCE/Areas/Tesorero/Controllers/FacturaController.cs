@@ -29,7 +29,20 @@ namespace SistemaIEBCE.Areas.Director.Controllers
         [HttpGet]
         public IActionResult ListFacturas()
         {
-            IEnumerable<FacturaVM> fac = db.Factura.GetAllFactura();
+            if (HttpContext.Session.GetObject<Caja>("cajaEst") == null)
+            {
+                ViewData["MENSAJE"] = "LA SESSION ESTA VACIA";
+                return RedirectToAction("Create", "Caja");
+            }
+
+            Caja caja = HttpContext.Session.GetObject<Caja>("cajaEst");
+
+            if (caja.Estado == 0)
+            {
+                return RedirectToAction("Create", "Caja");
+            }
+
+            IEnumerable<FacturaVM> fac = db.Factura.GetAllFactura(caja.Id);
 
 
             return View(fac);
@@ -65,7 +78,7 @@ namespace SistemaIEBCE.Areas.Director.Controllers
 
             IEnumerable<Cuota> cuotas = db.Cuota.GetAll(filter: ct => ct.Estado == 1);
 
-            IEnumerable<AsigEstudiante> asigEstudiante = db.AsigEstudiante.GetAll(filter: hw => hw.Estado == 1, includePropieties: "Estudiante,CicloEscolar");
+            IEnumerable<AsigEstudiante> asigEstudiante = db.AsigEstudiante.GetAll(filter: hw => hw.CicloEscolar.Estado == 1, includePropieties: "Estudiante,CicloEscolar");
 
             FacturaVM facturaVM = new FacturaVM()
             {

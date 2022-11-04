@@ -1,0 +1,89 @@
+﻿@model System.Collections.Generic.List<SistemaIEBCE.Models.ViewModels.AsigEstudianteVM>;
+
+@{
+    ViewData["Title"] = "Estudiantes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var num = 1;
+}
+
+
+<div class="row shadow p-3 my-5 bg-white rounded py-2">
+    <div class="col-12 row">
+        <div class="col-8">
+            <h1 class="">Estudiantes</h1>
+        </div>
+        <div class="col-4 p-2 d-flex justify-content-end">
+            <a class="btn btn-primary" asp-controller="Menu" asp-action="Index"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+            @*<a class="btn btn-danger mx-2 text-white" onclick="NuevoCiEs()">  <i class="fa-solid fa-plus"></i> Crear</a>*@
+        </div>
+    </div>
+    <div class="col-12">
+        <table id="tblEstudiantesCuenta" class="table text-primary table-bordered table-responsive-lg table-hover" style="width:100%">
+            <thead class="bg-primary text-light">
+                <tr>
+                    <td>#</td>
+                    <td>Nombre</td>
+                    <td>Apellido</td>
+                    <td>Ciclo Escolar</td>
+                    <td>Estado</td>
+                    <td>Acción</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td> @Convert.ToInt32(num++)</td>
+                        <td class="text-uppercase"> @item.nombres</td>
+                        <td class="text-uppercase" > @item.apellidos</td>
+                        <td class="text-center"> @item.cicloEscolar</td>
+                        <td class="text-center">
+                            @if (item.estado == 1)
+                            {
+                                <div class="d-flex justify-content-center"> <span class="badge badge-primary">Activo</span> </div>
+                            }
+                            else
+                            {
+                                <div class="d-flex justify-content-center"> <span class="badge badge-secondary">Inactivo</span> </div>
+                            }
+                        </td>
+                        <td class="text-center"> <a class="btn btn-dark" asp-controller="Cuota" asp-action="RepPagos" asp-route-idAsEs="@item.id"> <i class="fas fa-chart-column"></i>  </a> </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            cargarDatatableNotaCurso();
+        });
+
+        function cargarDatatableNotaCurso() {
+            dataTable = $("#tblEstudiantesCuenta").DataTable({
+                "language": {
+                    "url": "../lib/DataTables/idioma/es-ES.json",
+                    "emptyTable": "Ningún dato disponible en esta tabla",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    },
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "zeroRecords": "No se encontraron resultados",
+                    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                },
+                "width": "100%"
+            });
+        }
+    </script>
+}
+

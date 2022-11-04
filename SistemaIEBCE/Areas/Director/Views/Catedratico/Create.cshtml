@@ -8,7 +8,7 @@
 }
 
 <div class="container-fluid bg-white p-4 mt-4">
-    <h1 class="mt-4">Crear Nuevo Catedratico</h1>
+    <h1 class="mt-4">Crear Nuevo Catedrático</h1>
 
     <form method="post" asp-action="Create">
         <div class="row px-2 mx-2 border">
@@ -17,7 +17,7 @@
                 <div class="form-group row mt-3">
                     <label asp-for="NomCatedratico" class="col-sm-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
-                        <input asp-for="NomCatedratico" class="form-control" />
+                        <input asp-for="NomCatedratico" autocomplete="off" class="form-control" />
                         <span asp-validation-for="NomCatedratico" class="text-danger"></span>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                 <div class="form-group row mt-3">
                     <label asp-for="ApellCatedratico" class="col-sm-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
-                        <input asp-for="ApellCatedratico" class="form-control" />
+                        <input asp-for="ApellCatedratico" autocomplete="off" class="form-control" />
                         <span asp-validation-for="ApellCatedratico" class="text-danger"></span>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                 <div class="form-group row mt-3">
                     <label asp-for="Profesion" class="col-sm-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
-                        <input asp-for="Profesion" class="form-control" />
+                        <input asp-for="Profesion" autocomplete="off" class="form-control" />
                         <span asp-validation-for="Profesion" class="text-danger"></span>
                     </div>
                 </div>

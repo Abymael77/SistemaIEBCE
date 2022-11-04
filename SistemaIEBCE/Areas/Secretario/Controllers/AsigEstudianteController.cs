@@ -48,9 +48,29 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(AsigEstudianteVM AsigEstudianteVM)
         {
+            var exist = 0;
+            var grado = "";
             try
             {
-                if (ModelState.IsValid)
+                var anio = 0;
+                //IEnumerable<CicloEscolar> cies = db.CicloEscolar.GetListaCicloEscolar();
+                IEnumerable<CicloEscolar> ciesEst = db.CicloEscolar.GetListaCicloEscolarEst(1);
+
+                foreach (var item in ciesEst)
+                {
+                    anio = item.Anio;
+                }
+
+                IEnumerable<AsigEstudianteVM> ases = db.AsigEstudiante.GetListaAsigEstCuclo(anio);
+                foreach (var item in ases)
+                {
+                    if (item.idEstu == AsigEstudianteVM.AsigEstudiante.IdEstudiante)
+                    {
+                        exist = 1;
+                        grado = item.cicloEscolar;
+                    }
+                }
+                if (ModelState.IsValid & exist == 0)
                 {
                     //insertar nueva asignacion
                     db.AsigEstudiante.Add(AsigEstudianteVM.AsigEstudiante);
@@ -89,8 +109,14 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
                 }
                 else
                 {
-                    TempData["error"] = "Error en validación de modelo.";
-
+                    if (exist == 1)
+                    {
+                        TempData["error"] = "El Estudiante ya Esta Asignado en \n" + grado;
+                    }
+                    else
+                    {
+                        TempData["error"] = "Error en validación de modelo.";
+                    }
                     AsigEstudianteVM.ListaEstudiante = db.AsigEstudiante.GetListaAsigEstudiante();
                     AsigEstudianteVM.ListaCicloEscolar = db.AsigEstudiante.GetListaAsigCicloEscolar();
                     return View(AsigEstudianteVM);
@@ -108,6 +134,7 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         [HttpGet]
         public IActionResult Edit(int? id)
         {
+            int iiid = (int)id;
             try
             {
                 AsigEstudianteVM asigEstVm = new AsigEstudianteVM()
@@ -119,7 +146,7 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
 
                 if (id != null)
                 {
-                    asigEstVm.AsigEstudiante = db.AsigEstudiante.Get(id.GetValueOrDefault());
+                    asigEstVm.AsigEstudiante = db.AsigEstudiante.GetFirstOrDefault(filter: a => a.Id == iiid, includePropieties: "Estudiante");
                 }
 
                 return View(asigEstVm);
@@ -133,13 +160,14 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(AsigEstudianteVM AsigEstudianteVM)
+        public IActionResult Edit(AsigEstudianteVM AsigEstudianteVMres)
         {
             try
             {
+                
                 if (ModelState.IsValid)
                 {
-                    db.AsigEstudiante.Update(AsigEstudianteVM.AsigEstudiante);
+                    db.AsigEstudiante.Update(AsigEstudianteVMres.AsigEstudiante);
                     db.Save();
                     TempData["error"] = "dodo";
                     return RedirectToAction(nameof(Index));
@@ -147,16 +175,17 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
                 else
                 {
                     TempData["error"] = "Error en validación de modelo.";
-
-                    AsigEstudianteVM.ListaEstudiante = db.Estudiante.GetListaEstudiante();
-                    AsigEstudianteVM.ListaCicloEscolar = db.AsigEstudiante.GetListaAsigCicloEscolar();
-                    return View(AsigEstudianteVM);
+                    AsigEstudianteVMres.ListaEstudiante = db.AsigEstudiante.GetListaAsigEstudiante();
+                    AsigEstudianteVMres.ListaCicloEscolar = db.AsigEstudiante.GetListaAsigCicloEscolar();
+                    return View(AsigEstudianteVMres);
                 }
             }
             catch (Exception ex)
             {
                 TempData["error"] = "Error de sistema.";
-                return View(AsigEstudianteVM);
+                AsigEstudianteVMres.ListaEstudiante = db.AsigEstudiante.GetListaAsigEstudiante();
+                AsigEstudianteVMres.ListaCicloEscolar = db.AsigEstudiante.GetListaAsigCicloEscolar();
+                return View(AsigEstudianteVMres);
             }
         }
 
@@ -169,11 +198,31 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
             //SqlConnection con = new SqlConnection(cadena);
             //SqlDataAdapter consulta = new SqlDataAdapter("SELECT * FROM AsigEstudiante",con);
             //return Json(consulta);
+
             return Json(new
             {
                 data = db.AsigEstudiante.GetAll(includePropieties: "Estudiante,CicloEscolar"),
                 //data1 = db.Grado.GetAll(includePropieties: "Grado"),
                 //data2 = db.Seccion.GetAll(includePropieties: "Seccion")
+            }
+            );
+        }
+        [HttpGet]
+        public IActionResult GetAllCiEs()
+        {
+            //var anio = DateTime.Now.Year;
+            var anio = 0;
+            //IEnumerable<CicloEscolar> cies = db.CicloEscolar.GetListaCicloEscolar();
+            IEnumerable<CicloEscolar> ciesEst = db.CicloEscolar.GetListaCicloEscolarEst(1);
+
+            foreach (var item in ciesEst)
+            {
+                anio = item.Anio;
+            }
+
+            return Json(new
+            {
+                data = db.AsigEstudiante.GetListaAsigEstCuclo(anio)
             }
             );
         }

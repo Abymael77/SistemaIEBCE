@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using SistemaIEBCE.Models;
+using SistemaIEBCE.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,31 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
                          {
                              Id = ca.Id,
                              CicloEscolar = ca.CicloEscolar
+                         }).Distinct();
+            list = query.ToList();
+
+            return list;
+        }
+
+        public IEnumerable<AsigCursoVM> GetListaAsigCursoVM()
+        {
+            List<AsigCursoVM> list = null;
+
+            // consulta Validada por estado 
+            var query = (from ascu in _db.AsigCurso
+                         join cu in _db.Curso on ascu.IdCurso equals cu.Id
+                         join cat in _db.Catedratico on ascu.IdCatedratico equals cat.Id
+                         join cies in _db.CicloEscolar on ascu.IdCicloEscolar equals cies.Id
+                         join gr in _db.Grado on cies.IdGrado equals gr.Id
+                         join se in _db.Seccion on cies.IdSeccion equals se.Id
+                         where cies.Estado == 1
+                         select new AsigCursoVM
+                         {
+                             id = ascu.Id,
+                             catedratico = cat.NomCatedratico + " " + cat.ApellCatedratico,
+                             curso = cu.NomCurso,
+                             cicloEscolar = gr.NomGrado + " - " + se.NomSeccion + " - " +cies.Anio,
+                             estado = ascu.Estado
                          }).Distinct();
             list = query.ToList();
 

@@ -10,11 +10,14 @@
     <div class="row mb-3">
         <div class="col-6">
             <h2>Listado de Estudiantes</h2>
+            <p class="h6">@ViewData["NomCurso"] - @ViewData["NomBloque"] </p>
+            <p class="h6">@ViewData["NomGrado"] - @ViewData["NomSeccion"] - @ViewData["Anio"]</p>
         </div>
         <div class="col-6 text-right">
             <label class="h6">Fecha</label>
             <input type="date" id="dateAsisUp" name="fechaUp" class="fechaUp mx-3" value="@ViewData["Fecha"]" />
             <button class="guardar btn btn-dark" onclick="UpdateAsis(@ViewData["idBlkAsCu"])" type="submit">Guardar</button>
+            <a href="/Secretario/Asistencia/TblAsistencia/?IdBlkAsCu=@ViewData["idBlkAsCu"]&IdCicloEscolar=@ViewData["IdCicloEscolar"]&IdAsigCurso=@ViewData["IdAsigCurso"]" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
         </div>
     </div>
     <table id="listEstuAsisUpdate" class="display table table-hover" style="width:100%">
