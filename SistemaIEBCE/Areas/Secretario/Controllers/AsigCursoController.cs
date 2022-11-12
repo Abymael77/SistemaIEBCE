@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SistemaIEBCE.AccesoDatos.Data.Repository;
+using SistemaIEBCE.Extensions;
 using SistemaIEBCE.Models;
 using SistemaIEBCE.Models.ViewModels;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SistemaIEBCE.Areas.Secretario.Controllers
 {
-    //[Authorize(Roles = "Secretario")]
+    [Authorize(Roles = "Secretario,Director")]
     [Area("Secretario")]
     public class AsigCursoController : Controller
     {
@@ -45,6 +46,7 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         public IActionResult Create(AsigCursoVM AsigCursoVM)
         {
             var exist = 0;
+            var Catedratico = "";
             try
             {
                 var anio = 0;
@@ -56,12 +58,13 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
                     anio = item.Anio;
                 }
 
-                IEnumerable<AsigCurso> ascu = db.AsigCurso.GetAll(filter: a => a.CicloEscolar.Anio == anio);
+                IEnumerable<AsigCurso> ascu = db.AsigCurso.GetAll(filter: a => a.CicloEscolar.Anio == anio, includePropieties: "Catedratico");
                 foreach (var item in ascu)
                 {
-                    if (item.IdCicloEscolar == AsigCursoVM.AsigCurso.IdCicloEscolar & item.IdCatedratico == AsigCursoVM.AsigCurso.IdCatedratico & item.IdCurso == AsigCursoVM.AsigCurso.IdCurso) 
-                    {
+                    if (item.IdCicloEscolar == AsigCursoVM.AsigCurso.IdCicloEscolar & item.IdCurso == AsigCursoVM.AsigCurso.IdCurso)
+                    {//& item.IdCatedratico == AsigCursoVM.AsigCurso.IdCatedratico
                         exist = 1;
+                        Catedratico = item.Catedratico.NomCatedratico + " " + item.Catedratico.ApellCatedratico;
                     }
                 }
 
@@ -76,7 +79,7 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
                 {
                     if (exist == 1)
                     {
-                        TempData["error"] = "Asignación existente";
+                        TempData["error"] = "El curso ya esta asignado a: " + Catedratico;
                     }
                     else
                     {
@@ -103,17 +106,20 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         {
             try
             {
+                AsigCurso ascu = db.AsigCurso.GetFirstOrDefault(filter: a => a.Id == id);
+
                 AsigCursoVM asigEstVm = new AsigCursoVM()
                 {
                     AsigCurso = new Models.AsigCurso(),
                     ListaCatedratico = db.Catedratico.GetListaCatedratico(),
                     ListaCurso = db.Curso.GetListaCurso(),
                     ListaCicloEscolar = db.AsigCurso.GetListaAsigCicloEscolar(),
+                    CicloEscolar11 = db.CicloEscolar.GetFirstOrDefault(filter: c => c.Id == ascu.IdCicloEscolar, includePropieties: "Grado,Seccion"),
                 };
 
                 if (id != null)
                 {
-                    asigEstVm.AsigCurso = db.AsigCurso.Get(id.GetValueOrDefault());
+                    asigEstVm.AsigCurso = db.AsigCurso.GetFirstOrDefault(filter: c => c.Id == id, includePropieties: "Curso");
                 }
 
                 return View(asigEstVm);
@@ -170,14 +176,17 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         [HttpGet]
         public IActionResult GetAllCiEs()
         {
-            var anio = 0;
-            IEnumerable<CicloEscolar> ciesEst = db.CicloEscolar.GetListaCicloEscolarEst(1);
+            //if (HttpContext.Session.GetObject<CicloEscolar>("CicloEscolar") == null)
+            //{
+            //    ViewData["MENSAJE"] = "LA SESSION ESTA VACIA";
+            //    return RedirectToAction("MenuSecretario", "Menu", new{ ciclo = 1 });
+            //}
 
-            foreach (var item in ciesEst)
-            {
-                anio = item.Anio;
-            }
+            //CicloEscolar cies = HttpContext.Session.GetObject<CicloEscolar>("CicloEscolar");
 
+            //return Json(new { data = db.AsigCurso.GetListaAsigCursoVM(cies.Anio)
+            //                }
+            //);
             return Json(new { data = db.AsigCurso.GetListaAsigCursoVM()
                             }
             );

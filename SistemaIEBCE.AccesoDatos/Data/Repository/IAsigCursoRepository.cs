@@ -15,6 +15,7 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
         IEnumerable<AsigCurso> GetListaAsigCursoEst(int est);
         IEnumerable<SelectListItem> GetListaAsigCicloEscolar();
 
+        //IEnumerable<AsigCursoVM> GetListaAsigCursoVM(int anio);
         IEnumerable<AsigCursoVM> GetListaAsigCursoVM();
 
         void Update(AsigCurso AsigCurso);

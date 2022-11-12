@@ -44,6 +44,7 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
             return list;
         }
 
+        //public IEnumerable<AsigCursoVM> GetListaAsigCursoVM(int anio)
         public IEnumerable<AsigCursoVM> GetListaAsigCursoVM()
         {
             List<AsigCursoVM> list = null;
@@ -56,6 +57,7 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
                          join gr in _db.Grado on cies.IdGrado equals gr.Id
                          join se in _db.Seccion on cies.IdSeccion equals se.Id
                          where cies.Estado == 1
+                         //where cies.Anio == anio
                          select new AsigCursoVM
                          {
                              id = ascu.Id,

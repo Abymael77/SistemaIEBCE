@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace SistemaIEBCE.Areas.Secretario.Controllers
 {
-    //[Authorize(Roles = "Secretario")]
+    [Authorize(Roles = "Secretario,Director")]
     [Area("Secretario")]
     public class NotaController : Controller
     {
@@ -100,6 +100,7 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
 
             ViewData["asig"] = id;
             ViewData["IdCicloEscolar"] = IdCicloEscolar;
+            TempData["IdCicloEscolar"] = IdCicloEscolar;
 
 
             var conn = configuration.GetValue<string>("ConnectionStrings:conSQL2");
@@ -129,10 +130,22 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
         {
             ViewData["asig"] = bloqueAsigCursoVM.BloqueAsigCurso.IdAsigCurso;
             ViewData["IdCicloEscolar"] = bloqueAsigCursoVM.BloqueAsigCurso.Estado;
+            var exist = 0;
+            var bloque = "";
 
             try
             {
-                if (ModelState.IsValid)
+                IEnumerable<BloqueAsigCurso> blascuLs = db.BloqueAsigCurso.GetAll(filter: b => b.IdAsigCurso == bloqueAsigCursoVM.BloqueAsigCurso.IdAsigCurso);
+
+                foreach (var item in blascuLs)
+                {
+                    if (item.IdBloque == bloqueAsigCursoVM.BloqueAsigCurso.IdBloque)
+                    {
+                        exist = 1;
+                    }
+                }
+
+                if (ModelState.IsValid & exist == 0)
                 {
                     //asignar 1 al estado que se uso como idCicloEsc
                     bloqueAsigCursoVM.BloqueAsigCurso.Estado = 1;
@@ -179,15 +192,21 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
                     }
 
                     TempData["error"] = "dodo";
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("Bloque", "Nota", new { IdAsigCurso = bloqueAsigCursoVM.BloqueAsigCurso.IdAsigCurso, IdCicloEscolar = TempData["IdCicloEscolar"] });
                 }
                 else
                 {
-                    TempData["error"] = "Error en validación de modelo.";
+                    if (exist == 1)
+                    {
+                        TempData["error"] = "Bloque existente";
+                    }
+                    else
+                    {
+                        TempData["error"] = "Error en validación de modelo.";
+                    }
                     bloqueAsigCursoVM.ListaBloque = db.Bloque.GetListaBloqueEstado(1);
                     bloqueAsigCursoVM.ListaBloqueCrear = db.Bloque.GetListaBloque();
                     return View(bloqueAsigCursoVM);
-
                 }
             }
             catch (Exception)

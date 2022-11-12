@@ -9,7 +9,7 @@
 <h2>Ciclo => @ViewBag.IdBlkAsCu</h2>*@
 
 <div class="bg-white p-4 mt-lg-5">
-    <form asp-action="Curso" asp-route-IdCicloEscolar="@ViewData["IdCicloEscolar"]" onsubmit="RegistrarNota(@ViewBag.IdBlkAsCu)" method="post">
+    
         <div class="row mb-3 ">
             <div class="col-7">
                 <h3>Lista de Estudiantes </h3>
@@ -18,7 +18,7 @@
             </div>
             <div class="col-5 text-right">
                 <a href="/Secretario/Nota/Bloque/?IdAsigCurso=@ViewData["IdAsigCurso1"]&IdCicloEscolar=@ViewData["IdCicloEscolar"]" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
-                <button class="guardar btn btn-dark" type="submit"> <i class="fa-solid fa-floppy-disk"></i> Guardar Notas</button>
+                <button class="guardar btn btn-dark" onclick="RegistrarNota(@ViewBag.IdBlkAsCu)" type="submit"> <i class="fa-solid fa-floppy-disk"></i> Guardar Notas</button>
             </div>
         </div>
         <table id="listEstu" class="display table table-bordered table-hover" style="width:100%">
@@ -39,7 +39,6 @@
             </tbody>
             
         </table>
-    </form>
 </div>
 
 @section Scripts{

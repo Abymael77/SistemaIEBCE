@@ -26,7 +26,10 @@ namespace SistemaIEBCE.AccesoDatos.Data
             // consulta Validada por estado 
             var query = (from ca in _db.Catedratico
                          where ca.Estado == est
-                         select new SelectListItem { Text = ca.NomCatedratico, Value = ca.Id.ToString() }).Distinct();
+                         select new SelectListItem { 
+                             Text = ca.NomCatedratico + " " + ca.ApellCatedratico, 
+                             Value = ca.Id.ToString() 
+                         }).Distinct();
             list = query.ToList();
 
             return list;

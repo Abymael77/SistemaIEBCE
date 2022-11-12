@@ -9,7 +9,6 @@
 
 <div class="container-fluid bg-white p-4 mt-4">
     <h1 class="mt-4">Crear Nuevo Catedrático</h1>
-
     <form method="post" asp-action="Create">
         <div class="row px-2 mx-2 border">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -59,10 +58,8 @@
 
                 <input asp-for="Estado" value="1" hidden />
 
-                <div class="form-group row mt-3 row d-flex justify-content-center">
-                    <partial name="_VistaCrearVolver" />
-                </div>
-
+                <partial name="_VistaCrearVolver" />
+                
             </div>
         </div>
     </form>

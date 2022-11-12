@@ -1,4 +1,4 @@
-﻿
+﻿@using SistemaIEBCE.Utilidades
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,7 +9,14 @@
         <h1 class="p-2">Administración de cobros y cuotas</h1>
     </div>
     <div class="col-2 mt-3">
-        <a asp-controller="Menu" asp-action="Index" class="btn btn-dark form-control"><i class="fa-solid fa-arrow-left"></i>  Volver</a>
+        @if (User.IsInRole(CNT.Tesorero))
+        {
+            <a asp-area="Tesorero" asp-controller="Menu" asp-action="Index" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+        }
+        else
+        {
+            <a asp-area="Director" asp-controller="Menu" asp-action="MenuTesorero" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+        }
     </div>
 </div>
 

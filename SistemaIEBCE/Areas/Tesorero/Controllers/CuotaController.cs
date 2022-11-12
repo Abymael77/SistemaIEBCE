@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace SistemaIEBCE.Areas.Director.Controllers
 {
-    //[Authorize(Roles = "Tesorero")]
+    [Authorize(Roles = "Tesorero,Director")]
     [Area("Tesorero")]
     public class CuotaController : Controller
     {

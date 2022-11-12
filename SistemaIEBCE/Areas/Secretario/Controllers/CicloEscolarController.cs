@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace SistemaIEBCE.Areas.Secretario.Controllers
 {
-    //[Authorize(Roles = "Secretario")]
+    [Authorize(Roles = "Secretario,Director")]
     [Area("Secretario")]
     public class CicloEscolarController : Controller
     {
@@ -102,7 +102,7 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
 
                 if (id != null)
                 {
-                    asigEstVm.CicloEscolar = db.CicloEscolar.Get(id.GetValueOrDefault());
+                    asigEstVm.CicloEscolar = db.CicloEscolar.GetFirstOrDefault(filter: c => c.Id == id, includePropieties: "Grado,Seccion");
                 }
 
                 return View(asigEstVm);

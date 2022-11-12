@@ -11,6 +11,8 @@ namespace SistemaIEBCE.Models.ViewModels
     {
         public AsigCurso AsigCurso { get; set; }
 
+        public CicloEscolar CicloEscolar11 { get; set; }
+
         public IEnumerable<SelectListItem> ListaCatedratico { get; set; }
 
         public IEnumerable<SelectListItem> ListaCurso { get; set; }

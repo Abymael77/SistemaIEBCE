@@ -13,7 +13,7 @@ using SistemaIEBCE.Extensions;
 
 namespace SistemaIEBCE.Areas.Director.Controllers
 {
-    [Authorize(Roles = "Tesorero")]
+    [Authorize(Roles = "Tesorero,Director")]
     [Area("Tesorero")]
     public class DetalleGastoController : Controller
     {

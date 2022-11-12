@@ -13,7 +13,14 @@
         <div class="row py-3">
             <div class="col-8"> <h2>Listado de Estudinates</h2> </div>
             <div class="col-4 d-flex justify-content-end flex-nowrap">
-                <a href="/Secretario/ImpresionNota/ListBloque/?idCicEs=@ViewData["IdCicloEsc"]" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+                @if (Convert.ToInt32(ViewData["IdBloque"]) < 0)
+                {
+                    <a href="/Secretario/ImpresionNota/Index" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+                }
+                else
+                {
+                    <a href="/Secretario/ImpresionNota/ListBloque/?idCicEs=@ViewData["IdCicloEsc"]" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+                }
                 @*<a asp-action="Create" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-plus"></i> Crear Nuevo Nota</a>*@
             </div>
         </div>

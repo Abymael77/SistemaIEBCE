@@ -37,8 +37,8 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            @*@if (User.IsInRole(CNT.Director))
-            {*@
+            @if (User.IsInRole(CNT.Director))
+            {
                 <div class="form-group row">
                     <div class="col-10">
                         <input type="radio" name="radUsuarioRol" value="@CNT.Director" /> @CNT.Director
@@ -46,7 +46,7 @@
                         <input type="radio" name="radUsuarioRol" value="@CNT.Tesorero" /> @CNT.Tesorero
                     </div>
                 </div>
-             @*}*@ 
+             } 
             <button type="submit" class="btn text-light bg-primary">Registrar</button>
         </form>
     </div>

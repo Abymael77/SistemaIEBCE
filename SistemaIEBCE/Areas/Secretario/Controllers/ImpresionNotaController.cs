@@ -16,7 +16,7 @@ using Rotativa.AspNetCore;
 
 namespace SistemaIEBCE.Areas.Secretario.Controllers
 {
-    //[Authorize(Roles = "Secretario")]
+    [Authorize(Roles = "Secretario,Director")]
     [Area("Secretario")]
     public class ImpresionNotaController : Controller
     {

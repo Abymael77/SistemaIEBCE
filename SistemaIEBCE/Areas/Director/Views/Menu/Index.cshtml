@@ -4,10 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="p-2">Dirección IEBCE</h1>
 
 <div class="container-fluid">
     <section>
+        <h1 class="p-2">Dirección IEBCE</h1>
         <div class="row">
             <div class="col-xl-4 col-sm-6 col-12 mb-4">
                 <div class="card shadow">
@@ -34,9 +34,10 @@
                     </a>
                 </div>
             </div>
-            @*<div class="col-xl-4 col-sm-6 col-12 mb-4">
+            <div class="col-xl-4 col-sm-6 col-12 mb-4">
             <div class="card shadow">
-                <a class="btn" asp-area="Director" asp-controller="Secretaria" asp-action="Index">
+                @*<a class="btn" asp-area="Director" asp-controller="Menu" asp-action="MenuSecretario" asp-route-ciclo="1">*@
+                <a class="btn" asp-area="Director" asp-controller="Menu" asp-action="MenuSecretario">
 
                     <div class="card-body">
                         <div class="d-flex justify-content-between px-md-1">
@@ -47,7 +48,7 @@
                             </div>
                             <div class="col-9 text-right">
                                 <h3 class="text-primary">Secretaría</h3>
-                                <p class="mb-0 text-secondary">Reportes generados en secretaría</p>
+                                <p class="mb-0 text-secondary">Administrar área de secretaría</p>
                             </div>
                         </div>
                         <div class="px-md-1">
@@ -60,9 +61,9 @@
                 </a>
             </div>
         </div>
-        <div class="col-xl-4 col-sm-6 col-12 mb-4">
+        @*<div class="col-xl-4 col-sm-6 col-12 mb-4">
             <div class="card shadow">
-                <a class="btn" asp-area="Director" asp-controller="Tesoreria" asp-action="Index">
+                <a class="btn" asp-area="Director" asp-controller="Menu" asp-action="MenuTesorero">
                     <div class="card-body">
                         <div class="d-flex justify-content-between px-md-1">
                             <div class="align-self-center">
@@ -72,7 +73,7 @@
                             </div>
                             <div class="col-9 text-right">
                                 <h3 class="text-primary">Tesorería</h3>
-                                <p class="mb-0 text-secondary">Reportes generados en tesorería</p>
+                                <p class="mb-0 text-secondary">Administrar área de  tesorería</p>
                             </div>
                         </div>
                         <div class="px-md-1">
@@ -110,34 +111,6 @@
                     </a>
                 </div>
             </div>
-        </div>
-
-        <div class="row">
-            @*<div class="col-xl-4 col-sm-6 col-12 mb-4">
-                <div class="card shadow">
-                    <a class="btn" asp-area="Director" asp-controller="Usuario" asp-action="Index">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between px-md-1">
-                                <div class="align-self-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="70" height="50" viewBox="0 0 50 50">
-                                        <path id="Trazado_469" data-name="Trazado 469" d="M17.5,25c5.523,0,10-5.6,10-12.5S23.023,0,17.5,0s-10,5.6-10,12.5S11.977,25,17.5,25Zm3.961,4.688H13.539C6.063,29.688,0,37.266,0,46.611,0,48.486,1.213,50,2.708,50H32.294C33.789,50,35,48.486,35,46.611,35,37.266,28.938,29.688,21.461,29.688ZM48.125,19.531h-3.75V14.844A2.15,2.15,0,0,0,42.5,12.5a2.147,2.147,0,0,0-1.875,2.344v4.688h-3.75A2.156,2.156,0,0,0,35,21.875a2.153,2.153,0,0,0,1.875,2.344h3.75v4.688A2.149,2.149,0,0,0,42.5,31.25a2.152,2.152,0,0,0,1.875-2.344V24.219h3.75A2.144,2.144,0,0,0,50,21.875,2.144,2.144,0,0,0,48.125,19.531Z" fill="#17172b" />
-                                    </svg>
-                                </div>
-                                <div class="col-9 text-right">
-                                    <h3 class="text-primary">Usuarios</h3>
-                                    <p class="mb-0 text-secondary">Gestión de usuarios del sistema</p>
-                                </div>
-                            </div>
-                            <div class="px-md-1">
-                                <div class="progress mt-3 mb-1 rounded" style="height: 7px;">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="60"
-                                         aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>*@
         </div>
 
     </section>

@@ -25,7 +25,10 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
             // consulta Validada por estado 
             var query = (from ca in _db.Estudiante
                          where ca.Estado == est
-                         select new SelectListItem { Text = ca.NomEstudiante, Value = ca.Id.ToString() }).Distinct();
+                         select new SelectListItem { 
+                             Text = ca.NomEstudiante + " " + ca.ApellEstudiante, 
+                             Value = ca.Id.ToString() 
+                         }).Distinct();
             list = query.ToList();
 
             return list;

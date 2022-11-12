@@ -1,4 +1,6 @@
-﻿@model System.Collections.Generic.List<SistemaIEBCE.Models.ViewModels.AsigEstudianteVM>;
+﻿@using SistemaIEBCE.Utilidades
+@model System.Collections.Generic.List<SistemaIEBCE.Models.ViewModels.AsigEstudianteVM>;
+
 
 @{
     ViewData["Title"] = "Estudiantes";
@@ -13,7 +15,14 @@
             <h1 class="">Estudiantes</h1>
         </div>
         <div class="col-4 p-2 d-flex justify-content-end">
-            <a class="btn btn-primary" asp-controller="Menu" asp-action="Index"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+            @if (User.IsInRole(CNT.Tesorero))
+            {
+                <a asp-area="Tesorero" asp-controller="Menu" asp-action="Index" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Cancelar</a>
+            }
+            else
+            {
+                <a asp-area="Director" asp-controller="Menu" asp-action="MenuTesorero" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Cancelar</a>
+            }
             @*<a class="btn btn-danger mx-2 text-white" onclick="NuevoCiEs()">  <i class="fa-solid fa-plus"></i> Crear</a>*@
         </div>
     </div>

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace SistemaIEBCE.Areas.Director.Controllers
 {
-    //[Authorize(Roles ="Director")]
+    [Authorize(Roles ="Director")]
     [Area("Director")]
     public class CicloEcolarController : Controller
     {

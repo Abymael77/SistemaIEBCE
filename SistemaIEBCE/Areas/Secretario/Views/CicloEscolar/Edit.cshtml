@@ -15,7 +15,7 @@
     <div class='box-form container-fluid mx-2'>
         <div class='box-login-tab'></div>
         <div class='box-login-title p-2 font-weight-bold text-primary'>
-            <h2> <i class="fa-solid fa-swatchbook"></i> &nbsp;&nbsp;&nbsp; Crear</h2>
+            <h2> <i class="fa-solid fa-swatchbook"></i> &nbsp;&nbsp;&nbsp; Editar</h2>
         </div>
         <div class='box-login container-fluid'>
             <div class='fieldset-body container-fluid' id='login_form'>
@@ -30,23 +30,26 @@
                             <div class="form-group row mt-3">
                                 <label asp-for="CicloEscolar.Anio" class="col-sm-2 col-form-label col-form-label-sm"></label>
                                 <div class="col-10">
-                                    <input asp-for="CicloEscolar.Anio" class="form-control" readonly />
+                                    <span class="form-control text-left"> @Model.CicloEscolar.Anio</span>
+                                    <input asp-for="CicloEscolar.Anio" class="form-control" hidden />
                                 </div>
                             </div>
 
                             <div class="form-group row mt-3">
                                 <label asp-for="CicloEscolar.IdGrado" class="col-sm-2 col-form-label col-form-label-sm"></label>
                                 <div class="col-10">
+                                    <span class="form-control text-left">@Model.CicloEscolar.Grado.NomGrado</span>
                                     @Html.DropDownListFor(m => m.CicloEscolar.IdGrado, Model.ListaGrado,
-                                   "-Porfavor seleccione una opción-", new { @class = "form-control" })
+                                   "-Porfavor seleccione una opción-", new { @class = "form-control", hidden = "hidden" })
                                 </div>
                             </div>
 
                             <div class="form-group row mt-3">
                                 <label asp-for="CicloEscolar.IdSeccion" class="col-sm-2 col-form-label col-form-label-sm"></label>
                                 <div class="col-10">
+                                    <span class="form-control text-left">@Model.CicloEscolar.Seccion.NomSeccion</span>
                                     @Html.DropDownListFor(m => m.CicloEscolar.IdSeccion, Model.ListaSeccion,
-                                   "-Porfavor seleccione una opción-", new { @class = "form-control" })
+                                   "-Porfavor seleccione una opción-", new { @class = "form-control", hidden = "hidden" })
                                 </div>
                             </div>
 

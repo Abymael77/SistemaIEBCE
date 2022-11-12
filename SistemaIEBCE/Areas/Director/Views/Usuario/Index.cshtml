@@ -11,14 +11,14 @@
 
         <div class="row py-3">
             <div class="col-4"> <h2>Usuarios</h2> </div>
-            <div class="col-8 d-flex justify-content-end flex-nowrap">
+            <div class="col-8 text-right">
                 <a asp-area="Director" asp-controller="Menu" asp-action="Index" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
                 <a class="btn text-white bg-primary m-1" asp-area="Identity" asp-page="/Account/Register"><i class="fa-solid fa-plus"></i> Crear Nuevo Usuario</a>
             </div>
         </div>
 
         <div class="row shadow p-3 mb-5 bg-white rounded py-2">
-            <div class="col-12">
+            <div class="col-12 table-responsive">
 
                 <table id="tblUsersAd" class="table table-striped table-bordered mp-custom-table">
                     <thead>

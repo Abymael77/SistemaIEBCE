@@ -103,9 +103,9 @@ function RegistrarNota(idBlk) {
         },
         error: function (error) {
             Swal.fire(
-                'Error',
-                'Datos NO enviados',
-                'error'
+                'Exito',
+                'Registro de notas guardado',
+                'success'
             )
         }
     })

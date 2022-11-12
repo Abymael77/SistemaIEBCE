@@ -16,7 +16,7 @@
     <div class='box-form container-fluid mx-2'>
         <div class='box-login-tab'></div>
         <div class='box-login-title p-2 font-weight-bold text-primary'>
-            <h2> <i class="fa-solid fa-swatchbook"></i> &nbsp;&nbsp;&nbsp; Crear</h2>
+            <h2> <i class="fa-solid fa-swatchbook"></i> &nbsp;&nbsp;&nbsp; Editar Asignación</h2>
         </div>
         <div class='box-login container-fluid'>
             <div class='fieldset-body container-fluid' id='login_form'>
@@ -42,8 +42,9 @@
                             <div class="form-group row mt-3">
                                 <label asp-for="AsigCurso.IdCurso" class="col-sm-2 col-form-label "></label>
                                 <div class="col-10">
+                                    <span class="form-control text-left">@Model.AsigCurso.Curso.NomCurso</span>
                                     @Html.DropDownListFor(m => m.AsigCurso.IdCurso, Model.ListaCurso,
-                                   "-Porfavor seleccione una opción-", new { @class = "form-control", @id = "cursos" })
+                                   "-Porfavor seleccione una opción-", new { @class = "form-control", hidden = "hidden" })
                                 </div>
                                 <span asp-validation-for="AsigCurso.IdCurso" class="text-danger offset-2 col-10"></span>
                             </div>
@@ -51,8 +52,9 @@
                             <div class="form-group row mt-3">
                                 <label asp-for="AsigCurso.IdCicloEscolar" class="col-sm-2 col-form-label "></label>
                                 <div class="col-10">
+                                    <span class="form-control text-left">@Model.CicloEscolar11.Grado.NomGrado - @Model.CicloEscolar11.Seccion.NomSeccion - @Model.CicloEscolar11.Anio</span>
                                     @Html.DropDownListFor(m => m.AsigCurso.IdCicloEscolar, Model.ListaCicloEscolar,
-                                   "-Porfavor seleccione una opción-", new { @class = "form-control", @id = "cicloescolar" })
+                                   "-Porfavor seleccione una opción-", new { @class = "form-control", @id = "cc", hidden = "hidden" })
                                 </div>
                                 <span asp-validation-for="AsigCurso.IdCicloEscolar" class="text-danger offset-2 col-10"></span>
                             </div>
@@ -60,7 +62,7 @@
                             <div class="form-group row mt-3">
                                 <label asp-for="AsigCurso.Estado" class="col-sm-2 col-form-label col-form-label-sm"></label>
                                 <div class="col-10">
-                                    <select asp-for="AsigCurso.Estado" class="form-control" id="estado">
+                                    <select asp-for="AsigCurso.Estado" class="form-control" id="">
                                         <option value="1">Activo</option>
                                         <option value="0">Inactivo</option>
                                     </select>

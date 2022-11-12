@@ -1,4 +1,5 @@
-﻿@using SistemaIEBCE.Models.ViewModels
+﻿@using SistemaIEBCE.Utilidades
+@using SistemaIEBCE.Models.ViewModels
 @model CajaVM
 
 @{
@@ -44,7 +45,15 @@
         {
             <a type="button" class="btn btn-danger" asp-controller="Caja" asp-action="CerrarCaja"><i class="fa-solid fa-lock"></i> Cerrar Caja</a>
         }
-        <a type="button" class="btn btn-dark mr-4" asp-controller="Menu" asp-action="Index"><i class="fa-solid fa-arrow-left"></i> Volver</a>
+
+        @if (User.IsInRole(CNT.Tesorero))
+        {
+            <a asp-area="Tesorero" asp-controller="Menu" asp-action="Index" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+        }
+        else
+        {
+            <a asp-area="Director" asp-controller="Menu" asp-action="MenuTesorero" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+        }
     </div>
 </div>
 

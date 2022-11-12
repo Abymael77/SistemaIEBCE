@@ -1,4 +1,4 @@
-﻿
+﻿@using SistemaIEBCE.Utilidades
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,8 +13,14 @@
         <div class="row py-3">
             <div class="col-4"> <h2>Grados</h2> </div>
             <div class="col-8 d-flex justify-content-end flex-nowrap">
-                <a asp-area="Secretario" asp-controller="Menu" asp-action="Index" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
-                @*<a asp-action="Create" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-plus"></i> Crear Nuevo Nota</a>*@
+                @if (User.IsInRole(CNT.Secretario))
+                {
+                    <a asp-area="Secretario" asp-controller="Menu" asp-action="Index" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+                }
+                else
+                {
+                    <a asp-area="Director" asp-controller="Menu" asp-action="MenuSecretario" class="btn text-white bg-primary m-1"> <i class="fa-solid fa-arrow-left"></i> Volver</a>
+                }
             </div>
         </div>
 

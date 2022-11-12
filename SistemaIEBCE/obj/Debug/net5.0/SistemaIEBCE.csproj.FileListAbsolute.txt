@@ -438,7 +438,6 @@ C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\D
 C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\SistemaIEBCE.genruntimeconfig.cache
 C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Director\Views\_ViewImports.cshtml.g.cs
 C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Director\Views\_ViewStart.cshtml.g.cs
-C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Invitado\Views\Home\Index.cshtml.g.cs
 C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Invitado\Views\Home\Privacy.cshtml.g.cs
 C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Invitado\Views\_ViewImports.cshtml.g.cs
 C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Invitado\Views\_ViewStart.cshtml.g.cs
@@ -577,3 +576,6 @@ C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\D
 C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Tesorero\Views\Caja\RepCaja.cshtml.g.cs
 C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Tesorero\Views\Cuota\Estudiantes.cshtml.g.cs
 C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Tesorero\Views\Cuota\RepPagos.cshtml.g.cs
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Director\Views\Report\RankingEstud.cshtml.g.cs
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Director\Views\Menu\MenuSecretario.cshtml.g.cs
+C:\Users\Nitro 7\Documents\X Semestre\Sistema\SistemaIEBCE.v1\SistemaIEBCE\obj\Debug\net5.0\Razor\Areas\Director\Views\Menu\MenuTesorero.cshtml.g.cs

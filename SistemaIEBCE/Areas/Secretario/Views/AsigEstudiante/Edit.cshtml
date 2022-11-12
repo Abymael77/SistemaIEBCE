@@ -16,7 +16,7 @@
     <div class='box-form container-fluid mx-2'>
         <div class='box-login-tab'></div>
         <div class='box-login-title p-2 font-weight-bold text-primary'>
-            <h2> <i class="fa-solid fa-swatchbook"></i> &nbsp;&nbsp;&nbsp; Crear</h2>
+            <h2> <i class="fa-solid fa-swatchbook"></i> &nbsp;&nbsp;&nbsp; Actualizar asignación</h2>
         </div>
         <div class='box-login container-fluid'>
             <div class='fieldset-body container-fluid' id='login_form'>
@@ -41,7 +41,7 @@
                                 <label asp-for="AsigEstudiante.IdCicloEscolar" class="col-sm-2 col-form-label "></label>
                                 <div class="col-10">
                                     @Html.DropDownListFor(m => m.AsigEstudiante.IdCicloEscolar, Model.ListaCicloEscolar,
-                                   "-Porfavor seleccione una opción-", new { @class = "form-control", @id = "cicloescolar" })
+                                   "-Porfavor seleccione una opción-", new { @class = "form-control", @id = "cicloescolar", @disabled = "disabled" })
                                 </div>
                                 <span asp-validation-for="AsigEstudiante.IdCicloEscolar" class="text-danger offset-2 col-10"></span>
                             </div>

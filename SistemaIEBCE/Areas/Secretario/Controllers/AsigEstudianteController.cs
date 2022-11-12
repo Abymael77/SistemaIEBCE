@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace SistemaIEBCE.Areas.Secretario.Controllers
 {
-    //[Authorize(Roles = "Secretario")]
+    [Authorize(Roles = "Secretario,Director")]
     [Area("Secretario")]
     public class AsigEstudianteController : Controller
     {

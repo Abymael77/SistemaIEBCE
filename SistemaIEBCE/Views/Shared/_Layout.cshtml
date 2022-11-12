@@ -20,59 +20,54 @@
 
 </head>
 <body style="background: #F0F0F7">
-    <header>
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="container-fluid">
-                <a class="navbar-brand pl-lg-4" asp-area="Invitado" asp-controller="Home" asp-action="Inicio">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-4 "><img style="width: 30px" src="~/img/logoIEBCE.png" /></div>
-                        <div class="col-8 text-left">IEBCE</div>
-                    </div>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarColor01">
-                    <ul class="navbar-nav me-auto">
-                        @if (User.IsInRole(CNT.Director))
-                        {
-                            <a class="text-white" asp-area="Director" asp-controller="Menu" asp-action="Index"> <i class="fa-solid fa-bars"></i> Menu</a>
-                        }
-
-                        @if (User.IsInRole(CNT.Secretario))
-                        {
-                            <a class="text-white" asp-area="Secretario" asp-controller="Menu" asp-action="Index"> <i class="fa-solid fa-bars"></i> Menu</a>
-                        }
-
-                        @if (User.IsInRole(CNT.Tesorero))
-                        {
-                            @*<li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle text-white" id="NavbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Tesorería
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="NavbarDropDown">
-                                    <a class="dropdown-item" asp-area="Tesorero" asp-controller="Menu" asp-action="Index">Menu</a>
-                                </div>
-                            </li>*@
-                            <a class="text-white" asp-area="Tesorero" asp-controller="Menu" asp-action="Index"> <i class="fa-solid fa-bars"></i> Menu</a>
-
-                        }
-
-                    </ul>
-                </div>
-                <partial name="_LoginPartial" />
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand pl-lg-4" asp-area="Invitado" asp-controller="Home" asp-action="Inicio">
+            <div class="row d-flex align-items-center">
+                <div class="col-4 "><img style="width: 30px" src="~/img/logoIEBCE.png" /></div>
+                <div class="col-8 text-left">IEBCE</div>
             </div>
-        </nav>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                @if (User.IsInRole(CNT.Director))
+                {
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" asp-area="Director" asp-controller="Menu" asp-action="Index"> <i class="fa-solid fa-bars"></i> Menu </a>
+                    </li>
+                }
 
-    </header>
+                @if (User.IsInRole(CNT.Secretario))
+                {
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" asp-area="Secretario" asp-controller="Menu" asp-action="Index"> <i class="fa-solid fa-bars"></i> Menu </a>
+                    </li>
+                }
+
+                @if (User.IsInRole(CNT.Tesorero))
+                {
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" asp-area="Tesorero" asp-controller="Menu" asp-action="Index"> <i class="fa-solid fa-bars"></i> Menu</a>
+                    </li>
+                }
+
+            </ul>
+            <partial name="_LoginPartial" />
+        </div>
+    </nav>
+
+    
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted shadow-lg oculto-impresion">
+    <footer class="border-top footer d-flex justify-content-end  shadow-lg text-muted">
         <div class="container">
             &copy; 2022 - SistemaIEBCE - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

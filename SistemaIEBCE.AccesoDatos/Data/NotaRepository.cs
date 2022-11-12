@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using SistemaIEBCE.Models;
+using SistemaIEBCE.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +58,34 @@ namespace SistemaIEBCE.AccesoDatos.Data.Repository
             list = query.ToList();
 
             return list;
+        }
+
+        public IEnumerable<NotaRep> GetEstDestacados(int anio, int cant)
+        {
+            List<NotaRep> list = null;
+
+            // consulta Validada por estado 
+            var query = (from nt in _db.Nota
+                         join ases in _db.AsigEstudiante on nt.IdAsigEstudinate equals ases.Id
+                         join cies in _db.CicloEscolar on ases.IdCicloEscolar equals cies.Id
+                         join gr in _db.Grado on cies.IdGrado equals gr.Id
+                         join se in _db.Seccion on cies.IdSeccion equals se.Id
+                         join es in _db.Estudiante on ases.IdEstudiante equals es.Id
+                         where cies.Anio == anio
+                         group new { nt.IdAsigEstudinate, es.NomEstudiante, es.ApellEstudiante, es.Sexo, gr.NomGrado, se.NomSeccion, nt.Punteo } by nt.IdAsigEstudinate into NotaEst
+                         select new NotaRep
+                         {
+                             IdAsigEstudinate = NotaEst.Max(n => n.IdAsigEstudinate),
+                             NomEstudiante = NotaEst.Max(e => e.NomEstudiante),
+                             ApellEstudiante = NotaEst.Max(e => e.ApellEstudiante),
+                             Sexo = NotaEst.Max(e => e.Sexo),
+                             NomGrado = NotaEst.Max(g => g.NomGrado),
+                             NomSeccion = NotaEst.Max(s => s.NomSeccion),
+                             Nota = NotaEst.Average(n => n.Punteo)
+                         }).ToList();
+            list = query;
+
+            return list.OrderByDescending(n => n.Nota).Take(cant);
         }
 
         public void Update(Nota Nota)
