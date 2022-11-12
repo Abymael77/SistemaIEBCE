@@ -137,11 +137,14 @@ namespace SistemaIEBCE.Areas.Secretario.Controllers
             int iiid = (int)id;
             try
             {
+                AsigEstudiante ases = db.AsigEstudiante.GetFirstOrDefault(filter: e => e.Id == id);
+                CicloEscolar cies = db.CicloEscolar.GetFirstOrDefault(filter: c => c.Id == ases.IdCicloEscolar, includePropieties: "Grado,Seccion");
                 AsigEstudianteVM asigEstVm = new AsigEstudianteVM()
                 {
                     AsigEstudiante = new Models.AsigEstudiante(),
                     ListaEstudiante = db.AsigEstudiante.GetListaAsigEstudiante(),
                     ListaCicloEscolar = db.AsigEstudiante.GetListaAsigCicloEscolar(),
+                    cicloEscolar = cies.Grado.NomGrado + " - " + cies.Seccion.NomSeccion + " - " + cies.Anio
                 };
 
                 if (id != null)

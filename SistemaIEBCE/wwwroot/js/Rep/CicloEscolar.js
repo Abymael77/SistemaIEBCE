@@ -153,7 +153,11 @@ function EstuPorEstado(anio) {
             //console.log(data.data.length);
             //console.log(data.data[1]['strCantY']);
 
-            var arrGrdo = ['Inactivo', 'Activo'];
+            if (data.data.length == 2) {
+                var arrGrdo = ["Retidados", "Activos"];
+            } else if (data.data.length == 1) {
+                var arrGrdo = ["Activos"];
+            }
             var arrayCantidad = [];
 
             for (var i = 0; i < data.data.length; i++) {

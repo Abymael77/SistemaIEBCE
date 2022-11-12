@@ -31,7 +31,7 @@
                             <div class="form-group row mt-3">
                                 <label asp-for="AsigEstudiante.IdEstudiante" class="col-sm-2 col-form-label "></label>
                                 <div class="col-10">
-                                    <input type="text" class="form-control" readonly value="@Model.AsigEstudiante.Estudiante.NomEstudiante @Model.AsigEstudiante.Estudiante.ApellEstudiante" />
+                                    <span class="form-control text-left">@Model.AsigEstudiante.Estudiante.NomEstudiante @Model.AsigEstudiante.Estudiante.ApellEstudiante</span>
                                     <input type="text" asp-for="AsigEstudiante.IdEstudiante" hidden class="form-control" />
                                 </div>
                                 <span asp-validation-for="AsigEstudiante.IdEstudiante" class="text-danger offset-2 col-10"></span>
@@ -40,8 +40,9 @@
                             <div class="form-group row mt-3">
                                 <label asp-for="AsigEstudiante.IdCicloEscolar" class="col-sm-2 col-form-label "></label>
                                 <div class="col-10">
+                                    <span class="form-control text-left">@Model.cicloEscolar</span>
                                     @Html.DropDownListFor(m => m.AsigEstudiante.IdCicloEscolar, Model.ListaCicloEscolar,
-                                   "-Porfavor seleccione una opción-", new { @class = "form-control", @id = "cicloescolar", @disabled = "disabled" })
+                                   "-Porfavor seleccione una opción-", new { @class = "form-control", @id = "cicloescolar", @hidden = "hidden" })
                                 </div>
                                 <span asp-validation-for="AsigEstudiante.IdCicloEscolar" class="text-danger offset-2 col-10"></span>
                             </div>
@@ -87,9 +88,9 @@
     <script type="text/javascript">
         $(function () {
             //$("#estudiantes").chosen({ width: "90%" });
-            $("#catedraticos").chosen({ width: "90%" });
-            $("#cicloescolar").chosen({ width: "90%" });
-            $("#estado").chosen({ width: "90%" });
+            //$("#catedraticos").chosen({ width: "90%" });
+            //$("#cicloescolar").chosen({ width: "90%" });
+            //$("#estado").chosen({ width: "90%" });
         });
     </script>
     <script src="~/js/chosen.jquery.js"></script>
